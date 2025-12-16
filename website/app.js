@@ -91,19 +91,28 @@ async function fetchDoordashEmails() {
 
   try {
     loadingText.textContent = 'Searching for DoorDash emails...';
-    progressBar.style.width = '20%';
+    progressBar.style.width = '10%';
 
-    // Search for DoorDash emails
+    // Search for DoorDash emails with pagination
     const searchQuery = '(in:anywhere OR in:spam OR in:trash) from:doordash (subject:"receipt" OR subject:"confirmation") after:2024/12/31 before:2026/01/01';
-    const searchResponse = await fetch(
-      `https://gmail.googleapis.com/gmail/v1/users/me/messages?q=${encodeURIComponent(searchQuery)}&maxResults=500`,
-      {
-        headers: { Authorization: `Bearer ${accessToken}` }
-      }
-    );
+    const messageIds = [];
+    let nextPageToken = null;
 
-    const searchData = await searchResponse.json();
-    const messageIds = searchData.messages || [];
+    do {
+      const url = `https://gmail.googleapis.com/gmail/v1/users/me/messages?q=${encodeURIComponent(searchQuery)}&maxResults=500${nextPageToken ? `&pageToken=${nextPageToken}` : ''}`;
+      const searchResponse = await fetch(url, {
+        headers: { Authorization: `Bearer ${accessToken}` }
+      });
+
+      const searchData = await searchResponse.json();
+      if (searchData.messages) {
+        messageIds.push(...searchData.messages);
+      }
+      nextPageToken = searchData.nextPageToken;
+      loadingStatus.textContent = `Found ${messageIds.length} emails so far...`;
+    } while (nextPageToken);
+
+    progressBar.style.width = '20%';
 
     if (messageIds.length === 0) {
       showPage('noData');
