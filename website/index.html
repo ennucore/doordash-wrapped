@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DoorDash Wrapped 2025</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Landing Page -->
+  <div id="landing-page" class="page active">
+    <div class="landing-container">
+      <div class="hero">
+        <div class="logo-animation">
+          <div class="food-icons">
+            <span class="food-icon">🍔</span>
+            <span class="food-icon">🍕</span>
+            <span class="food-icon">🌮</span>
+            <span class="food-icon">🍜</span>
+            <span class="food-icon">🍣</span>
+            <span class="food-icon">🥗</span>
+          </div>
+        </div>
+        <h1 class="title">
+          <span class="title-doordash">DoorDash</span>
+          <span class="title-wrapped">Wrapped</span>
+          <span class="title-year">2025</span>
+        </h1>
+        <p class="subtitle">Discover your food delivery journey this year</p>
+        <div class="features">
+          <div class="feature">
+            <span class="feature-icon">🔒</span>
+            <span class="feature-text">100% Private - Data never leaves your browser</span>
+          </div>
+          <div class="feature">
+            <span class="feature-icon">📧</span>
+            <span class="feature-text">Analyzes your DoorDash receipt emails</span>
+          </div>
+          <div class="feature">
+            <span class="feature-icon">📊</span>
+            <span class="feature-text">Fun stats & shareable cards</span>
+          </div>
+        </div>
+        <button id="connect-gmail-btn" class="cta-button">
+          <svg class="gmail-icon" viewBox="0 0 24 24" width="24" height="24">
+            <path fill="currentColor" d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+          </svg>
+          Connect Gmail to Get Started
+        </button>
+        <p class="privacy-note">
+          We only read DoorDash emails. Your data stays in your browser and is never sent to any server.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Loading Page -->
+  <div id="loading-page" class="page">
+    <div class="loading-container">
+      <div class="loading-spinner"></div>
+      <h2 id="loading-text">Fetching your DoorDash emails...</h2>
+      <div class="loading-progress">
+        <div id="loading-progress-bar" class="loading-progress-fill"></div>
+      </div>
+      <p id="loading-status">This may take a moment</p>
+    </div>
+  </div>
+
+  <!-- No Data Page -->
+  <div id="no-data-page" class="page">
+    <div class="no-data-container">
+      <div class="no-data-icon">📭</div>
+      <h2>No DoorDash orders found</h2>
+      <p>We couldn't find any DoorDash receipt emails in your inbox. Make sure you've ordered from DoorDash this year!</p>
+      <button id="try-again-btn" class="secondary-button">Try Again</button>
+    </div>
+  </div>
+
+  <!-- Wrapped Story -->
+  <div id="wrapped-page" class="page">
+    <div class="story-container">
+      <!-- Progress Bar -->
+      <div id="progress-bar" class="progress-bar"></div>
+
+      <!-- Navigation -->
+      <button id="prev-btn" class="nav-btn nav-prev" disabled>
+        <svg viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
+      </button>
+      <button id="next-btn" class="nav-btn nav-next">
+        <svg viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+      </button>
+
+      <!-- Slides -->
+      <div class="slides-wrapper">
+        <!-- Slide 0: Intro -->
+        <div class="slide active" data-slide="0" style="--slide-color: #FF3008;">
+          <div class="slide-content intro-slide">
+            <div class="intro-animation">
+              <div class="year-reveal">2025</div>
+            </div>
+            <h1 class="intro-title">Your Year in<br>DoorDash</h1>
+            <p class="intro-subtitle">Let's look back at your food journey</p>
+            <div class="tap-hint">Tap to continue</div>
+          </div>
+        </div>
+
+        <!-- Slide 1: Total Spending -->
+        <div class="slide" data-slide="1" style="--slide-color: #FF6B35;">
+          <div class="slide-content stats-slide">
+            <p class="stat-label">This year, you spent</p>
+            <div class="big-stat spending-stat" id="total-spent-display">$0</div>
+            <p class="stat-sublabel">on <span id="total-orders-display">0</span> orders</p>
+            <div class="spending-emoji" id="spending-emoji">🍔</div>
+            <p class="spending-description" id="spending-description"></p>
+          </div>
+        </div>
+
+        <!-- Slide 2: Average Order -->
+        <div class="slide" data-slide="2" style="--slide-color: #7B2CBF;">
+          <div class="slide-content stats-slide">
+            <p class="stat-label">Your average order was</p>
+            <div class="big-stat" id="avg-order-display">$0</div>
+            <div class="comparison-card">
+              <div class="comparison-item">
+                <span class="comparison-label">Biggest splurge</span>
+                <span class="comparison-value" id="max-order-display">$0</span>
+                <span class="comparison-detail" id="max-order-restaurant"></span>
+              </div>
+              <div class="comparison-divider"></div>
+              <div class="comparison-item">
+                <span class="comparison-label">Quick bite</span>
+                <span class="comparison-value" id="min-order-display">$0</span>
+                <span class="comparison-detail" id="min-order-restaurant"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 3: Top Restaurant -->
+        <div class="slide" data-slide="3" style="--slide-color: #3A86FF;">
+          <div class="slide-content restaurant-slide">
+            <p class="stat-label">Your #1 spot was</p>
+            <div class="top-restaurant-name" id="top-restaurant-name"></div>
+            <div class="top-restaurant-count">
+              <span id="top-restaurant-count">0</span> orders
+            </div>
+            <div class="restaurant-list">
+              <p class="list-title">Your top 5</p>
+              <ol id="restaurants-list" class="ranked-list"></ol>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 4: Peak Times -->
+        <div class="slide" data-slide="4" style="--slide-color: #FF006E;">
+          <div class="slide-content timing-slide">
+            <p class="stat-label">Your ordering patterns</p>
+            <div class="timing-stats">
+              <div class="timing-stat">
+                <div class="timing-value" id="peak-day">Mon</div>
+                <div class="timing-label">Favorite day</div>
+              </div>
+              <div class="timing-stat">
+                <div class="timing-value" id="peak-hour">7PM</div>
+                <div class="timing-label">Peak hour</div>
+              </div>
+            </div>
+            <div class="heatmap-container">
+              <p class="heatmap-title">When you order</p>
+              <div id="activity-heatmap" class="activity-heatmap"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 5: Top Items -->
+        <div class="slide" data-slide="5" style="--slide-color: #06D6A0;">
+          <div class="slide-content items-slide">
+            <p class="stat-label">Your favorite items</p>
+            <div class="top-item-showcase">
+              <div class="top-item-badge">#1</div>
+              <div class="top-item-name" id="top-item-name"></div>
+              <div class="top-item-count">Ordered <span id="top-item-count">0</span> times</div>
+            </div>
+            <ol id="items-list" class="ranked-list items-ranked-list"></ol>
+          </div>
+        </div>
+
+        <!-- Slide 6: Delivery Spots -->
+        <div class="slide" data-slide="6" style="--slide-color: #8338EC;">
+          <div class="slide-content delivery-slide">
+            <p class="stat-label">You ordered to</p>
+            <div class="big-stat" id="locations-count">0</div>
+            <p class="stat-sublabel">different locations</p>
+            <div class="delivery-card">
+              <div class="delivery-icon">📍</div>
+              <div class="delivery-address" id="top-address"></div>
+              <div class="delivery-detail">Your most frequent spot</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 7: Fun Facts -->
+        <div class="slide" data-slide="7" style="--slide-color: #FB5607;">
+          <div class="slide-content funfacts-slide">
+            <p class="stat-label">Fun facts</p>
+            <div class="funfacts-grid">
+              <div class="funfact-card">
+                <div class="funfact-icon">📅</div>
+                <div class="funfact-value" id="busiest-month">Jan</div>
+                <div class="funfact-label">Busiest month</div>
+              </div>
+              <div class="funfact-card">
+                <div class="funfact-icon">🍽️</div>
+                <div class="funfact-value" id="total-items">0</div>
+                <div class="funfact-label">Items ordered</div>
+              </div>
+              <div class="funfact-card">
+                <div class="funfact-icon">💵</div>
+                <div class="funfact-value" id="total-tips">$0</div>
+                <div class="funfact-label">Tips given</div>
+              </div>
+              <div class="funfact-card">
+                <div class="funfact-icon">🏪</div>
+                <div class="funfact-value" id="unique-restaurants">0</div>
+                <div class="funfact-label">Restaurants tried</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 8: Share -->
+        <div class="slide" data-slide="8" style="--slide-color: #FF3008;">
+          <div class="slide-content share-slide">
+            <h2 class="share-title">That's a wrap!</h2>
+            <p class="share-subtitle">Share your DoorDash Wrapped</p>
+            <div id="share-card" class="share-card">
+              <div class="share-card-header">
+                <span class="share-card-logo">DoorDash Wrapped 2025</span>
+              </div>
+              <div class="share-card-stats">
+                <div class="share-stat">
+                  <span class="share-stat-value" id="share-spent">$0</span>
+                  <span class="share-stat-label">spent</span>
+                </div>
+                <div class="share-stat">
+                  <span class="share-stat-value" id="share-orders">0</span>
+                  <span class="share-stat-label">orders</span>
+                </div>
+              </div>
+              <div class="share-card-restaurant">
+                <span class="share-restaurant-label">Top spot:</span>
+                <span class="share-restaurant-name" id="share-restaurant"></span>
+              </div>
+            </div>
+            <div class="share-buttons">
+              <button id="download-btn" class="share-btn">
+                <svg viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+                Download Image
+              </button>
+              <button id="copy-btn" class="share-btn">
+                <svg viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+                Copy Stats
+              </button>
+            </div>
+            <button id="restart-btn" class="secondary-button">Start Over</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+  <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+  <script type="module" src="app.js"></script>
+</body>
+</html>
