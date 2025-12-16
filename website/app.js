@@ -547,8 +547,9 @@ function setupNavigation() {
     if (currentSlide < totalSlides - 1) goToSlide(currentSlide + 1);
   });
 
-  // Click anywhere to advance
+  // Click anywhere to advance (but not if selecting text)
   document.querySelector('.slides-wrapper').addEventListener('click', (e) => {
+    if (window.getSelection().toString()) return; // Don't advance if text is selected
     if (!e.target.closest('.nav-btn') && !e.target.closest('.share-btn') && !e.target.closest('.secondary-button')) {
       if (currentSlide < totalSlides - 1) goToSlide(currentSlide + 1);
     }
