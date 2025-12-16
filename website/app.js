@@ -42,9 +42,7 @@ function initializeApp() {
   // Setup event listeners
   document.getElementById('connect-gmail-btn').addEventListener('click', handleConnectGmail);
   document.getElementById('try-again-btn').addEventListener('click', handleTryAgain);
-  document.getElementById('restart-btn').addEventListener('click', handleRestart);
   document.getElementById('download-btn').addEventListener('click', handleDownload);
-  document.getElementById('copy-btn').addEventListener('click', handleCopyStats);
 
   // Check for demo mode (for development without Google API)
   if (window.location.search.includes('demo')) {
@@ -607,11 +605,6 @@ function handleTryAgain() {
   showPage('landing');
 }
 
-function handleRestart() {
-  currentSlide = 0;
-  showPage('landing');
-}
-
 async function handleDownload() {
   const shareCard = document.getElementById('share-card');
 
@@ -628,23 +621,6 @@ async function handleDownload() {
   } else {
     alert('Screenshot feature not available. Please try again later.');
   }
-}
-
-function handleCopyStats() {
-  const text = `My DoorDash Wrapped 2025:
-- Spent: ${document.getElementById('share-spent').textContent}
-- Orders: ${document.getElementById('share-orders').textContent}
-- Top spot: ${document.getElementById('share-restaurant').textContent}
-
-Get your Wrapped at doordash-wrapped.com`;
-
-  navigator.clipboard.writeText(text).then(() => {
-    const btn = document.getElementById('copy-btn');
-    btn.textContent = 'Copied!';
-    setTimeout(() => {
-      btn.innerHTML = `<svg viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg> Copy Stats`;
-    }, 2000);
-  });
 }
 
 function escapeHtml(text) {
