@@ -902,3 +902,168 @@ body {
     right: 8px;
   }
 }
+
+/* Legal Pages (Privacy Policy & Terms of Service) */
+.legal-page {
+  background: var(--doordash-dark);
+  color: var(--white);
+  min-height: 100vh;
+  padding: 60px 24px;
+}
+
+.legal-container {
+  max-width: 800px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+
+.legal-home-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--doordash-red);
+  text-decoration: none;
+  font-weight: 600;
+  margin-bottom: 32px;
+  transition: opacity 0.2s;
+}
+
+.legal-home-link:hover {
+  opacity: 0.8;
+}
+
+.legal-header {
+  margin-bottom: 48px;
+  text-align: center;
+}
+
+.legal-title {
+  font-size: 36px;
+  font-weight: 900;
+  color: var(--doordash-red);
+  margin-bottom: 12px;
+}
+
+.legal-updated {
+  font-size: 14px;
+  color: var(--gray-400);
+}
+
+.legal-section {
+  margin-bottom: 32px;
+}
+
+.legal-section h2 {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 16px;
+  margin-top: 40px;
+}
+
+.legal-section h3 {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--gray-200);
+  margin-bottom: 12px;
+  margin-top: 24px;
+}
+
+.legal-section p {
+  margin-bottom: 16px;
+  color: var(--gray-200);
+}
+
+.legal-section ul,
+.legal-section ol {
+  margin-left: 24px;
+  margin-bottom: 16px;
+  color: var(--gray-200);
+}
+
+.legal-section li {
+  margin-bottom: 8px;
+}
+
+.legal-section a {
+  color: var(--doordash-red);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(255, 48, 8, 0.3);
+  transition: border-color 0.2s;
+}
+
+.legal-section a:hover {
+  border-bottom-color: var(--doordash-red);
+}
+
+.legal-section code {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-family: 'Courier New', monospace;
+  font-size: 0.9em;
+}
+
+.legal-highlight {
+  background: rgba(255, 48, 8, 0.1);
+  border-left: 4px solid var(--doordash-red);
+  padding: 16px 20px;
+  margin: 24px 0;
+  border-radius: 4px;
+}
+
+.legal-footer {
+  margin-top: 64px;
+  padding-top: 32px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  text-align: center;
+}
+
+.legal-footer .footer-links {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.legal-footer .footer-link {
+  font-size: 12px;
+  color: var(--gray-400);
+  text-decoration: none;
+  transition: color 0.2s;
+  border: none;
+}
+
+.legal-footer .footer-link:hover {
+  color: var(--doordash-red);
+}
+
+.legal-footer .footer-divider {
+  font-size: 12px;
+  color: var(--gray-600);
+}
+
+.legal-footer .footer-disclaimer {
+  font-size: 11px;
+  color: var(--gray-600);
+  margin-top: 4px;
+}
+
+@media (max-width: 480px) {
+  .legal-page {
+    padding: 40px 20px;
+  }
+
+  .legal-title {
+    font-size: 28px;
+  }
+
+  .legal-section h2 {
+    font-size: 20px;
+  }
+
+  .legal-section h3 {
+    font-size: 16px;
+  }
+}
