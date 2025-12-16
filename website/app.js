@@ -96,7 +96,7 @@ async function fetchDoordashEmails() {
     progressBar.style.width = '20%';
 
     // Search for DoorDash emails
-    const searchQuery = 'from:doordash.com (subject:"receipt" OR subject:"confirmation")';
+    const searchQuery = '(in:anywhere OR in:spam OR in:trash) from:doordash (subject:"receipt" OR subject:"confirmation") after:2024/12/31 before:2026/01/01';
     const searchResponse = await fetch(
       `https://gmail.googleapis.com/gmail/v1/users/me/messages?q=${encodeURIComponent(searchQuery)}&maxResults=500`,
       {
