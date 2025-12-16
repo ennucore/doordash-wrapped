@@ -1,0 +1,32 @@
+{
+  "manifest_version": 3,
+  "name": "DoorDash Wrapped",
+  "version": "1.0.0",
+  "description": "Generate your DoorDash Wrapped - a fun summary of your yearly DoorDash orders",
+  "permissions": [
+    "storage"
+  ],
+  "host_permissions": [
+    "https://www.doordash.com/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://www.doordash.com/*"],
+      "js": ["content.js"],
+      "run_at": "document_start"
+    }
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "DoorDash Wrapped"
+  },
+  "web_accessible_resources": [
+    {
+      "resources": ["injected.js"],
+      "matches": ["https://www.doordash.com/*"]
+    }
+  ]
+}
