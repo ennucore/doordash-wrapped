@@ -115,25 +115,33 @@ async function fetchDoordashEmails() {
     loadingText.textContent = `Found ${messageIds.length} emails. Processing...`;
     progressBar.style.width = '40%';
 
-    // Fetch each email
+    // Fetch emails in parallel batches for speed
+    const BATCH_SIZE = 20;
     const rawEmails = [];
-    for (let i = 0; i < messageIds.length; i++) {
+
+    for (let i = 0; i < messageIds.length; i += BATCH_SIZE) {
+      const batch = messageIds.slice(i, i + BATCH_SIZE);
       const progress = 40 + (i / messageIds.length) * 50;
       progressBar.style.width = `${progress}%`;
-      loadingStatus.textContent = `Processing email ${i + 1} of ${messageIds.length}`;
+      loadingStatus.textContent = `Processing emails ${i + 1}-${Math.min(i + BATCH_SIZE, messageIds.length)} of ${messageIds.length}`;
 
-      const msgResponse = await fetch(
-        `https://gmail.googleapis.com/gmail/v1/users/me/messages/${messageIds[i].id}?format=raw`,
-        {
-          headers: { Authorization: `Bearer ${accessToken}` }
-        }
+      const batchResults = await Promise.all(
+        batch.map(async (msg) => {
+          const msgResponse = await fetch(
+            `https://gmail.googleapis.com/gmail/v1/users/me/messages/${msg.id}?format=raw`,
+            {
+              headers: { Authorization: `Bearer ${accessToken}` }
+            }
+          );
+          return msgResponse.json();
+        })
       );
 
-      const msgData = await msgResponse.json();
-      if (msgData.raw) {
-        // Decode base64url to string
-        const rawEmail = atob(msgData.raw.replace(/-/g, '+').replace(/_/g, '/'));
-        rawEmails.push(rawEmail);
+      for (const msgData of batchResults) {
+        if (msgData.raw) {
+          const rawEmail = atob(msgData.raw.replace(/-/g, '+').replace(/_/g, '/'));
+          rawEmails.push(rawEmail);
+        }
       }
     }
 
