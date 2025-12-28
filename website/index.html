@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>DoorDash Wrapped 2025</title>
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css?v=2">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -37,7 +37,7 @@
           Connect Gmail to Get Started
         </button>
         <p class="privacy-note">
-          Your data stays in your browser and is never sent to any server.
+          Your data stays in your browser and is never sent to any server. <a href="/privacy.html">Privacy</a> · <a href="/terms.html">Terms</a>
         </p>
       </div>
     </div>
@@ -197,8 +197,28 @@
           </div>
         </div>
 
-        <!-- Slide 7: Share -->
-        <div class="slide" data-slide="7" style="--slide-color: #FF3008;">
+        <!-- Slide 7: Tips -->
+        <div class="slide" data-slide="7" style="--slide-color: #06D6A0;">
+          <div class="slide-content tips-slide">
+            <p class="stat-label">You tipped your dashers</p>
+            <div class="big-stat" id="total-tips-display">$0</div>
+            <p class="stat-sublabel">Thank you for your generosity!</p>
+            <div class="tips-emoji">💚</div>
+            <div class="tips-breakdown">
+              <div class="tips-stat">
+                <span class="tips-stat-value" id="avg-tip-display">$0</span>
+                <span class="tips-stat-label">avg tip per order</span>
+              </div>
+              <div class="tips-stat">
+                <span class="tips-stat-value" id="tip-percentage-display">0%</span>
+                <span class="tips-stat-label">of your spending</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 8: Share -->
+        <div class="slide" data-slide="8" style="--slide-color: #FF3008;">
           <div class="slide-content share-slide">
             <div id="share-card" class="share-card">
               <div class="share-card-decoration">
@@ -243,12 +263,15 @@
                 </div>
               </div>
               <div class="share-card-highlights">
-                <div class="share-highlight">
+                <div class="share-highlight share-highlight-restaurant">
                   <div class="share-highlight-left">
-                    <span class="share-highlight-icon">🏆</span>
+                    <span class="share-highlight-icon" id="share-restaurant-icon">🏆</span>
                     <span class="share-highlight-label">Top spot</span>
                   </div>
                   <span class="share-highlight-value" id="share-restaurant"></span>
+                  <div class="share-restaurant-photo-container" id="share-restaurant-photo-container">
+                    <img id="share-restaurant-photo" class="share-restaurant-photo" alt="" />
+                  </div>
                 </div>
                 <div class="share-highlight">
                   <div class="share-highlight-left">
@@ -266,7 +289,7 @@
                 </div>
               </div>
               <div class="share-card-footer">
-                <span class="share-footer-text">doordash-wrapped.pages.dev</span>
+                <span class="share-footer-text">doordashwrapped.com</span>
               </div>
             </div>
             <div class="share-buttons">
@@ -285,6 +308,6 @@
   <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
   <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDAEUPr9EiVGKzIJLxYDMkqt8YZz3p76tg&libraries=geocoding&callback=initMapsReady"></script>
   <script>window.initMapsReady = function() { window.mapsReady = true; }</script>
-  <script type="module" src="app.js"></script>
+  <script type="module" src="app.js?v=2"></script>
 </body>
 </html>

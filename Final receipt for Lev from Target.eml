@@ -1,0 +1,1359 @@
+Delivered-To: ennucore@gmail.com
+Received: by 2002:ac0:c24b:0:b0:3a7:5aef:d5c8 with SMTP id x11csp1095575imi;
+        Sat, 13 Dec 2025 17:12:46 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IHehCw1DiibH5ubwrVwtdWh85MlJc5Ew8mxEuS88LOAMs8oDFzYNCCAB4vR9hEHNeFTLItJ
+X-Received: by 2002:a17:90b:5103:b0:33b:6650:57c3 with SMTP id 98e67ed59e1d1-34abd751962mr5966905a91.21.1765674766348;
+        Sat, 13 Dec 2025 17:12:46 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1765674766; cv=none;
+        d=google.com; s=arc-20240605;
+        b=A6NhHgGfGRolqIJkRK5NPBz0CCSkBg9n19NVORwRkFy6BRybN68mldTQb/aT37zNhm
+         DNl+tbwUPXCC53r8NXaYC1YTBIsurR4IDUc3UlCr4xiMZusYmKRPWOAmdeGMHOJBWRdd
+         TUDrVTfhJ3CGLLIxjkWQyWYamvJmaY6+c9j/3JdBwQOa/kYdE+OijXdQDjYPXLARNzR8
+         KArrU7eecthEs5v4It8OYfL/o0Iy3VbBhM33eN2B68Uu1dH+VpD69pA7nGJGOLWZq0Zw
+         eKAnhTCp6381i6sqoNZGFaHm5lxBM2Tkii3RWopztaZ+ZMVKUQeSZMLS9oyPKRuA0OJ+
+         Z/Eg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
+        h=to:subject:message-id:mime-version:from:date:dkim-signature
+         :dkim-signature;
+        bh=ztfXp6jrGgjuIalceLU4fWxnsvWqOWf7IiaT7buCBd4=;
+        fh=24Zn+9NqQo6ZizjOWSqPE87nR8J4VLYx1L4ndAuPWb0=;
+        b=aSXHG/wfPXHxZigolJS5qy2v21MjBr1Zj8LNA8MEUJ6szHbi/oG0rc22OxYxcEUsTu
+         nEPk2uCv6uw3Iu/SKe2rRVzYza/Bgw9tOodOpWJQbPVPWvbhyumlQYa21ySAUO+ALD+g
+         FYCA5KTpgc/tyAejZLH5l4ZPdMI4CoquU/AQODPfrgse4Y90ZoiWgWAuOF+7AljAIAl9
+         ykSEmvevH8RxsOB6WoY1Dmgpq90MCVSMEXqM1FNGYuMNN6ii4+75RPM/7A9sH4iSQJxN
+         EfxY7ZeIphEsEIwPg4Tu736waXfhjvhiDtFFVNz1thCSYBSU/ry93Ngcpyy8r9YtE8Un
+         6FeQ==;
+        dara=google.com
+ARC-Authentication-Results: i=1; mx.google.com;
+       dkim=pass header.i=@doordash.com header.s=s3 header.b=O9wok7J3;
+       dkim=pass header.i=@sendgrid.info header.s=smtpapi header.b=uNTk9uor;
+       spf=pass (google.com: domain of bounces+36866409-a83b-ennucore=gmail.com@notify.doordash.com designates 159.183.94.152 as permitted sender) smtp.mailfrom="bounces+36866409-a83b-ennucore=gmail.com@notify.doordash.com";
+       dmarc=pass (p=REJECT sp=REJECT dis=NONE) header.from=doordash.com
+Return-Path: <bounces+36866409-a83b-ennucore=gmail.com@notify.doordash.com>
+Received: from o26.send.doordash.com (o26.send.doordash.com. [159.183.94.152])
+        by mx.google.com with ESMTPS id 41be03b00d2f7-c0c2e3674e6si15030626a12.419.2025.12.13.17.12.45
+        for <ennucore@gmail.com>
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Sat, 13 Dec 2025 17:12:46 -0800 (PST)
+Received-SPF: pass (google.com: domain of bounces+36866409-a83b-ennucore=gmail.com@notify.doordash.com designates 159.183.94.152 as permitted sender) client-ip=159.183.94.152;
+Authentication-Results: mx.google.com;
+       dkim=pass header.i=@doordash.com header.s=s3 header.b=O9wok7J3;
+       dkim=pass header.i=@sendgrid.info header.s=smtpapi header.b=uNTk9uor;
+       spf=pass (google.com: domain of bounces+36866409-a83b-ennucore=gmail.com@notify.doordash.com designates 159.183.94.152 as permitted sender) smtp.mailfrom="bounces+36866409-a83b-ennucore=gmail.com@notify.doordash.com";
+       dmarc=pass (p=REJECT sp=REJECT dis=NONE) header.from=doordash.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=doordash.com;
+	h=content-type:date:from:mime-version:subject:to:cc:content-type:date:
+	feedback-id:from:subject:to;
+	s=s3; bh=ztfXp6jrGgjuIalceLU4fWxnsvWqOWf7IiaT7buCBd4=;
+	b=O9wok7J3sevwpLfPZUnIbtCgmqNiVCN3Z+pZJjeH7ZmA5p2yLeXbJFkPSvOyYWer/xGj
+	Rsf9ARw3RNrxxrNXZAMQZPGswIL1Ojc40o5o/xDNeCW35R0V5qMDmlPs3w4l8E85sCIJvf
+	AUUIpQgbDwrt9ln8YOgJaH31FHhLrmzR2zNNFnjsxFXFRpAsgAY+U9Dybrd+KOJm9YScY9
+	UhGjw3VA7DOMdrc43mtmgBPoaxm5n1mWpe/2ZesDjEhhirqA+1pRf2stlM4CUcTo3lFZKJ
+	N0Cw48UEYBcMnRDG+MCITiwvOz9Q4gxOV7MtmqgxhGVD7OahZnpPlIKC4YtmxABw==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sendgrid.info;
+	h=content-type:date:from:mime-version:subject:to:cc:content-type:date:
+	feedback-id:from:subject:to;
+	s=smtpapi; bh=ztfXp6jrGgjuIalceLU4fWxnsvWqOWf7IiaT7buCBd4=;
+	b=uNTk9uorrjecjTsIx1LBEhBcErNqlYJcdNSrmDRGehaKRz115NJdLJ01SWPpCsgdGjkG
+	Xa6tbmIhdKFZbHMJ7H32E0nEqXjMjkFm4uSwrF2sh57ybSH24mSTHFwjiGTnwIf0HLwR99
+	ma04pGhfed7SgU54VPILoaMXaoU7uO1Ds=
+Received: by recvd-664f5cd8bb-fjv6s with SMTP id recvd-664f5cd8bb-fjv6s-1-693E0F0D-1A
+	2025-12-14 01:12:45.152363188 +0000 UTC m=+3463636.347630285
+Received: from MzY4NjY0MDk (unknown)
+	by geopod-ismtpd-15 (SG) with HTTP
+	id 2KFg8rWLTBOtl-XJyIQUVQ
+	Sun, 14 Dec 2025 01:12:45.144 +0000 (UTC)
+Content-Type: multipart/alternative; boundary=bcfddbb0f6c1acc4fef3597f7b0be96b75116c36a02813ab10ebe7cbeffb
+Date: Sun, 14 Dec 2025 01:12:45 +0000 (UTC)
+From: DoorDash Order <no-reply@doordash.com>
+Mime-Version: 1.0
+Message-ID: <2KFg8rWLTBOtl-XJyIQUVQ@geopod-ismtpd-15>
+Subject: Final receipt for Lev from Target
+X-SG-EID: 
+ =?us-ascii?Q?u001=2Eif3om8whlzrKfksGqhz4AAzBJOMllrFm=2FUzRzy9IkDjc8Kj=2FQzIKGHqY=2F?=
+ =?us-ascii?Q?gjRSTwbW0KjJyNLbqpIXq6uSC88WiPcXg5Q+YwV?=
+ =?us-ascii?Q?W+8HDPr7V6U8w5TW=2FyiUbYNDLACui54LQxuwFh1?=
+ =?us-ascii?Q?3dpowXJ69Ex6AYdmwRDEVxa=2FSGyX8C=2FJGU8dJkr?=
+ =?us-ascii?Q?TcSWdPz=2Fe81jmtKZQgszKvFRr6gGnUiPuAZyerT?=
+ =?us-ascii?Q?RAET3XTBhkYbuLOIUmtjydkMdyoXr61NgfDaLST?= =?us-ascii?Q?N6oi?=
+X-SG-ID: 
+ =?us-ascii?Q?u001=2ESdBcvi+Evd=2FbQef8eZF3BpTL9BgbK5wfSJMJGMsmprBx2awDaqzM6JDdd?=
+ =?us-ascii?Q?QePzwmTxyXryKyUNrI7+tpGvRtJyyFZWeC4jYPh?=
+ =?us-ascii?Q?lseypC1O6odO8YnHBCeWeGj84+Zv=2FfZcMDTpzjt?=
+ =?us-ascii?Q?45swGZoOGbISZclY4W4jWc4UsKl7Fs3Dcj9Sp8V?=
+ =?us-ascii?Q?LwC+QBnHLRkEIuciku+UL5zu6vlVPshJgMDvesC?=
+ =?us-ascii?Q?pCE5XXS6BI6x23Kjjqn1lGW+sKhdGV15F0fNQ9s?=
+ =?us-ascii?Q?K=2FohfrdSROfAzQspZHQ0C2NkAZiJc60IIghvsTM?=
+ =?us-ascii?Q?UM9tCiV2yl3Uk9WDRXw8VhjaGH1EsLSgOcqugcF?=
+ =?us-ascii?Q?PEHD3j4iiuWfKnrCVL5=2FpxmYA9tq+1jMpNrn=2F1a?=
+ =?us-ascii?Q?hh5QPlBSIsDvCcaa1bBYj9EZd+oQ5bKHh6ctS4M?=
+ =?us-ascii?Q?Fu0zhy260eNOToJ45bqkxRI2bg75VRMLrOO8T3T?=
+ =?us-ascii?Q?fyhVVGImTK1FQv1GVqS2nAYGMwVr4uan5UZ69+M?=
+ =?us-ascii?Q?Ib4rcdjZNOe8xz8U+KPzYUcazCrgGLWmzMpRK6g?=
+ =?us-ascii?Q?nDYSGTNpPVcxA7fiRFOCkFHn8AYf9IkpIUuI0UD?=
+ =?us-ascii?Q?T2J8wkMar8Mq?=
+To: ennucore@gmail.com
+X-Entity-ID: u001.FGi0IQe1EADKOnDF/Ln1Jw==
+
+--bcfddbb0f6c1acc4fef3597f7b0be96b75116c36a02813ab10ebe7cbeffb
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=utf-8
+Mime-Version: 1.0
+
+
+=20
+ =20
+ =20
+ =20
+ =20
+ =20
+ =20
+ =20
+  DoorDash =20
+   =20
+  =20
+  =20
+  =20
+   =20
+  =20
+ =20
+    =20
+=20
+=20
+ =20
+  =20
+    =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=
+=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=
+=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F=
+ =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=
+=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=
+=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =
+=E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=
+=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=
+=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=
+=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=
+=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F=
+ =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=
+=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=
+=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =
+=E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=
+=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=
+=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=
+=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=
+=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F=
+ =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=
+=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=
+=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =
+=E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=
+=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=
+=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=
+=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=
+=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F=
+ =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=
+=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=
+=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =
+=E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=
+=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=
+=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=
+=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=
+=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F=
+ =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=
+=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=
+=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =
+=E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=
+=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=
+=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=
+=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=
+=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F=
+ =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=
+=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F
+  =20
+  =20
+   =20
+    =20
+     =20
+      =20
+       =20
+        =20
+         =20
+          =20
+           =20
+            =20
+             =20
+            =20
+            =20
+              Final receipt.
+            =20
+            =20
+             =20
+            =20
+           =20
+          =20
+        =20
+        =20
+         =20
+          =20
+           =20
+            =20
+             =20
+              =20
+               =20
+                =20
+                 =20
+                  =20
+                   =20
+                    =20
+                       Paid with MasterCard Ending in 0580=C2=A0and/or=C2=
+=A0credits Target  Total: $40.58
+                    =20
+                    =20
+                      Your receipt    1 Arkansas St #41, San Francisco, CA =
+94107, USA
+                    =20
+                   =20
+                  =20
+                =20
+               =20
+                =20
+              =20
+               =20
+                =20
+                 =20
+                  =20
+                   =20
+                    =20
+                      Items you ordered
+                    =20
+                    =20
+                      =20
+                      =20
+                       =20
+                        =20
+                         =20
+                           =20
+                           =20
+                            =20
+                               =20
+                             =20
+                             =20
+                             =20
+                              1x Optimum Nutrition Micronized Blueberry Lem=
+onade Creatine Powder (12.69 oz)
+                              =C2=A0$28.19=C2=A0
+                              =20
+                             =20
+                             =20
+                              =20
+                           =20
+                          =20
+                        =20
+                       =20
+                       =20
+                    =20
+                   =20
+                  =20
+                =20
+               =20
+               =20
+              =20
+               =20
+                =20
+                 =20
+                  =20
+                   =20
+                    =20
+                     =20
+                      =20
+                       =20
+                        =20
+                          Subtotal
+                          $28.19
+                            =20
+                        =20
+                          Tax
+                          $2.90
+                           =20
+                        =20
+                          Delivery fee
+                          $0.00
+                          =20
+                        =20
+                          Service=C2=A0fee
+                          $5.49
+                            =20
+                        =20
+                          Dasher=C2=A0tip
+                          $4.00
+                             =20
+                       =20
+                      =20
+                    =20
+                   =20
+                  =20
+                =20
+               =20
+              =20
+              =20
+               =20
+                =20
+                 =20
+                  =20
+                   =20
+                    =20
+                      Final total charged
+                      $40.58
+                    =20
+                   =20
+                  =20
+                =20
+                =20
+                 =20
+                  =20
+                   =20
+                    =20
+                        This email confirms revisions made to your original=
+ DoorDash order and reflects the final amount charged. The new total cost o=
+f your order is above and includes all taxes and fees. Payment processing a=
+djustments to the original charge may take up to 5-7 business days to proce=
+ss.  Get Order Help
+                    =20
+                   =20
+                  =20
+                =20
+               =20
+              =20
+            =20
+           =20
+          =20
+        =20
+       =20
+      =20
+      =20
+       =20
+        =20
+          =20
+          =20
+           =20
+            =20
+             =20
+              =20
+               =20
+                =20
+                 =20
+                =20
+                =20
+                 =20
+                  =20
+                   =20
+                    =20
+                     =20
+                      =20
+                       =20
+                        =20
+                         =20
+                          =20
+                           =20
+                            =20
+                             =20
+                            =20
+                            =20
+                               Download=20
+the app
+                            =20
+                           =20
+                          =20
+                         =20
+                          =20
+                           =20
+                            =20
+                             =20
+                            =20
+                            =20
+                               Shop=20
+Gift Cards
+                            =20
+                           =20
+                           =20
+                        =20
+                       =20
+                       =20
+                      =20
+                       =20
+                        =20
+                         =20
+                          =20
+                           =20
+                            =20
+                             =20
+                            =20
+                            =20
+                               Refer and=20
+Earn Credit
+                            =20
+                           =20
+                          =20
+                         =20
+                          =20
+                           =20
+                            =20
+                             =20
+                            =20
+                            =20
+                               Deliver with=20
+DoorDash
+                            =20
+                           =20
+                          =20
+                        =20
+                       =20
+                      =20
+                    =20
+                   =20
+                  =20
+                =20
+                =20
+                   =C2=A92025 DoorDash Inc.=20
+303 2nd Street, South Tower, Suite 800=20
+San Francisco, CA 94107 Privacy Policy
+                =20
+                =20
+                 =20
+                  =20
+                   =20
+                    =20
+                      =20
+                     =20
+                      =20
+                     =20
+                    =20
+                   =20
+                  =20
+                =20
+                =20
+                   Help Center
+                =20
+               =20
+              =20
+            =20
+           =20
+           =20
+        =20
+       =20
+      =20
+    =20
+   =20
+  =20
+ =20
+=20
+
+--bcfddbb0f6c1acc4fef3597f7b0be96b75116c36a02813ab10ebe7cbeffb
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/html; charset=utf-8
+Mime-Version: 1.0
+
+<!doctype html>
+<html lang=3D"en" dir=3D"ltr" xmlns:v=3D"urn:schemas-microsoft-com:vml" xml=
+ns:o=3D"urn:schemas-microsoft-com:office:office">
+ <head>
+  <meta charset=3D"utf-8">
+  <meta http-equiv=3D"X-UA-Compatible" content=3D"IE=3Dedge">
+  <meta name=3D"viewport" content=3D"width=3Ddevice-width,initial-scale=3D1=
+ user-scalable=3Dyes">
+  <meta name=3D"format-detection" content=3D"telephone=3Dno, date=3Dno, add=
+ress=3Dno, email=3Dno, url=3Dno">
+  <meta name=3D"x-apple-disable-message-reformatting">
+  <meta name=3D"color-scheme" content=3D"light dark">
+  <meta name=3D"supported-color-schemes" content=3D"light dark">
+  <title>DoorDash</title> <!-- WEB FONTS --> <!--[if !mso]>-->
+  <style type=3D"text/css">
+      @font-face{font-family:'TTNorms';font-style:normal;font-weight:700;sr=
+c:url('https://typography.doordash.com/TTNorms-Pro/TTNormsPro-Bold.woff2')f=
+ormat('woff2');}
+      @font-face{font-family:'TTNorms';font-style:normal;font-weight:600;sr=
+c:url('https://typography.doordash.com/TTNorms-Pro/TTNormsPro-DemiBold.woff=
+2')format('woff2');}
+      @font-face{font-family:'TTNorms';font-style:normal;font-weight:500;sr=
+c:url('https://typography.doordash.com/TTNorms-Pro/TTNormsPro-Medium.woff2'=
+)format('woff2');}
+      @font-face{font-family:'TTNorms';font-style:normal;font-weight:450;sr=
+c:url('https://typography.doordash.com/TTNorms-Pro/TTNormsPro-Normal.woff2'=
+)format('woff2');}
+      @font-face{font-family:'TTNorms';font-style:normal;font-weight:400;sr=
+c:url('https://typography.doordash.com/TTNorms-Pro/TTNormsPro-Regular.woff2=
+')format('woff2');}
+    </style> <!--<![endif]--> <!-- STYLE RESETS -->
+  <style type=3D"text/css">a[href^=3D"tel"],a[href^=3D"sms"]{color:inherit;=
+cursor:default;font-weight:inherit;text-decoration:none}body{-ms-text-size-=
+adjust:100%;-webkit-font-smoothing:antialiased;-webkit-text-size-adjust:100=
+%;mso-line-height-rule:exactly;}html,body{width:100%;margin:0;padding:0}img=
+{border:0;display:block;height:auto;line-height:100%;outline:none;text-deco=
+ration:none}table{border:0 !important;padding:0 !important; border-collapse=
+:collapse !important;mso-table-lspace:0pt;mso-table-rspace:0pt;}u + .body a=
+{color:inherit;font-family:inherit;font-size:inherit;font-weight:inherit;li=
+ne-height:inherit}u ~ img + div > div{display:none;}u + .body{width:100%;}.=
+body a[x-apple-data-detectors=3Dtrue]{color:inherit!important;text-decorati=
+on:inherit!important}span.MsoHyperlink{color:inherit !important;mso-style-p=
+riority:99 !important}span.MsoHyperlinkFollowed{color:inherit !important;ms=
+o-style-priority:99 !important}
+    </style> <!-- BACKGROUND COLORS -->
+  <style type=3D"text/css">
+      body,#MainTable{background-color:#F4F4F4;}
+      #Basic000{background-color:#FEFFFF;}
+      #Sky200{background-color:#DDF4F4;}
+    </style> <!-- FONT STYLES -->
+  <style type=3D"text/css">
+      h1,h2,h3,h4,h5,h6{font-family:'TTNorms',system-ui,sans-serif;font-wei=
+ght:700;margin:0 0 8px 0;}
+      p,ol,ul{font-family:'TTNorms',system-ui,sans-serif;font-weight:450;ma=
+rgin:0 0 8px 0;}
+      ul,ol{padding:0 0 0 20px;}
+      li{font-weight:450;margin:0 0 8px 0;}
+      h1{font-size:50px;line-height:50px;letter-spacing:-0.03em;}
+      h2{font-size:40px;line-height:40px;letter-spacing:-0.02em;}
+      h3{font-size:32px;line-height:32px;letter-spacing:-0.02em;}
+      h4{font-size:24px;line-height:24px;letter-spacing:-0.01em;}
+      h5{font-size:20px;line-height:22px;letter-spacing:-0.01em;}
+      h6{font-size:16px;line-height:18px;}
+      p.p1{font-size:20px;line-height:26px;}
+      p.p2{font-size:16px;line-height:22px;}
+      p.p4{font-size:12px;line-height:14px;}
+      sup{font-size:11px;line-height:11px;}
+    </style> <!-- FONT COLORS -->
+  <style type=3D"text/css">
+      #MainTable table td{color:#191919;}
+      #MainTable table td a{color:inherit;}
+      #MainTable table td p a{text-decoration:underline;}
+      .Red200{color:#EB1700 !important;}
+    </style> <!-- CTAs --> <!-- MOBILE STYLES -->
+  <style type=3D"text/css">
+      @media only screen and (max-width:699px){
+        #MainTable > table {max-width:410px!important;}
+        .full{width:100%!important;height:auto!important;}
+        .pad0{padding-left:0!important;padding-right:0!important;}
+        .pad8{padding-left:8px!important;padding-right:8px!important;}
+        .pad24{padding-left:24px!important;padding-right:24px!important;}
+        .logo{padding-top:40px!important;padding-bottom:40px!important;}
+        h1{font-size:40px!important;line-height:40px!important;letter-spaci=
+ng:-0.02em!important;}
+        h2{font-size:32px!important;line-height:32px!important;}
+        h3{font-size:24px!important;line-height:24px!important;letter-spaci=
+ng:-0.01em!important;}
+      }
+    </style> <!-- DARK MODE STYLES -->
+  <style type=3D"text/css">
+      @media (prefers-color-scheme:dark){
+        body,#MainTable,#Footer{background-color:#000000!important;backgrou=
+nd-image:linear-gradient(#000000,#000000)!important;}
+        table[id^=3D"Basic"]{background-color:#191919!important;background-=
+image:linear-gradient(#191919,#191919)!important;}
+        table[id^=3D"Sky"],table[id^=3D"Blue"]{background-color:#002629!imp=
+ortant;background-image:linear-gradient(#002629,#002629)!important;}
+        #MainTable table td{color:#FFFFFF!important;}
+        #MainTable #Footer table td a{color:#FFFFFF!important;}
+        #MainTable .Red200{color:#FF3008!important;}
+        #MainTable .label span{color:#494949!important;background-color:#FE=
+FFFF!important;}
+        #MainTable .grayCopy p{color:#A6A6A6!important;}
+      }
+    </style>
+  <style type=3D"text/css">
+      :root{color-scheme:light dark;supported-color-schemes:light dark;}
+    </style> <!-- GMAIL APP DARK MODE FIX --> <!-- OUTLOOK SPECIFIC CSS -->=
+ <!--[if gte mso 9]>
+    <style type=3D"text/css">
+      #MainTable td a{color:#191919;}
+      ol,ul{margin-left:20px !important;}
+      li{text-indent:-1em;}
+    </style>
+    <noscript>
+      <xml>
+        <o:OfficeDocumentSettings>
+          <o:PixelsPerInch>96</o:PixelsPerInch>
+        </o:OfficeDocumentSettings>
+      </xml>
+    </noscript>
+    <![endif]-->
+ </head>
+ <body class=3D"body" style=3D"width:100%;margin:0;padding:0;">
+  <span style=3D"color:transparent;visibility:hidden;display:none;opacity:0=
+;height:0;width:0;font-size:0;"></span>
+  <div role=3D"article" aria-roledescription=3D"email" aria-label=3D"DoorDa=
+sh Email" lang=3D"en" dir=3D"ltr" style=3D"font-size:medium; font-size:max(=
+16px, 1rem);">
+   <div style=3D"display: none; max-height: 0px; overflow: hidden;">
+    =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=
+=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=
+=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F=
+ =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=
+=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=
+=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =
+=E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=
+=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=
+=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=
+=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=
+=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F=
+ =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=
+=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=
+=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =
+=E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=
+=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=
+=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=
+=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=
+=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F=
+ =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=
+=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=
+=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =
+=E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=
+=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=
+=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=
+=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=
+=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F=
+ =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=
+=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=
+=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =
+=E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=
+=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=
+=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=
+=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=
+=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F=
+ =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=
+=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=
+=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =
+=E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=
+=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=
+=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=
+=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=
+=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F=
+ =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F =E2=80=
+=87=C2=AD=CD=8F =E2=80=87=C2=AD=CD=8F
+   </div>
+   <table align=3D"center" border=3D"0" cellpadding=3D"0" cellspacing=3D"0"=
+ role=3D"presentation" style=3D"width:100%;">
+    <tbody>
+     <tr>
+      <td align=3D"center" id=3D"MainTable" style=3D"background-color:#F4F4=
+F4;">
+       <table align=3D"center" border=3D"0" cellpadding=3D"0" cellspacing=
+=3D"0" class=3D"full" id=3D"Sky200" role=3D"presentation" style=3D"width:70=
+0px;">
+        <tbody>
+         <tr>
+          <td align=3D"left" class=3D"pad24" style=3D"padding: 0 64px;">
+           <table align=3D"left" border=3D"0" cellpadding=3D"0" cellspacing=
+=3D"0" role=3D"presentation" style=3D"width:100%;">
+            <tbody>
+             <tr>
+              <td align=3D"left" class=3D"logo" style=3D"padding: 48px 0;">=
+<a href=3D"https://tracksg.doordash.com/uni/ls/click?upn=3Du001.2WPFTROKt87=
+XSwhhpTWl-2B-2FBg5Q-2B-2F17CbuWT8XZi-2BuiX9NQvXQ9aE-2FeLMhxL9C-2FAEGQ3d_Rsu=
+M8DEUWpxI-2Bjw9pNWOxClubibUpclL7UNoyoqG1Zpq-2B19dHWuV-2FBVGPzqb2tvI19o89nI2=
+8k83BWZ5uKYvbobhAkBJbIzX4XM3-2B9FQDtV1vrryX2OwLuJ1mzGpvfMiaiLdMR3l4CSKGXDa4=
+RHRN-2Fy2-2FrEjFCRM3rvp2swr5dZ-2BIYjFSzNFGIUTAmnMIA-2BJVbNa38xz0o5h1jZAG9Td=
+ma4W6c6y2PTq25SXhG7th0EsX72mM37h2fJ1BF-2FzAGcep1GVARr4gTw2SEeUiVOp-2BQYqlIK=
+QNTbcNZvecXUE-2BV-2F1DI5e8jopptmlzOD2jHX2y4TqRKce2AU-2BCfuAQrUpe8YzJhlVTOvn=
+S2uZLucOPz6hR4kXuylVCUM6E0iZKY1IdiSLE4SuIaKB-2BYIP7-2BYcYM7jWQ2xZCpDu2LqQKb=
+Ln5EszM65QeENo1hJLIx1CeRBPqxJGjBvORINeySmIqW-2BJZdNJy6nIKGnhqD6EMR8XEixqGwc=
+-2FEk4nQLZ7kXkSpBiEoY7sRojLCBoknRmaHRbQScdwpUgYQpY0KVirhp0vTpwUKHuLBGMd8j-2=
+FO3vOVF6dnHqZ2Wi8xaJMfvkY0Cy5maksHGol-2BVlZ863AKKCsxQEvlQrrqlqsI1j216O-2B3J=
+rcRRfQfjwP2SBzbMXaWM1env3dVvureHSNxnCq2IERBitvIUBx94HbJ2ygfDbUReCYUgIznQgnM=
+5N2ytBLsqoyNw-3D-3D" target=3D"_blank" universal=3D"true"><img alt=3D"DoorD=
+ash" border=3D"0" src=3D"https://assets.doordash.team/m/5e68fa5cbbc50c32/or=
+iginal/DoorDash-Logo-Red100.png" style=3D"color: #FF3008;font-family:'TTNor=
+ms',system-ui,sans-serif;font-weight:bold;font-size:18px;text-decoration:no=
+ne;" width=3D"50"></a></td>
+             </tr>
+             <tr>
+              <td align=3D"left" class=3D"pad0" style=3D"padding:0 64px 0 0=
+;"><h1 style=3D"margin:0 0 16px 0;">Final receipt.</h1></td>
+             </tr>
+             <tr>
+              <td align=3D"right" style=3D"padding: 0 0 40px 0;"><img alt=
+=3D"" src=3D"https://img.cdn4dd.com/s/convenience/images/adjustments_eml_gr=
+ocery.png" width=3D"380" style=3D"width:100%;max-width:380px;"></td>
+             </tr>
+            </tbody>
+           </table></td>
+         </tr>
+         <tr>
+          <td align=3D"left" class=3D"pad8" style=3D"padding: 0 40px 40px;"=
+>
+           <table align=3D"left" border=3D"0" cellpadding=3D"0" cellspacing=
+=3D"0" id=3D"Basic000" role=3D"presentation" style=3D"width:100%;border-rad=
+ius:25px;">
+            <tbody>
+             <tr>
+              <td align=3D"left" class=3D"pad24" style=3D"padding:40px 40px=
+ 0;">
+               <table align=3D"left" border=3D"0" cellpadding=3D"0" cellspa=
+cing=3D"0" role=3D"presentation" style=3D"width:100%;">
+                <tbody>
+                 <tr>
+                  <td align=3D"left" style=3D"padding:0 0 32px 0;">
+                   <table align=3D"left" border=3D"0" cellpadding=3D"0" cel=
+lspacing=3D"0" role=3D"presentation" style=3D"width:100%;">
+                    <tbody>
+                     <tr>
+                      <td align=3D"left" style=3D"padding:0 0 24px 0;"><!--
+                                   =20
+                                    --> <p class=3D"p2" style=3D"margin:0 0=
+ 4px 0;">Paid with MasterCard Ending in 0580&nbsp;and/or&nbsp;credits</p> <=
+p class=3D"p2" style=3D"margin:0 0 4px 0;">Target</p> <p class=3D"p2" style=
+=3D"margin:0 0 4px 0;"></p> <p class=3D"p2"><strong>Total: $40.58</strong><=
+/p></td>
+                     </tr>
+                     <tr>
+                      <td align=3D"left" style=3D"padding:0 0 24px 0;border=
+-bottom:1px solid #C4C4C4;"><h4>Your receipt</h4> <!----> <p class=3D"p2" s=
+tyle=3D"margin:0 0 4px 0;"></p> <!----> <p class=3D"p2"><a href=3D"" style=
+=3D"color:#191919;text-decoration:none;">1 Arkansas St #41, San Francisco, =
+CA 94107, USA</a></p></td>
+                     </tr>
+                    </tbody>
+                   </table></td>
+                 </tr>
+                </tbody>
+               </table> <!----> <!---->
+               <table align=3D"left" border=3D"0" cellpadding=3D"0" cellspa=
+cing=3D"0" role=3D"presentation" style=3D"width:100%;">
+                <tbody>
+                 <tr>
+                  <td align=3D"left" style=3D"padding:0 0 32px 0;">
+                   <table align=3D"left" border=3D"0" cellpadding=3D"0" cel=
+lspacing=3D"0" role=3D"presentation" style=3D"width:100%;">
+                    <tbody>
+                     <tr>
+                      <td align=3D"left"><h4>Items you ordered</h4></td>
+                     </tr>
+                     <tr>
+                      <td align=3D"left" style=3D"padding:0 0 16px 0;border=
+-bottom:1px solid #C4C4C4;"><!----> <!--    -->
+                       <table align=3D"center" border=3D"0" cellpadding=3D"=
+0" cellspacing=3D"0" role=3D"presentation" style=3D"width: 100%; border: 0;=
+ padding: 0; border-collapse: collapse;" width=3D"100%">
+                        <tbody>
+                         <tr>
+                          <td align=3D"left" style=3D"padding: 16px 0 0 0; =
+border-bottom: none;">
+                           <table align=3D"left" border=3D"0" cellpadding=
+=3D"0" cellspacing=3D"0" role=3D"presentation" style=3D"width: 100%; border=
+: 0; padding: 0; border-collapse: collapse;" width=3D"100%">
+                            <!--  --> <!--  -->
+                            <tbody>
+                             <tr>
+                              <td align=3D"left" style=3D"padding: 0 0 12px=
+ 0;"><!--    --> <!--  --> <!--  -->
+                              <table align=3D"left" border=3D"0" cellpaddin=
+g=3D"0" cellspacing=3D"0" role=3D"presentation" style=3D"width: 100%; borde=
+r: 0; padding: 0; border-collapse: collapse;" width=3D"100%">
+                              <!--=20
+                =20
+               -->
+                              <tbody>
+                              <tr>
+                              <td align=3D"left" valign=3D"top" class=3D"">=
+<p class=3D"para-rg" style=3D"font-family: 'TTNorms',system-ui,sans-serif; =
+font-weight: 500; font-size: 16px; line-height: 20px; margin: 0 0 4px 0;col=
+or:inherit;"><strong>1x</strong> Optimum Nutrition Micronized Blueberry Lem=
+onade Creatine Powder (12.69 oz)</p></td>
+                              <td align=3D"right" valign=3D"top" style=3D"p=
+adding: 0 0 0 24px;"><p class=3D"para-rg" style=3D"font-family: 'TTNorms',s=
+ystem-ui,sans-serif; font-weight: 500; font-size: 16px; line-height: 20px; =
+text-decoration: none; margin: 0 0 4px 0;color:inherit;white-space:nowrap;"=
+>&nbsp;$28.19&nbsp;</p></td>
+                              </tr> <!--  -->
+                              </tbody>
+                              </table></td>
+                             </tr> <!--  --> <!--  -->
+                            </tbody>
+                           </table></td>
+                         </tr>
+                        </tbody>
+                       </table> <!----></td>
+                     </tr>
+                    </tbody>
+                   </table></td>
+                 </tr>
+                </tbody>
+               </table> <!---->
+               <table align=3D"left" border=3D"0" cellpadding=3D"0" cellspa=
+cing=3D"0" role=3D"presentation" style=3D"width:100%;">
+                <tbody>
+                 <tr>
+                  <td align=3D"left" style=3D"padding:0 0 32px 0;">
+                   <table align=3D"left" border=3D"0" cellpadding=3D"0" cel=
+lspacing=3D"0" role=3D"presentation" style=3D"width:100%;">
+                    <tbody>
+                     <tr>
+                      <td align=3D"left" style=3D"padding:0 0 24px 0;border=
+-bottom:1px solid #C4C4C4;">
+                       <table align=3D"left" border=3D"0" cellpadding=3D"0"=
+ cellspacing=3D"0" role=3D"presentation" style=3D"width:100%;">
+                        <tbody>
+                         <tr>
+                          <td align=3D"left"><p class=3D"p2">Subtotal</p></=
+td>
+                          <td align=3D"right" valign=3D"bottom"><p class=3D=
+"p2">$28.19</p></td>
+                         </tr> <!----> <!----> <!----> <!---->
+                         <tr>
+                          <td align=3D"left"><p class=3D"p2">Tax</p></td>
+                          <td align=3D"right" valign=3D"top"><p class=3D"p2=
+">$2.90</p></td>
+                         </tr> <!----> <!----> <!---->
+                         <tr>
+                          <td align=3D"left"><p class=3D"p2">Delivery fee</=
+p></td>
+                          <td align=3D"right" valign=3D"top"><p class=3D"p2=
+">$0.00</p></td>
+                         </tr> <!----> <!---->
+                         <tr>
+                          <td align=3D"left"><p class=3D"p2">Service&nbsp;f=
+ee</p></td>
+                          <td align=3D"right" valign=3D"top"><p class=3D"p2=
+">$5.49</p></td>
+                         </tr> <!----> <!----> <!----> <!---->
+                         <tr>
+                          <td align=3D"left"><p class=3D"p2">Dasher&nbsp;ti=
+p</p></td>
+                          <td align=3D"right" valign=3D"top"><p class=3D"p2=
+">$4.00</p></td>
+                         </tr> <!----> <!----> <!----> <!----> <!---->
+                        </tbody>
+                       </table></td>
+                     </tr>
+                    </tbody>
+                   </table></td>
+                 </tr>
+                </tbody>
+               </table>
+               <table align=3D"left" border=3D"0" cellpadding=3D"0" cellspa=
+cing=3D"0" role=3D"presentation" style=3D"width:100%;">
+                <tbody>
+                 <tr>
+                  <td align=3D"left">
+                   <table align=3D"left" border=3D"0" cellpadding=3D"0" cel=
+lspacing=3D"0" role=3D"presentation" style=3D"width:100%;">
+                    <tbody>
+                     <tr>
+                      <td align=3D"left"><p class=3D"p1" style=3D"font-weig=
+ht:700;">Final total charged</p></td>
+                      <td align=3D"right" valign=3D"bottom"><p class=3D"p1"=
+ style=3D"font-weight:700;">$40.58</p></td>
+                     </tr>
+                    </tbody>
+                   </table></td>
+                 </tr>
+                 <tr>
+                  <td align=3D"left" style=3D"padding:16px 0 24px 0;">
+                   <table align=3D"left" border=3D"0" cellpadding=3D"0" cel=
+lspacing=3D"0" role=3D"presentation" style=3D"width:100%;">
+                    <tbody>
+                     <tr>
+                      <td align=3D"left"><!----> <!----> <p class=3D"p4" st=
+yle=3D"margin:0 0 16px;font-weight:400;">This email confirms revisions made=
+ to your original DoorDash order and reflects the final amount charged. The=
+ new total cost of your order is above and includes all taxes and fees. Pay=
+ment processing adjustments to the original charge may take up to 5-7 busin=
+ess days to process.</p> <!----> <p class=3D"p2" style=3D"margin:0 0 16px;"=
+><a class=3D"Red200" href=3D"https://tracksg.doordash.com/uni/ls/click?upn=
+=3Du001.2WPFTROKt87XSwhhpTWl-2B-2FBg5Q-2B-2F17CbuWT8XZi-2BuiWfMGyUSCzez4LsL=
+B-2BjyDdInrb61-2FexmCKcQZuBOFK6Ihz2C6fYR15jr5BExsha9Bv5KgGfFRnczzxF9PL5GKqK=
+84-R_RsuM8DEUWpxI-2Bjw9pNWOxClubibUpclL7UNoyoqG1Zpq-2B19dHWuV-2FBVGPzqb2tvI=
+19o89nI28k83BWZ5uKYvbobhAkBJbIzX4XM3-2B9FQDtV1vrryX2OwLuJ1mzGpvfMiaiLdMR3l4=
+CSKGXDa4RHRN-2Fy2-2FrEjFCRM3rvp2swr5dZ-2BIYjFSzNFGIUTAmnMIA-2BJVbNa38xz0o5h=
+1jZAG9Tdma4W6c6y2PTq25SXhG7th0EsX72mM37h2fJ1BF-2FzAGcep1GVARr4gTw2SEeUiVOp-=
+2BQYqlIKQNTbcNZvecXUE-2BV-2F1DI5e8jopptmlzOD2jHX2y4TqRKce2AU-2BCfuAQrUpe8Yz=
+JhlVTOvnS2uZLucOPz6hR4kXuylVCUM6E0iZKY1IdiSLE4SuIaKB-2BYIP7-2BYcYM7jWQ2xZCp=
+Du2LqQKbLn5EszM65QeENo1hJLIx1CeRBPqxJGjBvORINeySmIqW-2BJZdNJy6nIKGnhqD6EMR8=
+XEixqGwc-2FEk4nQLZ7kXkSpBiEoY7sRojLCBoknRmaHRbQScdwpUgYQpY0KVirhp0vTpwUKHuL=
+BGMd8j-2FO3vOVF6dnHqZ2Wi8xaJMfvkY0Cy5mZsuj0ccOwli-2B-2F-2Bnr-2BptImPr-2BA7n=
+Ap-2BpEszeKMJYwxv-2BO6vZ7NVXw9LfKb1Y5-2Bn2jpqsC2JzQ3IH-2BSFR7s9GFY-2F50JyGT=
+L8MAh83pgMRXfnjkjtt-2FP9tfa-2B3zrLeZ4R2zQ-3D-3D" target=3D"_blank" style=3D=
+"font-weight:700;text-decoration:none;" universal=3D"true">Get Order Help</=
+a></p></td>
+                     </tr>
+                    </tbody>
+                   </table></td>
+                 </tr>
+                </tbody>
+               </table></td>
+             </tr>
+            </tbody>
+           </table></td>
+         </tr>
+        </tbody>
+       </table>
+       <table align=3D"center" border=3D"0" cellpadding=3D"0" cellspacing=
+=3D"0" class=3D"full" id=3D"Footer" role=3D"presentation" style=3D"width:70=
+0px;">
+        <tbody>
+         <tr>
+          <td valign=3D"top" align=3D"center" style=3D"padding:0 0 24px 0;"=
+><!--
+
+
+--> <!--[if (gte mso 9)|(IE)]>
+<table align=3D"center" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" ro=
+le=3D"presentation" style=3D"width:620px;">
+  <tr>
+    <td align=3D"center">
+    <![endif]-->
+           <table align=3D"center" border=3D"0" cellpadding=3D"0" cellspaci=
+ng=3D"0" id=3D"Footer" role=3D"presentation" style=3D"mso-table-lspace: 0; =
+mso-table-rspace: 0; width: 100%; max-width: 700px; border: 0; padding: 0; =
+border-collapse: collapse;" width=3D"100%">
+            <tbody>
+             <tr>
+              <td align=3D"center" style=3D"padding: 0 24px;">
+               <table align=3D"center" border=3D"0" cellpadding=3D"0" cells=
+pacing=3D"0" role=3D"presentation" style=3D"mso-table-lspace: 0; mso-table-=
+rspace: 0; width:100%;max-width:572px; border: 0; padding: 0; border-collap=
+se: collapse;" width=3D"100%">
+                <tbody>
+                 <tr>
+                  <td align=3D"left" style=3D"padding: 48px 0 32px 0; borde=
+r-bottom: 1px solid #E7E7E7;"><a href=3D"https://tracksg.doordash.com/uni/l=
+s/click?upn=3Du001.2WPFTROKt87XSwhhpTWl-2B-2FBg5Q-2B-2F17CbuWT8XZi-2BuiX9NQ=
+vXQ9aE-2FeLMhxL9C-2FAE6_Y7_RsuM8DEUWpxI-2Bjw9pNWOxClubibUpclL7UNoyoqG1Zpq-2=
+B19dHWuV-2FBVGPzqb2tvI19o89nI28k83BWZ5uKYvbobhAkBJbIzX4XM3-2B9FQDtV1vrryX2O=
+wLuJ1mzGpvfMiaiLdMR3l4CSKGXDa4RHRN-2Fy2-2FrEjFCRM3rvp2swr5dZ-2BIYjFSzNFGIUT=
+AmnMIA-2BJVbNa38xz0o5h1jZAG9Tdma4W6c6y2PTq25SXhG7th0EsX72mM37h2fJ1BF-2FzAGc=
+ep1GVARr4gTw2SEeUiVOp-2BQYqlIKQNTbcNZvecXUE-2BV-2F1DI5e8jopptmlzOD2jHX2y4Tq=
+RKce2AU-2BCfuAQrUpe8YzJhlVTOvnS2uZLucOPz6hR4kXuylVCUM6E0iZKY1IdiSLE4SuIaKB-=
+2BYIP7-2BYcYM7jWQ2xZCpDu2LqQKbLn5EszM65QeENo1hJLIx1CeRBPqxJGjBvORINeySmIqW-=
+2BJZdNJy6nIKGnhqD6EMR8XEixqGwc-2FEk4nQLZ7kXkSpBiEoY7sRojLCBoknRmaHRbQScdwpU=
+gYQpY0KVirhp0vTpwUKHuLBGMd8j-2FO3vOVF6dnHqZ2Wi8xaJMfvkY0Cy5mRPgOeXLHYs8w9Tu=
+9Huo-2F4tc7oGGZ1HtrU2AzxJ2JW2a4Jfa0-2Fr1fr69qfbxROyJvvra64iemXoQZM4rNMBS2yr=
+Terbc0c2yjv0dd0ZUp3qlZlNbpPWSmKd3XF-2FTQE-2Fo9Q-3D-3D" target=3D"_blank" st=
+yle=3D"color: #191919;" universal=3D"true"><img alt=3D"DoorDash" border=3D"=
+0" src=3D"https://assets.doordash.team/m/60228540eee4df0c/original/DoorDash=
+-Logo-Full-Red100.png" style=3D"-ms-interpolation-mode: bicubic; border: 0;=
+ display: block; height: auto; line-height: 100%; outline: none; color: #FF=
+3008; font-family:'TTNorms',system-ui,sans-serif; font-weight: bold; font-s=
+ize: 18px; text-decoration: none; width: 183px;" width=3D"183"></a></td>
+                 </tr>
+                 <tr>
+                  <td align=3D"left" style=3D"padding:16px 0 0 0;">
+                   <table align=3D"left" border=3D"0" cellpadding=3D"0" cel=
+lspacing=3D"0" role=3D"presentation" style=3D"mso-table-lspace: 0; mso-tabl=
+e-rspace: 0; width: 100%; border: 0; padding: 0; border-collapse: collapse;=
+" width=3D"100%">
+                    <tbody>
+                     <tr>
+                      <td align=3D"left" style=3D"padding:0 0 16px 0;">
+                       <table align=3D"left" border=3D"0" cellpadding=3D"0"=
+ cellspacing=3D"0" role=3D"presentation" width=3D"100%" style=3D"mso-table-=
+lspace: 0; mso-table-rspace: 0; width: 100%; max-width: 280px; border: 0; p=
+adding: 0; border-collapse: collapse; float: left;">
+                        <tbody>
+                         <tr>
+                          <td align=3D"left" valign=3D"top" style=3D"paddin=
+g: 16px 0; width: 50%;" width=3D"50%">
+                           <table align=3D"left" border=3D"0" cellpadding=
+=3D"0" cellspacing=3D"0" role=3D"presentation" width=3D"100%" style=3D"mso-=
+table-lspace: 0; mso-table-rspace: 0; width: 100%; max-width: 140px; border=
+: 0; padding: 0; border-collapse: collapse;">
+                            <tbody>
+                             <tr>
+                              <td align=3D"left" valign=3D"top" style=3D"he=
+ight: 40px;" height=3D"40"><a href=3D"https://tracksg.doordash.com/ls/click=
+?upn=3Du001.2WPFTROKt87XSwhhpTWl-2BzcjCYVO02E6L8GZdu019pLCdzrwjBbgDTooc-2Bf=
+2hmV45f2EGDuiNzmiTMuRZPKlHjhcIixsxt6mci9emxQ30-2BVxGv0RnlPka-2FFd4fNutCfWP5=
+9qLn5b2LnYMFz9QVRs-2FSPJVeax0MxwhWejYUsJXRb6tR22CAvldJ8oQ3uaWNGf6cIK_RsuM8D=
+EUWpxI-2Bjw9pNWOxClubibUpclL7UNoyoqG1Zpq-2B19dHWuV-2FBVGPzqb2tvI19o89nI28k8=
+3BWZ5uKYvbobhAkBJbIzX4XM3-2B9FQDtV1vrryX2OwLuJ1mzGpvfMiaiLdMR3l4CSKGXDa4RHR=
+N-2Fy2-2FrEjFCRM3rvp2swr5dZ-2BIYjFSzNFGIUTAmnMIA-2BJVbNa38xz0o5h1jZAG9Tdma4=
+W6c6y2PTq25SXhG7th0EsX72mM37h2fJ1BF-2FzAGcep1GVARr4gTw2SEeUiVOp-2BQYqlIKQNT=
+bcNZvecXUE-2BV-2F1DI5e8jopptmlzOD2jHX2y4TqRKce2AU-2BCfuAQrUpe8YzJhlVTOvnS2u=
+ZLucOPz6hR4kXuylVCUM6E0iZKY1IdiSLE4SuIaKB-2BYIP7-2BYcYM7jWQ2xZCpDu2LqQKbLn5=
+EszM65QeENo1hJLIx1CeRBPqxJGjBvORINeySmIqW-2BJZdNJy6nIKGnhqD6EMR8XEixqGwc-2F=
+Ek4nQLZ7kXkSpBiEoY7sRojLCBoknRmaHRbQScdwpUgYQpY0KVirhp0vTpwUKHuLBGMd8j-2FO3=
+vOVF6dnHqZ2Wi8xaJMfvkY0Cy5mZlxKIIPSYxMNn7IBp8VViRK0l3Hkj5hFx4Ya8uaX-2Fe6J4O=
+5UMmEBemEjlM-2F8n44BSlg2E-2Ba6M4LGFwCqyJSfGmP27zzPW56diX7VCopUQpwFsIdluVsj2=
+qtA3kMrCCm9g-3D-3D" target=3D"_blank" style=3D"color: #191919;"><img alt=3D=
+"Download the app" src=3D"https://assets.doordash.team/m/500fea64c23bc120/o=
+riginal/icon-footer-mobileapp.png" width=3D"55" style=3D"-ms-interpolation-=
+mode: bicubic; border: 0; display: block; height: auto; line-height: 100%; =
+outline: none; text-decoration: none; width: 55px;"></a></td>
+                             </tr>
+                             <tr>
+                              <td align=3D"left" valign=3D"top" style=3D"co=
+lor: #191919;"><!--
+                                   =20
+                                     =20
+                                   =20
+                                    --> <p style=3D"font-family:'TTNorms',s=
+ystem-ui,sans-serif;font-size:16px;line-height:22px;font-weight:500;margin:=
+0;"><a href=3D"https://tracksg.doordash.com/ls/click?upn=3Du001.2WPFTROKt87=
+XSwhhpTWl-2BzcjCYVO02E6L8GZdu019pLCdzrwjBbgDTooc-2Bf2hmV45f2EGDuiNzmiTMuRZP=
+KlHjhcIixsxt6mci9emxQ30-2BVxGv0RnlPka-2FFd4fNutCfWP59qLn5b2LnYMFz9QVRs-2FSP=
+JVeax0MxwhWejYUsJXRb6tR22CAvldJ8oQ3uaWNGfWrAM_RsuM8DEUWpxI-2Bjw9pNWOxClubib=
+UpclL7UNoyoqG1Zpq-2B19dHWuV-2FBVGPzqb2tvI19o89nI28k83BWZ5uKYvbobhAkBJbIzX4X=
+M3-2B9FQDtV1vrryX2OwLuJ1mzGpvfMiaiLdMR3l4CSKGXDa4RHRN-2Fy2-2FrEjFCRM3rvp2sw=
+r5dZ-2BIYjFSzNFGIUTAmnMIA-2BJVbNa38xz0o5h1jZAG9Tdma4W6c6y2PTq25SXhG7th0EsX7=
+2mM37h2fJ1BF-2FzAGcep1GVARr4gTw2SEeUiVOp-2BQYqlIKQNTbcNZvecXUE-2BV-2F1DI5e8=
+jopptmlzOD2jHX2y4TqRKce2AU-2BCfuAQrUpe8YzJhlVTOvnS2uZLucOPz6hR4kXuylVCUM6E0=
+iZKY1IdiSLE4SuIaKB-2BYIP7-2BYcYM7jWQ2xZCpDu2LqQKbLn5EszM65QeENo1hJLIx1CeRBP=
+qxJGjBvORINeySmIqW-2BJZdNJy6nIKGnhqD6EMR8XEixqGwc-2FEk4nQLZ7kXkSpBiEoY7sRoj=
+LCBoknRmaHRbQScdwpUgYQpY0KVirhp0vTpwUKHuLBGMd8j-2FO3vOVF6dnHqZ2Wi8xaJMfvkY0=
+Cy5mRI97Ms1Rof-2BCmYCxcrp5yGKz9T9Te0Cy1R-2B730wHhWsvGhH4DMpMs1M-2BMVTJxHp97=
+bdKsBIlDrU2KPJg-2BmqsomKtefN1LNI0OVOYBbJSES41lCaTnq4LsbvKTE7J0oLmA-3D-3D" t=
+arget=3D"_blank" style=3D"color: #191919; text-decoration: none;">Download =
+<br>the app</a></p></td>
+                             </tr>
+                            </tbody>
+                           </table></td>
+                          <td data-skip-shadow-validation=3D"true" align=3D=
+"left" valign=3D"top" style=3D"padding: 16px 0; width: 50%;" width=3D"50%">=
+<!---->
+                           <table align=3D"left" border=3D"0" cellpadding=
+=3D"0" cellspacing=3D"0" role=3D"presentation" width=3D"100%" style=3D"mso-=
+table-lspace: 0; mso-table-rspace: 0; width: 100%; max-width: 140px; border=
+: 0; padding: 0; border-collapse: collapse;">
+                            <tbody>
+                             <tr>
+                              <td align=3D"left" valign=3D"top" style=3D"he=
+ight: 40px;" height=3D"40"><a href=3D"https://tracksg.doordash.com/uni/ls/c=
+lick?upn=3Du001.2WPFTROKt87XSwhhpTWl-2B-2FBg5Q-2B-2F17CbuWT8XZi-2BuiXcTh9Rn=
+omDHl8hjluP2Kf-2BD5RGeDVqI9bmTUfMaMWMZA-3D-3DxwvI_RsuM8DEUWpxI-2Bjw9pNWOxCl=
+ubibUpclL7UNoyoqG1Zpq-2B19dHWuV-2FBVGPzqb2tvI19o89nI28k83BWZ5uKYvbobhAkBJbI=
+zX4XM3-2B9FQDtV1vrryX2OwLuJ1mzGpvfMiaiLdMR3l4CSKGXDa4RHRN-2Fy2-2FrEjFCRM3rv=
+p2swr5dZ-2BIYjFSzNFGIUTAmnMIA-2BJVbNa38xz0o5h1jZAG9Tdma4W6c6y2PTq25SXhG7th0=
+EsX72mM37h2fJ1BF-2FzAGcep1GVARr4gTw2SEeUiVOp-2BQYqlIKQNTbcNZvecXUE-2BV-2F1D=
+I5e8jopptmlzOD2jHX2y4TqRKce2AU-2BCfuAQrUpe8YzJhlVTOvnS2uZLucOPz6hR4kXuylVCU=
+M6E0iZKY1IdiSLE4SuIaKB-2BYIP7-2BYcYM7jWQ2xZCpDu2LqQKbLn5EszM65QeENo1hJLIx1C=
+eRBPqxJGjBvORINeySmIqW-2BJZdNJy6nIKGnhqD6EMR8XEixqGwc-2FEk4nQLZ7kXkSpBiEoY7=
+sRojLCBoknRmaHRbQScdwpUgYQpY0KVirhp0vTpwUKHuLBGMd8j-2FO3vOVF6dnHqZ2Wi8xaJMf=
+vkY0Cy5mawVGjteH9qkueV1Fgi9QOoqueC4KZxMWStpoQIP7i9hZ-2BDNCbEZUiBFbI-2F1tgs9=
+q4-2FImYH7jIXjDvYizOirHN1-2FDEdi4zsoHHrWlNOVU7AIi5CkcAb2wkWTLMgH9NjxHQ-3D-3=
+D" target=3D"_blank" style=3D"color: #191919;" universal=3D"true"><img alt=
+=3D"Shop Gift Cards" src=3D"https://assets.doordash.team/m/2f055075aa667d75=
+/original/icon-dd-giftcard.png" width=3D"43" style=3D"-ms-interpolation-mod=
+e: bicubic; border: 0; display: block; height: auto; line-height: 100%; out=
+line: none; text-decoration: none; width: 43px;"></a></td>
+                             </tr>
+                             <tr>
+                              <td align=3D"left" valign=3D"top" style=3D"co=
+lor: #191919;"><!--
+                                   =20
+                                     =20
+                                   =20
+                                    --> <p style=3D"font-family:'TTNorms',s=
+ystem-ui,sans-serif;font-size:16px;line-height:22px;font-weight:500;margin:=
+0;"><a href=3D"https://tracksg.doordash.com/uni/ls/click?upn=3Du001.2WPFTRO=
+Kt87XSwhhpTWl-2B-2FBg5Q-2B-2F17CbuWT8XZi-2BuiXcTh9RnomDHl8hjluP2Kf-2BD5RGeD=
+VqI9bmTUfMaMWMZA-3D-3DkPa__RsuM8DEUWpxI-2Bjw9pNWOxClubibUpclL7UNoyoqG1Zpq-2=
+B19dHWuV-2FBVGPzqb2tvI19o89nI28k83BWZ5uKYvbobhAkBJbIzX4XM3-2B9FQDtV1vrryX2O=
+wLuJ1mzGpvfMiaiLdMR3l4CSKGXDa4RHRN-2Fy2-2FrEjFCRM3rvp2swr5dZ-2BIYjFSzNFGIUT=
+AmnMIA-2BJVbNa38xz0o5h1jZAG9Tdma4W6c6y2PTq25SXhG7th0EsX72mM37h2fJ1BF-2FzAGc=
+ep1GVARr4gTw2SEeUiVOp-2BQYqlIKQNTbcNZvecXUE-2BV-2F1DI5e8jopptmlzOD2jHX2y4Tq=
+RKce2AU-2BCfuAQrUpe8YzJhlVTOvnS2uZLucOPz6hR4kXuylVCUM6E0iZKY1IdiSLE4SuIaKB-=
+2BYIP7-2BYcYM7jWQ2xZCpDu2LqQKbLn5EszM65QeENo1hJLIx1CeRBPqxJGjBvORINeySmIqW-=
+2BJZdNJy6nIKGnhqD6EMR8XEixqGwc-2FEk4nQLZ7kXkSpBiEoY7sRojLCBoknRmaHRbQScdwpU=
+gYQpY0KVirhp0vTpwUKHuLBGMd8j-2FO3vOVF6dnHqZ2Wi8xaJMfvkY0Cy5mae5xRiuJ6TAHJA1=
+5531vWCutzz4Dym6iLCETonAgSb6c-2Bzfm8tpVyF7is9CL77N-2FanjtRoPC5Ah9FJ3IiTFLcM=
+9x8A8pQG5-2FQKZDlBNzprMDtyNLBmEy8ufQD4MZFq50g-3D-3D" target=3D"_blank" styl=
+e=3D"color: #191919; text-decoration: none;" universal=3D"true">Shop <br>Gi=
+ft Cards</a></p></td>
+                             </tr>
+                            </tbody>
+                           </table> <!----></td>
+                         </tr>
+                        </tbody>
+                       </table> <!--[if gte mso 9]></td><td align=3D"left">=
+<![endif]-->
+                       <table align=3D"left" border=3D"0" cellpadding=3D"0"=
+ cellspacing=3D"0" role=3D"presentation" width=3D"100%" style=3D"mso-table-=
+lspace: 0; mso-table-rspace: 0; width: 100%; max-width: 280px; border: 0; p=
+adding: 0; border-collapse: collapse; float: left;">
+                        <tbody>
+                         <tr>
+                          <td align=3D"left" valign=3D"top" style=3D"paddin=
+g: 16px 0; width: 50%;" width=3D"50%">
+                           <table align=3D"left" border=3D"0" cellpadding=
+=3D"0" cellspacing=3D"0" role=3D"presentation" width=3D"100%" style=3D"mso-=
+table-lspace: 0; mso-table-rspace: 0; width: 100%; max-width: 140px; border=
+: 0; padding: 0; border-collapse: collapse;">
+                            <tbody>
+                             <tr>
+                              <td align=3D"left" valign=3D"top" style=3D"he=
+ight: 40px;" height=3D"40"><a href=3D"https://tracksg.doordash.com/uni/ls/c=
+lick?upn=3Du001.2WPFTROKt87XSwhhpTWl-2B-2FBg5Q-2B-2F17CbuWT8XZi-2BuiVT5CX2S=
+pN45IR7hQUH3fjvHqA4t-2F4SC8-2BnSVnPlHEF7Q-3D-3DMJRa_RsuM8DEUWpxI-2Bjw9pNWOx=
+ClubibUpclL7UNoyoqG1Zpq-2B19dHWuV-2FBVGPzqb2tvI19o89nI28k83BWZ5uKYvbobhAkBJ=
+bIzX4XM3-2B9FQDtV1vrryX2OwLuJ1mzGpvfMiaiLdMR3l4CSKGXDa4RHRN-2Fy2-2FrEjFCRM3=
+rvp2swr5dZ-2BIYjFSzNFGIUTAmnMIA-2BJVbNa38xz0o5h1jZAG9Tdma4W6c6y2PTq25SXhG7t=
+h0EsX72mM37h2fJ1BF-2FzAGcep1GVARr4gTw2SEeUiVOp-2BQYqlIKQNTbcNZvecXUE-2BV-2F=
+1DI5e8jopptmlzOD2jHX2y4TqRKce2AU-2BCfuAQrUpe8YzJhlVTOvnS2uZLucOPz6hR4kXuylV=
+CUM6E0iZKY1IdiSLE4SuIaKB-2BYIP7-2BYcYM7jWQ2xZCpDu2LqQKbLn5EszM65QeENo1hJLIx=
+1CeRBPqxJGjBvORINeySmIqW-2BJZdNJy6nIKGnhqD6EMR8XEixqGwc-2FEk4nQLZ7kXkSpBiEo=
+Y7sRojLCBoknRmaHRbQScdwpUgYQpY0KVirhp0vTpwUKHuLBGMd8j-2FO3vOVF6dnHqZ2Wi8xaJ=
+MfvkY0Cy5mZs-2BYdNvPPhYV-2B7Sx9yg0hn2TIjE-2Bj7-2BGfBp3vDHZYYAaBhW753AMuoTd1=
+XeAL73HwsU1v5NjZ1rJnbgmjB26rrTC6Uphf65CZLrzil8-2By7mUwNvbkA-2FlNkWzO7sSIyTY=
+A-3D-3D" target=3D"_blank" style=3D"color: #191919;" universal=3D"true"><im=
+g alt=3D"Refer and Earn Credit" src=3D"https://assets.doordash.team/m/73675=
+450875ebb57/original/icon-footer-refer.png" width=3D"30" style=3D"-ms-inter=
+polation-mode: bicubic; border: 0; display: block; height: auto; line-heigh=
+t: 100%; outline: none; text-decoration: none; width: 30px;"></a></td>
+                             </tr>
+                             <tr>
+                              <td align=3D"left" valign=3D"top" style=3D"co=
+lor: #191919;"><!--
+                                   =20
+                                     =20
+                                   =20
+                                    --> <p style=3D"font-family:'TTNorms',s=
+ystem-ui,sans-serif;font-size:16px;line-height:22px;font-weight:500;margin:=
+0;"><a href=3D"https://tracksg.doordash.com/uni/ls/click?upn=3Du001.2WPFTRO=
+Kt87XSwhhpTWl-2B-2FBg5Q-2B-2F17CbuWT8XZi-2BuiVT5CX2SpN45IR7hQUH3fjvHqA4t-2F=
+4SC8-2BnSVnPlHEF7Q-3D-3DnXlv_RsuM8DEUWpxI-2Bjw9pNWOxClubibUpclL7UNoyoqG1Zpq=
+-2B19dHWuV-2FBVGPzqb2tvI19o89nI28k83BWZ5uKYvbobhAkBJbIzX4XM3-2B9FQDtV1vrryX=
+2OwLuJ1mzGpvfMiaiLdMR3l4CSKGXDa4RHRN-2Fy2-2FrEjFCRM3rvp2swr5dZ-2BIYjFSzNFGI=
+UTAmnMIA-2BJVbNa38xz0o5h1jZAG9Tdma4W6c6y2PTq25SXhG7th0EsX72mM37h2fJ1BF-2FzA=
+Gcep1GVARr4gTw2SEeUiVOp-2BQYqlIKQNTbcNZvecXUE-2BV-2F1DI5e8jopptmlzOD2jHX2y4=
+TqRKce2AU-2BCfuAQrUpe8YzJhlVTOvnS2uZLucOPz6hR4kXuylVCUM6E0iZKY1IdiSLE4SuIaK=
+B-2BYIP7-2BYcYM7jWQ2xZCpDu2LqQKbLn5EszM65QeENo1hJLIx1CeRBPqxJGjBvORINeySmIq=
+W-2BJZdNJy6nIKGnhqD6EMR8XEixqGwc-2FEk4nQLZ7kXkSpBiEoY7sRojLCBoknRmaHRbQScdw=
+pUgYQpY0KVirhp0vTpwUKHuLBGMd8j-2FO3vOVF6dnHqZ2Wi8xaJMfvkY0Cy5me80-2B3WwLLM3=
+-2BT-2Fw8atO381IGu8JFJsFsmlqj3YQT-2BMqB0x3dz7bRngjdQ2hSslYTSXYV7IQ-2FCcjQTV=
+hsFsjbTzKpAmokqPOrQ16jdFHODSMGBm1P6zR5SPCW-2FYAtmfnBQ-3D-3D" target=3D"_bla=
+nk" style=3D"color: #191919; text-decoration: none;" universal=3D"true">Ref=
+er and <br>Earn Credit</a></p></td>
+                             </tr>
+                            </tbody>
+                           </table></td>
+                          <td align=3D"left" valign=3D"top" style=3D"paddin=
+g: 16px 0; width: 50%;" width=3D"50%">
+                           <table align=3D"left" border=3D"0" cellpadding=
+=3D"0" cellspacing=3D"0" role=3D"presentation" width=3D"100%" style=3D"mso-=
+table-lspace: 0; mso-table-rspace: 0; width: 100%; max-width: 140px; border=
+: 0; padding: 0; border-collapse: collapse;">
+                            <tbody>
+                             <tr>
+                              <td align=3D"left" valign=3D"top" style=3D"he=
+ight: 40px;" height=3D"40"><a href=3D"https://tracksg.doordash.com/ls/click=
+?upn=3Du001.2WPFTROKt87XSwhhpTWl-2B-2FBg5Q-2B-2F17CbuWT8XZi-2BuiUmEso6tSMMq=
+b4wX3Q58ulh0RYYyPmHEEAnk-2BGx0Kt-2BeA-3D-3D4K4u_RsuM8DEUWpxI-2Bjw9pNWOxClub=
+ibUpclL7UNoyoqG1Zpq-2B19dHWuV-2FBVGPzqb2tvI19o89nI28k83BWZ5uKYvbobhAkBJbIzX=
+4XM3-2B9FQDtV1vrryX2OwLuJ1mzGpvfMiaiLdMR3l4CSKGXDa4RHRN-2Fy2-2FrEjFCRM3rvp2=
+swr5dZ-2BIYjFSzNFGIUTAmnMIA-2BJVbNa38xz0o5h1jZAG9Tdma4W6c6y2PTq25SXhG7th0Es=
+X72mM37h2fJ1BF-2FzAGcep1GVARr4gTw2SEeUiVOp-2BQYqlIKQNTbcNZvecXUE-2BV-2F1DI5=
+e8jopptmlzOD2jHX2y4TqRKce2AU-2BCfuAQrUpe8YzJhlVTOvnS2uZLucOPz6hR4kXuylVCUM6=
+E0iZKY1IdiSLE4SuIaKB-2BYIP7-2BYcYM7jWQ2xZCpDu2LqQKbLn5EszM65QeENo1hJLIx1CeR=
+BPqxJGjBvORINeySmIqW-2BJZdNJy6nIKGnhqD6EMR8XEixqGwc-2FEk4nQLZ7kXkSpBiEoY7sR=
+ojLCBoknRmaHRbQScdwpUgYQpY0KVirhp0vTpwUKHuLBGMd8j-2FO3vOVF6dnHqZ2Wi8xaJMfvk=
+Y0Cy5mV9g0aQSAbiS94ZxgwtHNQKdUtA6GHhpPJzjvqxwNYsI8I11iz9GmkPPtXN2E29ixHQdP-=
+2FKqUXegy7uuXl5-2FLuYHegCiIBD3Lxf1hkd2ZfHUDZHUoy13AWEjypsU4DLaOw-3D-3D" tar=
+get=3D"_blank" style=3D"color: #191919;"><img alt=3D"Deliver with DoorDash"=
+ src=3D"https://assets.doordash.team/m/d3fd5564cd1d0f3/original/icon-footer=
+-deliverdd.png" width=3D"27" style=3D"-ms-interpolation-mode: bicubic; bord=
+er: 0; display: block; height: auto; line-height: 100%; outline: none; text=
+-decoration: none; width: 27px;"></a></td>
+                             </tr>
+                             <tr>
+                              <td align=3D"left" valign=3D"top" style=3D"co=
+lor: #191919;"><!--
+                                   =20
+                                     =20
+                                   =20
+                                    --> <p style=3D"font-family:'TTNorms',s=
+ystem-ui,sans-serif;font-size:16px;line-height:22px;font-weight:500;margin:=
+0;"><a href=3D"https://tracksg.doordash.com/ls/click?upn=3Du001.2WPFTROKt87=
+XSwhhpTWl-2B-2FBg5Q-2B-2F17CbuWT8XZi-2BuiUmEso6tSMMqb4wX3Q58ulh0RYYyPmHEEAn=
+k-2BGx0Kt-2BeA-3D-3DmFAL_RsuM8DEUWpxI-2Bjw9pNWOxClubibUpclL7UNoyoqG1Zpq-2B1=
+9dHWuV-2FBVGPzqb2tvI19o89nI28k83BWZ5uKYvbobhAkBJbIzX4XM3-2B9FQDtV1vrryX2OwL=
+uJ1mzGpvfMiaiLdMR3l4CSKGXDa4RHRN-2Fy2-2FrEjFCRM3rvp2swr5dZ-2BIYjFSzNFGIUTAm=
+nMIA-2BJVbNa38xz0o5h1jZAG9Tdma4W6c6y2PTq25SXhG7th0EsX72mM37h2fJ1BF-2FzAGcep=
+1GVARr4gTw2SEeUiVOp-2BQYqlIKQNTbcNZvecXUE-2BV-2F1DI5e8jopptmlzOD2jHX2y4TqRK=
+ce2AU-2BCfuAQrUpe8YzJhlVTOvnS2uZLucOPz6hR4kXuylVCUM6E0iZKY1IdiSLE4SuIaKB-2B=
+YIP7-2BYcYM7jWQ2xZCpDu2LqQKbLn5EszM65QeENo1hJLIx1CeRBPqxJGjBvORINeySmIqW-2B=
+JZdNJy6nIKGnhqD6EMR8XEixqGwc-2FEk4nQLZ7kXkSpBiEoY7sRojLCBoknRmaHRbQScdwpUgY=
+QpY0KVirhp0vTpwUKHuLBGMd8j-2FO3vOVF6dnHqZ2Wi8xaJMfvkY0Cy5me-2F5xZAH3-2Brq8k=
+o-2BRRP-2FuD-2BskYaeJR-2BM1843fpSrvxxSATLzCFNqrhT8KuefqU-2B3ck1IjnS47ZRJobL=
+V-2FFTHwvkBfy-2B-2BkXjwAweoMAgWW9OS8Py6eYlcPzLfMbTj4Vmrdn1gf3wCRf4VsgkNQ0Bk=
+5EQ-3D" target=3D"_blank" style=3D"color: #191919; text-decoration: none;">=
+Deliver with <br>DoorDash</a></p></td>
+                             </tr>
+                            </tbody>
+                           </table></td>
+                         </tr>
+                        </tbody>
+                       </table></td>
+                     </tr>
+                    </tbody>
+                   </table></td>
+                 </tr>
+                 <tr>
+                  <td align=3D"left" style=3D"color: #191919; padding: 16px=
+ 0;"><!--
+                 =20
+                   =20
+                 =20
+                  --> <p style=3D"font-family:'TTNorms',system-ui,sans-seri=
+f;font-size:14px;line-height:18px;font-weight:400;margin:0;color:#9A9A9A;">=
+=C2=A92025 <a style=3D"color: #9A9A9A; text-decoration: none;">DoorDash Inc=
+. <br>303 2nd Street, South Tower, Suite 800 <br>San Francisco, CA 94107</a=
+></p> <p style=3D"font-family:'TTNorms',system-ui,sans-serif;font-size:14px=
+;line-height:18px;font-weight:400;margin:0;color:#9A9A9A;"><a href=3D"https=
+://tracksg.doordash.com/ls/click?upn=3Du001.2WPFTROKt87XSwhhpTWl-2B-2FDD8Fc=
+MNUAvAdfcDQmgdYAfdX67BmAmt0ufvV0DN-2BQcKLBxKTnrSNIWzubRh3E-2BfgEsS2yrPfbmkJ=
+cf80iMMHs-3DCbon_RsuM8DEUWpxI-2Bjw9pNWOxClubibUpclL7UNoyoqG1Zpq-2B19dHWuV-2=
+FBVGPzqb2tvI19o89nI28k83BWZ5uKYvbobhAkBJbIzX4XM3-2B9FQDtV1vrryX2OwLuJ1mzGpv=
+fMiaiLdMR3l4CSKGXDa4RHRN-2Fy2-2FrEjFCRM3rvp2swr5dZ-2BIYjFSzNFGIUTAmnMIA-2BJ=
+VbNa38xz0o5h1jZAG9Tdma4W6c6y2PTq25SXhG7th0EsX72mM37h2fJ1BF-2FzAGcep1GVARr4g=
+Tw2SEeUiVOp-2BQYqlIKQNTbcNZvecXUE-2BV-2F1DI5e8jopptmlzOD2jHX2y4TqRKce2AU-2B=
+CfuAQrUpe8YzJhlVTOvnS2uZLucOPz6hR4kXuylVCUM6E0iZKY1IdiSLE4SuIaKB-2BYIP7-2BY=
+cYM7jWQ2xZCpDu2LqQKbLn5EszM65QeENo1hJLIx1CeRBPqxJGjBvORINeySmIqW-2BJZdNJy6n=
+IKGnhqD6EMR8XEixqGwc-2FEk4nQLZ7kXkSpBiEoY7sRojLCBoknRmaHRbQScdwpUgYQpY0KVir=
+hp0vTpwUKHuLBGMd8j-2FO3vOVF6dnHqZ2Wi8xaJMfvkY0Cy5mYZVWdmAQGx7th7f8QmLxOHOpc=
+KhwPAtGB9zJQcx-2BTgutyBrulidJln60DU-2Fj39IutYmJpTmy1Z56LZZr76E1fEuurrWBesyW=
+lbyBGdJn7CIW0winH54DRuO5dsgj-2BC1Mg8CmzEZE3gQaO3aSsIowcE-3D" target=3D"_bla=
+nk" style=3D"color: #9A9A9A; text-decoration: none;">Privacy Policy</a></p>=
+</td>
+                 </tr>
+                 <tr>
+                  <td align=3D"left" style=3D"color: #191919; padding: 0 0 =
+16px 0;">
+                   <table align=3D"left" border=3D"0" cellpadding=3D"0" cel=
+lspacing=3D"0" role=3D"presentation" style=3D"mso-table-lspace: 0; mso-tabl=
+e-rspace: 0; border: 0; padding: 0; border-collapse: collapse;">
+                    <tbody>
+                     <tr>
+                      <td align=3D"left" valign=3D"middle" style=3D"color: =
+#191919; padding: 0 8px 0 0;"><!----> <a href=3D"https://tracksg.doordash.c=
+om/ls/click?upn=3Du001.2WPFTROKt87XSwhhpTWl-2B-2FB3YMlmntmTqKXVA7huNFqC-2FY=
+2hoh-2Fz5YPfVOcCa6quEO0F_RsuM8DEUWpxI-2Bjw9pNWOxClubibUpclL7UNoyoqG1Zpq-2B1=
+9dHWuV-2FBVGPzqb2tvI19o89nI28k83BWZ5uKYvbobhAkBJbIzX4XM3-2B9FQDtV1vrryX2OwL=
+uJ1mzGpvfMiaiLdMR3l4CSKGXDa4RHRN-2Fy2-2FrEjFCRM3rvp2swr5dZ-2BIYjFSzNFGIUTAm=
+nMIA-2BJVbNa38xz0o5h1jZAG9Tdma4W6c6y2PTq25SXhG7th0EsX72mM37h2fJ1BF-2FzAGcep=
+1GVARr4gTw2SEeUiVOp-2BQYqlIKQNTbcNZvecXUE-2BV-2F1DI5e8jopptmlzOD2jHX2y4TqRK=
+ce2AU-2BCfuAQrUpe8YzJhlVTOvnS2uZLucOPz6hR4kXuylVCUM6E0iZKY1IdiSLE4SuIaKB-2B=
+YIP7-2BYcYM7jWQ2xZCpDu2LqQKbLn5EszM65QeENo1hJLIx1CeRBPqxJGjBvORINeySmIqW-2B=
+JZdNJy6nIKGnhqD6EMR8XEixqGwc-2FEk4nQLZ7kXkSpBiEoY7sRojLCBoknRmaHRbQScdwpUgY=
+QpY0KVirhp0vTpwUKHuLBGMd8j-2FO3vOVF6dnHqZ2Wi8xaJMfvkY0Cy5mY-2FpZ4ew-2B2QbVk=
+oeQWfZEMg-2F7lNJdb5KTi-2ByTBLn9sRu-2F1tOvXYIae5Zezf6S-2BRQCFLYmFD6tjX6llVbE=
+fbZX8nP6LSYc-2Fs1dVxmdYeFCWQ1O-2Bw-2FMKgOT43zEDurzGz-2BUE2NWfi5jK437l7HNRlI=
+kco-3D" target=3D"_blank" style=3D"color: #191919;"><img alt=3D"fb" src=3D"=
+https://assets.doordash.team/m/5188bb1f5f04acaa/original/logo-facebook.png"=
+ width=3D"24" style=3D"-ms-interpolation-mode: bicubic; border: 0; display:=
+ block; height: auto; line-height: 100%; outline: none; text-decoration: no=
+ne; width: 24px;"></a></td>
+                      <td align=3D"left" valign=3D"middle" style=3D"color: =
+#191919; padding: 0 8px 0 0;"><a href=3D"https://tracksg.doordash.com/ls/cl=
+ick?upn=3Du001.2WPFTROKt87XSwhhpTWl-2B4AUo6me50US-2FvcfePJUZTRhfLFumwrfkjz2=
+KbYGBSYXUB-e_RsuM8DEUWpxI-2Bjw9pNWOxClubibUpclL7UNoyoqG1Zpq-2B19dHWuV-2FBVG=
+Pzqb2tvI19o89nI28k83BWZ5uKYvbobhAkBJbIzX4XM3-2B9FQDtV1vrryX2OwLuJ1mzGpvfMia=
+iLdMR3l4CSKGXDa4RHRN-2Fy2-2FrEjFCRM3rvp2swr5dZ-2BIYjFSzNFGIUTAmnMIA-2BJVbNa=
+38xz0o5h1jZAG9Tdma4W6c6y2PTq25SXhG7th0EsX72mM37h2fJ1BF-2FzAGcep1GVARr4gTw2S=
+EeUiVOp-2BQYqlIKQNTbcNZvecXUE-2BV-2F1DI5e8jopptmlzOD2jHX2y4TqRKce2AU-2BCfuA=
+QrUpe8YzJhlVTOvnS2uZLucOPz6hR4kXuylVCUM6E0iZKY1IdiSLE4SuIaKB-2BYIP7-2BYcYM7=
+jWQ2xZCpDu2LqQKbLn5EszM65QeENo1hJLIx1CeRBPqxJGjBvORINeySmIqW-2BJZdNJy6nIKGn=
+hqD6EMR8XEixqGwc-2FEk4nQLZ7kXkSpBiEoY7sRojLCBoknRmaHRbQScdwpUgYQpY0KVirhp0v=
+TpwUKHuLBGMd8j-2FO3vOVF6dnHqZ2Wi8xaJMfvkY0Cy5mdw6NeOzA8YL-2FKcjHbnZabq6zbtT=
+QmTcoKNys1AbH7VlbGrZgGR8B-2Fe4KR9T3OVOWXU9z9mY7XbHCe0zySGSPXArS-2FNv4sZ4ZKe=
+g1jUdIbhQIzI-2FV5S-2BBBfWuERz3-2B66xm4mjA-2BDUE-2BAJN40NgolcoM-3D" target=
+=3D"_blank" style=3D"color: #191919;"><img alt=3D"tw" src=3D"https://assets=
+.doordash.team/m/250ca598c483f1b8/original/logo-x.png" width=3D"24" style=
+=3D"-ms-interpolation-mode: bicubic; border: 0; display: block; height: aut=
+o; line-height: 100%; outline: none; text-decoration: none; width: 24px;"><=
+/a></td>
+                      <td align=3D"left" valign=3D"middle" style=3D"color: =
+#191919; padding: 0 12px 0 0;"><!----> <a href=3D"https://tracksg.doordash.=
+com/ls/click?upn=3Du001.2WPFTROKt87XSwhhpTWl-2B2DmXtXKS05Hn1cgbRhFddpiLHO0E=
+WksR6pd5wFKsdGv_d-7_RsuM8DEUWpxI-2Bjw9pNWOxClubibUpclL7UNoyoqG1Zpq-2B19dHWu=
+V-2FBVGPzqb2tvI19o89nI28k83BWZ5uKYvbobhAkBJbIzX4XM3-2B9FQDtV1vrryX2OwLuJ1mz=
+GpvfMiaiLdMR3l4CSKGXDa4RHRN-2Fy2-2FrEjFCRM3rvp2swr5dZ-2BIYjFSzNFGIUTAmnMIA-=
+2BJVbNa38xz0o5h1jZAG9Tdma4W6c6y2PTq25SXhG7th0EsX72mM37h2fJ1BF-2FzAGcep1GVAR=
+r4gTw2SEeUiVOp-2BQYqlIKQNTbcNZvecXUE-2BV-2F1DI5e8jopptmlzOD2jHX2y4TqRKce2AU=
+-2BCfuAQrUpe8YzJhlVTOvnS2uZLucOPz6hR4kXuylVCUM6E0iZKY1IdiSLE4SuIaKB-2BYIP7-=
+2BYcYM7jWQ2xZCpDu2LqQKbLn5EszM65QeENo1hJLIx1CeRBPqxJGjBvORINeySmIqW-2BJZdNJ=
+y6nIKGnhqD6EMR8XEixqGwc-2FEk4nQLZ7kXkSpBiEoY7sRojLCBoknRmaHRbQScdwpUgYQpY0K=
+Virhp0vTpwUKHuLBGMd8j-2FO3vOVF6dnHqZ2Wi8xaJMfvkY0Cy5mSIDU96ra-2FsGFHGB4drpq=
+CooDslraPIRCEPtDg86qLjvGtImqT0StL7UoMpL9jINxGSE9JfmD-2BlcDZ-2BwFmjyDJkFp-2B=
+wmURR2RyhsMYwqXAJfq0YX63gsZQVmZ888vw4hebybtXk7chIQ0xI-2BTtbu9KQ-3D" target=
+=3D"_blank" style=3D"color: #191919;"><img alt=3D"ig" src=3D"https://assets=
+.doordash.team/m/30ad9ef70caf3a55/original/logo-instagram.png" width=3D"24"=
+ style=3D"-ms-interpolation-mode: bicubic; border: 0; display: block; heigh=
+t: auto; line-height: 100%; outline: none; text-decoration: none; width: 24=
+px;"></a></td>
+                      <td align=3D"left" valign=3D"middle" style=3D"color: =
+#191919; padding: 0 8px 0 0;"><a href=3D"https://tracksg.doordash.com/ls/cl=
+ick?upn=3Du001.2WPFTROKt87XSwhhpTWl-2B9Cc31vkufkxkjeQDdWBHi-2BEykKWTniWhBO2=
+q7EZvDyOpIBI_RsuM8DEUWpxI-2Bjw9pNWOxClubibUpclL7UNoyoqG1Zpq-2B19dHWuV-2FBVG=
+Pzqb2tvI19o89nI28k83BWZ5uKYvbobhAkBJbIzX4XM3-2B9FQDtV1vrryX2OwLuJ1mzGpvfMia=
+iLdMR3l4CSKGXDa4RHRN-2Fy2-2FrEjFCRM3rvp2swr5dZ-2BIYjFSzNFGIUTAmnMIA-2BJVbNa=
+38xz0o5h1jZAG9Tdma4W6c6y2PTq25SXhG7th0EsX72mM37h2fJ1BF-2FzAGcep1GVARr4gTw2S=
+EeUiVOp-2BQYqlIKQNTbcNZvecXUE-2BV-2F1DI5e8jopptmlzOD2jHX2y4TqRKce2AU-2BCfuA=
+QrUpe8YzJhlVTOvnS2uZLucOPz6hR4kXuylVCUM6E0iZKY1IdiSLE4SuIaKB-2BYIP7-2BYcYM7=
+jWQ2xZCpDu2LqQKbLn5EszM65QeENo1hJLIx1CeRBPqxJGjBvORINeySmIqW-2BJZdNJy6nIKGn=
+hqD6EMR8XEixqGwc-2FEk4nQLZ7kXkSpBiEoY7sRojLCBoknRmaHRbQScdwpUgYQpY0KVirhp0v=
+TpwUKHuLBGMd8j-2FO3vOVF6dnHqZ2Wi8xaJMfvkY0Cy5mdtzJ6umbcojQBBwcDhk2aBhrVVAAw=
+FY2-2FTabrGoPI-2Fwh9jc3up5lkesHtdJa9M7N11Zq-2B-2F1cY26eCm6youFoHBJPVug5mdqs=
+OX3Y-2BxSlPeLXwzm1O6-2FU-2BC5i0GOZ1M-2Fk-2FyRD-2F24b9Sa5-2FsJ7yw-2BxAo-3D" =
+target=3D"_blank" style=3D"color: #191919;"><img alt=3D"blog" src=3D"https:=
+//assets.doordash.team/m/4d258e2251ad126b/original/icon_medium.png" width=
+=3D"18" style=3D"-ms-interpolation-mode: bicubic; border: 0; display: block=
+; height: auto; line-height: 100%; outline: none; text-decoration: none; wi=
+dth: 18px;"></a></td>
+                     </tr>
+                    </tbody>
+                   </table></td>
+                 </tr>
+                 <tr>
+                  <td align=3D"left" style=3D"color: #191919; padding: 0 0 =
+24px 0;"><!--
+                 =20
+                   =20
+                 =20
+                  --> <p style=3D"font-family:'TTNorms',system-ui,sans-seri=
+f;font-size:14px;line-height:18px;font-weight:500;margin:0;color:#9A9A9A;">=
+<a href=3D"https://tracksg.doordash.com/ls/click?upn=3Du001.2WPFTROKt87XSwh=
+hpTWl-2B-2FDD8FcMNUAvAdfcDQmgdYABnncKv1afIihr5Gt6bkMjrvEH_RsuM8DEUWpxI-2Bjw=
+9pNWOxClubibUpclL7UNoyoqG1Zpq-2B19dHWuV-2FBVGPzqb2tvI19o89nI28k83BWZ5uKYvbo=
+bhAkBJbIzX4XM3-2B9FQDtV1vrryX2OwLuJ1mzGpvfMiaiLdMR3l4CSKGXDa4RHRN-2Fy2-2FrE=
+jFCRM3rvp2swr5dZ-2BIYjFSzNFGIUTAmnMIA-2BJVbNa38xz0o5h1jZAG9Tdma4W6c6y2PTq25=
+SXhG7th0EsX72mM37h2fJ1BF-2FzAGcep1GVARr4gTw2SEeUiVOp-2BQYqlIKQNTbcNZvecXUE-=
+2BV-2F1DI5e8jopptmlzOD2jHX2y4TqRKce2AU-2BCfuAQrUpe8YzJhlVTOvnS2uZLucOPz6hR4=
+kXuylVCUM6E0iZKY1IdiSLE4SuIaKB-2BYIP7-2BYcYM7jWQ2xZCpDu2LqQKbLn5EszM65QeENo=
+1hJLIx1CeRBPqxJGjBvORINeySmIqW-2BJZdNJy6nIKGnhqD6EMR8XEixqGwc-2FEk4nQLZ7kXk=
+SpBiEoY7sRojLCBoknRmaHRbQScdwpUgYQpY0KVirhp0vTpwUKHuLBGMd8j-2FO3vOVF6dnHqZ2=
+Wi8xaJMfvkY0Cy5mQpxfvFRFJS6zWCya1bffqM1NdKJiFaadJhVVBLcdOiYIiz3D-2FOpHLsPnw=
+GL1DkM16iiBOa1lPbKd1I3P-2FF5kP2daF2x2pwnAscZnxtj1MF-2Fjjbs8zsvzt9834PHHNKLd=
+TYM0af9yFGnOYKf-2B7g1Vqg-3D" target=3D"_blank" style=3D"color: #9A9A9A; tex=
+t-decoration: none;">Help Center</a></p></td>
+                 </tr>
+                </tbody>
+               </table></td>
+             </tr>
+            </tbody>
+           </table> <!--[if (gte mso 9)|(IE)]>
+    </td>
+  </tr>
+</table>
+<![endif]--></td>
+         </tr>
+        </tbody>
+       </table></td>
+     </tr>
+    </tbody>
+   </table>
+  </div>
+ <img src=3D"https://tracksg.doordash.com/wf/open?upn=3Du001.ZINUistG65CIRw=
+jeAkgTVKWxN6wlGdFEJQ-2BaKLSWNtKHuWjpiXoHpWNb83Oa6YA9lqD5HJRm-2B72VgXTZvgRzt=
+lASvOVOWvAjBu7hNZj5cOuiZnMC6yJ-2FzoZ6jZUMl0czR7oI97ZWTCCZsHV1c46oJ1qGM0tfwf=
+s71nHC0rBHZUzbdt4MdJVqJhlYsYtMTqE9ibNu2FRXi9xlcRWGVNjbUB2cgL-2F9dD-2FhfvIsh=
+Uu-2FlDjnEXsE6uYMDHjHyRpxXdNA9fAF2A5p1nniyO-2Fb3Omxi7k3eBmgSoQqx0gAq7t3oVI6=
+issUUVQS5rbXZ3hjwncT3ds0qDWd4-2BWQk4-2FqIgWDG06e7VwoIPIa2wgih-2B3ovR0zepDYs=
+tnraFUQH8UoeJhvCeqrP-2F-2FTv-2FFohcCPRS37368kR4LvcMqXejXlcMQCEnGWA6gKs-2Fpr=
+qoYa7jHEgdVW9W4bBtiwQe4xGdE3w-2FTfk4ycQD-2FkgQBBcUYt0pViLDaySXpzoT5BwJgpCVY=
+gcZO3dbc93ok96ZMhIJ2sQm51nJ-2FAJ3rZ3-2BePKzwsMusSYUVB-2Fg2akAgpI-2BRPQiqPvY=
+uhpwTFmwUFGTG1Od5uLdkqgzIYfAUifNan9PylpP83Xayaa4XhIf9dotLH5rcSMR1-2FWYoQRco=
+ON9tQNzsewap2-2B1f18h1ikfK1oO-2Fhn8cOFr8x-2B4Fr5A6BPWMIC61KgQFLRyMOGuBAeMJ1=
+sXJuyMTobYWwsomaSSEIwX-2B-2FiTlVruo-3D" alt=3D"" width=3D"1" height=3D"1" b=
+order=3D"0" style=3D"height:1px !important;width:1px !important;border-widt=
+h:0 !important;margin-top:0 !important;margin-bottom:0 !important;margin-ri=
+ght:0 !important;margin-left:0 !important;padding-top:0 !important;padding-=
+bottom:0 !important;padding-right:0 !important;padding-left:0 !important;"/=
+></body>
+</html>
+--bcfddbb0f6c1acc4fef3597f7b0be96b75116c36a02813ab10ebe7cbeffb--

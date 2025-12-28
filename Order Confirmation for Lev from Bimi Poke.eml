@@ -1,0 +1,1122 @@
+Delivered-To: ennucore@gmail.com
+Received: by 2002:ac0:c24b:0:b0:3a7:5aef:d5c8 with SMTP id x11csp2345661imi;
+        Mon, 15 Dec 2025 19:12:01 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IEoBP8MkQTA3+WgBNk5+xgF7HQKmkiB4mdQEjbcBQcqh9U5CA7dwz4Z+C3+DzYT5dk8uz/S
+X-Received: by 2002:a05:622a:91:b0:4ee:26b3:e512 with SMTP id d75a77b69052e-4f1bfbbda62mr233089141cf.13.1765854720979;
+        Mon, 15 Dec 2025 19:12:00 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1765854720; cv=none;
+        d=google.com; s=arc-20240605;
+        b=SnKrlYQMh26j//2fWbdNXu8kfixFnDP5IIyV0MhFWqbAbTdtbrGbJfIUTL3IVOGghQ
+         EGNGWa3X6u77xZVt1pWnjxMwo7sAet8NMheyD+CPpRf3m8K0bg/m1d2MIq9T9vlV8I2e
+         JjE9rOdUyjeaGs7YqYAGTL1nM4pWCrB2cjltaIty8x9yprlMdY6Y/PXRDIJ7iHfGL8nv
+         enS5gKKK/GJYTx4dt6PEzsZRhji1ym3HRqO0F8/vshr4+Utymu8i8xAiv2y+RsJD305g
+         xePwOgA88BfyBvMua7wUvEHyFEYwTMowwhgDv0LVj2NntzlHVR1eFy48AO9p3fewaLFP
+         TEiA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
+        h=to:subject:message-id:mime-version:from:date:dkim-signature
+         :dkim-signature;
+        bh=fRUjBc9tAS5PGPnLbutF3XsVzPkZvTQODQbwq60R5IY=;
+        fh=24Zn+9NqQo6ZizjOWSqPE87nR8J4VLYx1L4ndAuPWb0=;
+        b=BfxujA3Qdp6vf6lobyDaFq+pcyBB5CbIM+kUUCOebxgzKZj9AVdadP/xVUTnllifKW
+         ldcLjFDfOWnDVL7SeqqblyZcWueESLEWR5twHATzMO9SnO9qfWhQQwyAssnOAkPp3RBT
+         ttb9I0LdrcP07gipC7IGDLuWWkFr1wIKIcl87uK4Yis7ysA26bP4V48C7sMBqJnk7AOo
+         dX55kP0Udc2hIjDJuU1m6nwKz6AVVIKSspP7ZMCBeiAzp3uQBHqbMfZo4d3RsIWR2O/1
+         gk1kTo7MCDLiNarONj2Sw/vk0u8vYtUrDdxc49Tp5zxb9oQIuulgQuHHqZD9qh+uOa5i
+         5+ww==;
+        dara=google.com
+ARC-Authentication-Results: i=1; mx.google.com;
+       dkim=pass header.i=@doordash.com header.s=s3 header.b=BvYmsXCA;
+       dkim=pass header.i=@sendgrid.info header.s=smtpapi header.b=Nk82dPIl;
+       spf=pass (google.com: domain of bounces+36866409-a83b-ennucore=gmail.com@notify.doordash.com designates 159.183.84.83 as permitted sender) smtp.mailfrom="bounces+36866409-a83b-ennucore=gmail.com@notify.doordash.com";
+       dmarc=pass (p=REJECT sp=REJECT dis=NONE) header.from=doordash.com
+Return-Path: <bounces+36866409-a83b-ennucore=gmail.com@notify.doordash.com>
+Received: from o21.send.doordash.com (o21.send.doordash.com. [159.183.84.83])
+        by mx.google.com with ESMTPS id 6a1803df08f44-889a8670f96si93691666d6.460.2025.12.15.19.12.00
+        for <ennucore@gmail.com>
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Mon, 15 Dec 2025 19:12:00 -0800 (PST)
+Received-SPF: pass (google.com: domain of bounces+36866409-a83b-ennucore=gmail.com@notify.doordash.com designates 159.183.84.83 as permitted sender) client-ip=159.183.84.83;
+Authentication-Results: mx.google.com;
+       dkim=pass header.i=@doordash.com header.s=s3 header.b=BvYmsXCA;
+       dkim=pass header.i=@sendgrid.info header.s=smtpapi header.b=Nk82dPIl;
+       spf=pass (google.com: domain of bounces+36866409-a83b-ennucore=gmail.com@notify.doordash.com designates 159.183.84.83 as permitted sender) smtp.mailfrom="bounces+36866409-a83b-ennucore=gmail.com@notify.doordash.com";
+       dmarc=pass (p=REJECT sp=REJECT dis=NONE) header.from=doordash.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=doordash.com;
+	h=content-type:date:from:mime-version:subject:to:cc:content-type:date:
+	feedback-id:from:subject:to;
+	s=s3; bh=fRUjBc9tAS5PGPnLbutF3XsVzPkZvTQODQbwq60R5IY=;
+	b=BvYmsXCAxPlRKisjq2MeCbu9AS+qgUaOIKKzoZZCrsERGCHv+9bD+Y71FZ6IisGNdagt
+	XOSFirOWPqokunnZ6sMcaVnied/eO0xOVXEHfI22R6oW5tDNpnEcKyDkD8vIXD4tsVSiCx
+	4MkK73i0emYZwMEMerP1VKUSVeTgmn6SZ+8oLh3nGogsgm4QQF9iNKVdqvZn38IAXqew1o
+	Q5PQ484p0dPwkDwEZqgJ57bdzx1xrLqWOCVIjUEEfxTmY7NzF4L2Fl4Z1MnjdFjmNhMl+9
+	yU4ziDb4aDG7o5A2z55Ulnhg6mIlE6WB+wCDAVFYrKwZ8h0S8xuJua3NTIq7fgVA==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sendgrid.info;
+	h=content-type:date:from:mime-version:subject:to:cc:content-type:date:
+	feedback-id:from:subject:to;
+	s=smtpapi; bh=fRUjBc9tAS5PGPnLbutF3XsVzPkZvTQODQbwq60R5IY=;
+	b=Nk82dPIlR/4uXJvISXzkC946VacYbUTZc3OB3FrEimPlLoX/E7OWX4WjnFdtjj2gHlP6
+	R/h+zQOU1zLua8UUwB7SgMl8fsSOpQkxpF5R0GMMWvq7Ko8QiSwmp07kdFQOcd746QCYF+
+	fRk8b0L9luF1iELP6a6vmo+KftE1wU3FE=
+Received: by recvd-db79b56b8-s6cs8 with SMTP id recvd-db79b56b8-s6cs8-1-6940CE00-1A
+	2025-12-16 03:12:00.245698261 +0000 UTC m=+2441680.573202754
+Received: from MzY4NjY0MDk (unknown)
+	by geopod-ismtpd-13 (SG) with HTTP
+	id L9-QK8tHTn2mXrAjvugSnQ
+	Tue, 16 Dec 2025 03:12:00.211 +0000 (UTC)
+Content-Type: multipart/alternative; boundary=8a01a56df37ab2e037057caca88a38d488f14656887c4d37f7bb8480baf0
+Date: Tue, 16 Dec 2025 03:12:00 +0000 (UTC)
+From: DoorDash <no-reply@doordash.com>
+Mime-Version: 1.0
+Message-ID: <L9-QK8tHTn2mXrAjvugSnQ@geopod-ismtpd-13>
+Subject: Order Confirmation for Lev from Bimi Poke
+X-SG-EID: 
+ =?us-ascii?Q?u001=2Eif3om8whlzrKfksGqhz4ALCEoGV0zdR+0Q1S=2FT3gfFFYYMnjgmgqicz7J?=
+ =?us-ascii?Q?DNyxCtMY3mxDr8TX76lVr59GaM4oBOwQgN5JZzO?=
+ =?us-ascii?Q?2pDK7cRUT+PEMLONjeJZUK9dVl61=2FkluaihxkMz?=
+ =?us-ascii?Q?+x+XxcPNnhE0XybvWfFyvEOhAtgZ9yZjchuVx2c?=
+ =?us-ascii?Q?Hqn5DOWTrpW7dF5TK7ImyzI2uquiT=2FXDOAk+Qvd?=
+ =?us-ascii?Q?OxDH3dn4OFpFWUVdf1ItE8=3D?=
+X-SG-ID: 
+ =?us-ascii?Q?u001=2ESdBcvi+Evd=2FbQef8eZF3BpTL9BgbK5wfSJMJGMsmprBx2awDaqzM6JDdd?=
+ =?us-ascii?Q?QePzwmTQwbwigzkgb0Zr8uSvLNgBoRTbZMNZUPU?=
+ =?us-ascii?Q?hFgY2Rx9El9c2WR5UWqHw5JkjHZQk4p=2F6ee1QXv?=
+ =?us-ascii?Q?NwIB1xVBZXXPKHWDCwQTPN0jAElUnIXAtGKYDqJ?=
+ =?us-ascii?Q?15aXv1plEPML3EfPjXME81juIwulDVJMQ=2FCJJEQ?=
+ =?us-ascii?Q?9Wyrg1NSmYtxHHj8Lhk4aTW0KbcWhSTqM59W7AV?=
+ =?us-ascii?Q?lWe8dT5erDKNsNz8RUY6Wuk6PQjgk113slbzTwd?=
+ =?us-ascii?Q?Y4=2FrdOn+U1oCgljdIHL=2FvCO+CIwCCL1ycxfy1Jg?=
+ =?us-ascii?Q?89gNdFRM5IpEB4Pr779D=2FIS8aQzXqbuXTJvy1oq?=
+ =?us-ascii?Q?V2mXenIDjZn61tRv7qz+3tCDyzUiPSEVmwpX+kB?=
+ =?us-ascii?Q?wrBocG6H3fBf8paC8Tv2Y3Jr921E37k6QclosTF?=
+ =?us-ascii?Q?FkdWNi4Yv0LPUHS0F91bPE48yaorBTGKWLUMI=2FX?=
+ =?us-ascii?Q?cLOdd3sMGfxPrEGeLZ8wHRNe8R83WbQTzRZQHy0?=
+ =?us-ascii?Q?A275Py7BPkzrYamAGP+uAI2zMfxn8M=3D?=
+To: ennucore@gmail.com
+X-Entity-ID: u001.FGi0IQe1EADKOnDF/Ln1Jw==
+
+--8a01a56df37ab2e037057caca88a38d488f14656887c4d37f7bb8480baf0
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=utf-8
+Mime-Version: 1.0
+
+
+=20
+ =20
+ =20
+ =20
+ =20
+ =20
+ =20
+ =20
+  DoorDash =20
+   =20
+  =20
+  =20
+  =20
+  =20
+  =20
+  =20
+  =20
+ =20
+  =20
+   =20
+=20
+=20
+ =20
+  =20
+    =CD=8F =E2=80=8C =C2=A0 =E2=80=87 =C2=AD =CD=8F =E2=80=8C =C2=A0 =E2=80=
+=87 =C2=AD =CD=8F =E2=80=8C =C2=A0 =E2=80=87 =C2=AD =CD=8F =E2=80=8C =C2=A0=
+ =E2=80=87 =C2=AD =CD=8F =E2=80=8C =C2=A0 =E2=80=87 =C2=AD =CD=8F =E2=80=8C=
+ =C2=A0 =E2=80=87 =C2=AD =CD=8F =E2=80=8C =C2=A0 =E2=80=87 =C2=AD =CD=8F =
+=E2=80=8C =C2=A0 =E2=80=87 =C2=AD =CD=8F =E2=80=8C =C2=A0 =E2=80=87 =C2=AD =
+=CD=8F =E2=80=8C =C2=A0 =E2=80=87 =C2=AD =CD=8F =E2=80=8C =C2=A0 =E2=80=87 =
+=C2=AD =CD=8F =E2=80=8C =C2=A0 =E2=80=87 =C2=AD =CD=8F =E2=80=8C =C2=A0 =E2=
+=80=87 =C2=AD =CD=8F =E2=80=8C =C2=A0 =E2=80=87 =C2=AD =CD=8F =E2=80=8C =C2=
+=A0 =E2=80=87 =C2=AD =CD=8F =E2=80=8C =C2=A0 =E2=80=87 =C2=AD =CD=8F =E2=80=
+=8C =C2=A0 =E2=80=87 =C2=AD =CD=8F =E2=80=8C =C2=A0 =E2=80=87 =C2=AD =CD=8F=
+ =E2=80=8C =C2=A0 =E2=80=87 =C2=AD =CD=8F =E2=80=8C =C2=A0 =E2=80=87 =C2=AD=
+ =CD=8F =E2=80=8C =C2=A0 =E2=80=87 =C2=AD =CD=8F =E2=80=8C =C2=A0 =E2=80=87=
+ =C2=AD =CD=8F =E2=80=8C =C2=A0 =E2=80=87 =C2=AD =CD=8F =E2=80=8C =C2=A0 =
+=E2=80=87 =C2=AD =CD=8F =E2=80=8C =C2=A0 =E2=80=87 =C2=AD =CD=8F =E2=80=8C =
+=C2=A0 =E2=80=87 =C2=AD =CD=8F =E2=80=8C =C2=A0 =E2=80=87 =C2=AD =CD=8F =E2=
+=80=8C =C2=A0 =E2=80=87 =C2=AD =CD=8F =E2=80=8C =C2=A0 =E2=80=87 =C2=AD =CD=
+=8F =E2=80=8C =C2=A0 =E2=80=87 =C2=AD =CD=8F =E2=80=8C =C2=A0 =E2=80=87 =C2=
+=AD =CD=8F =E2=80=8C =C2=A0 =E2=80=87 =C2=AD =CD=8F =E2=80=8C =C2=A0 =E2=80=
+=87 =C2=AD =CD=8F =E2=80=8C =C2=A0 =E2=80=87 =C2=AD =CD=8F =E2=80=8C =C2=A0=
+ =E2=80=87 =C2=AD =CD=8F =E2=80=8C =C2=A0 =E2=80=87 =C2=AD =CD=8F =E2=80=8C=
+ =C2=A0 =E2=80=87 =C2=AD =CD=8F =E2=80=8C =C2=A0 =E2=80=87 =C2=AD =CD=8F =
+=E2=80=8C =C2=A0 =E2=80=87 =C2=AD =CD=8F =E2=80=8C =C2=A0 =E2=80=87 =C2=AD =
+=CD=8F =E2=80=8C =C2=A0 =E2=80=87 =C2=AD =CD=8F =E2=80=8C =C2=A0 =E2=80=87 =
+=C2=AD =CD=8F =E2=80=8C =C2=A0 =E2=80=87 =C2=AD =CD=8F =E2=80=8C =C2=A0 =E2=
+=80=87 =C2=AD =CD=8F =E2=80=8C =C2=A0 =E2=80=87 =C2=AD =CD=8F =E2=80=8C =C2=
+=A0 =E2=80=87 =C2=AD =CD=8F =E2=80=8C =C2=A0 =E2=80=87 =C2=AD =CD=8F =E2=80=
+=8C =C2=A0 =E2=80=87 =C2=AD =CD=8F =E2=80=8C =C2=A0 =E2=80=87 =C2=AD =CD=8F=
+ =E2=80=8C =C2=A0 =E2=80=87 =C2=AD =CD=8F =E2=80=8C =C2=A0 =E2=80=87 =C2=AD=
+ =CD=8F =E2=80=8C =C2=A0 =E2=80=87 =C2=AD =CD=8F =E2=80=8C =C2=A0 =E2=80=87=
+ =C2=AD =CD=8F =E2=80=8C =C2=A0 =E2=80=87 =C2=AD =CD=8F =E2=80=8C =C2=A0 =
+=E2=80=87 =C2=AD =CD=8F =E2=80=8C =C2=A0 =E2=80=87 =C2=AD =CD=8F =E2=80=8C =
+=C2=A0 =E2=80=87 =C2=AD =CD=8F =E2=80=8C =C2=A0 =E2=80=87 =C2=AD =CD=8F =E2=
+=80=8C =C2=A0 =E2=80=87 =C2=AD =CD=8F =E2=80=8C =C2=A0 =E2=80=87 =C2=AD =CD=
+=8F =E2=80=8C =C2=A0 =E2=80=87 =C2=AD =CD=8F =E2=80=8C =C2=A0 =E2=80=87 =C2=
+=AD =CD=8F =E2=80=8C =C2=A0 =E2=80=87 =C2=AD =CD=8F =E2=80=8C =C2=A0 =E2=80=
+=87 =C2=AD =CD=8F =E2=80=8C =C2=A0 =E2=80=87 =C2=AD =CD=8F =E2=80=8C =C2=A0=
+ =E2=80=87 =C2=AD =CD=8F =E2=80=8C =C2=A0 =E2=80=87 =C2=AD =CD=8F =E2=80=8C=
+ =C2=A0 =E2=80=87 =C2=AD =CD=8F =E2=80=8C =C2=A0 =E2=80=87 =C2=AD =CD=8F =
+=E2=80=8C =C2=A0 =E2=80=87 =C2=AD =CD=8F =E2=80=8C =C2=A0 =E2=80=87 =C2=AD =
+=CD=8F =E2=80=8C =C2=A0 =E2=80=87 =C2=AD =CD=8F =E2=80=8C =C2=A0 =E2=80=87 =
+=C2=AD =CD=8F =E2=80=8C =C2=A0 =E2=80=87 =C2=AD =CD=8F =E2=80=8C =C2=A0 =E2=
+=80=87 =C2=AD =CD=8F =E2=80=8C =C2=A0 =E2=80=87 =C2=AD =CD=8F =E2=80=8C =C2=
+=A0 =E2=80=87 =C2=AD =CD=8F =E2=80=8C =C2=A0 =E2=80=87 =C2=AD =CD=8F =E2=80=
+=8C =C2=A0 =E2=80=87 =C2=AD =CD=8F =E2=80=8C =C2=A0 =E2=80=87 =C2=AD =CD=8F=
+ =E2=80=8C =C2=A0 =E2=80=87 =C2=AD =CD=8F =E2=80=8C =C2=A0 =E2=80=87 =C2=AD=
+ =CD=8F =E2=80=8C =C2=A0 =E2=80=87 =C2=AD =CD=8F =E2=80=8C =C2=A0 =E2=80=87=
+ =C2=AD =CD=8F =E2=80=8C =C2=A0 =E2=80=87 =C2=AD =CD=8F =E2=80=8C =C2=A0 =
+=E2=80=87 =C2=AD =CD=8F =E2=80=8C =C2=A0 =E2=80=87 =C2=AD =CD=8F =E2=80=8C =
+=C2=A0 =E2=80=87 =C2=AD =CD=8F =E2=80=8C =C2=A0 =E2=80=87 =C2=AD =CD=8F =E2=
+=80=8C =C2=A0 =E2=80=87 =C2=AD
+  =20
+  =20
+   =20
+    =20
+     =20
+      =20
+       =20
+        =20
+         =20
+          =20
+           =20
+            =20
+             =20
+            =20
+            =20
+              THANKS FOR YOUR=C2=A0ORDER,  Lev=20
+            =20
+            =20
+              The estimated delivery time for your order is 7:44 PM - 7:51 =
+PM. Track your order in the DoorDash app or=C2=A0website.
+            =20
+            =20
+             =20
+              =20
+               =20
+                =20
+                 =20
+                   Track your order
+                  =20
+                =20
+               =20
+              =20
+            =20
+            =20
+             =20
+              =20
+               =20
+                =20
+                 =20
+                  =20
+                   =20
+                    =20
+                      Your order details  Paid with MasterCard Ending in 05=
+80=C2=A0and/or=C2=A0credits Bimi Poke Total: $61.26
+                    =20
+                    =20
+                      Your receipt 1 Arkansas St #41, San Francisco, CA 941=
+07, USA ESTIMATED TOTAL: $61.26
+                    =20
+                    =20
+                      View Full Receipt Get Order Help=20
+                    =20
+                   =20
+                  =20
+                =20
+               =20
+              =20
+            =20
+            =20
+                =20
+            =20
+           =20
+          =20
+         =20
+        =20
+         =20
+          =20
+           =20
+            =20
+             =20
+              =20
+               =20
+                =20
+                  Review this Store
+                  =20
+                   =20
+                     Share your thoughts on your order with fellow customer=
+s and Bimi Poke.
+                   =20
+                  =20
+                =20
+               =20
+              =20
+            =20
+            =20
+             =20
+              =20
+               =20
+                =20
+                 =20
+                     =20
+                  =20
+                     =20
+                  =20
+                     =20
+                  =20
+                  =20
+               =20
+              =20
+            =20
+           =20
+          =20
+         =20
+        =20
+         =20
+          =20
+           =20
+            =20
+              Restaurants and beyond, it's=C2=A0in=C2=A0the=C2=A0bag.
+            =20
+            =20
+              YOUR DOOR=20
+TO MORE
+            =20
+            =20
+             =20
+            =20
+           =20
+          =20
+        =20
+       =20
+      =20
+      =20
+       =20
+        =20
+         =20
+          =20
+           =20
+            =20
+             =20
+              =20
+               =20
+                =20
+                 =20
+                =20
+                =20
+                  =C2=A92025 DoorDash Inc.=20
+303 2nd Street, South Tower, Suite 800=20
+San Francisco, CA 94107 Privacy Policy
+                =20
+                =20
+                  Help Center
+                =20
+               =20
+              =20
+            =20
+           =20
+           =20
+        =20
+        =20
+           This restaurant pays a commission to DoorDash on this order  Pro=
+p 65 Restaurant WARNING Prop 65 Alcohol WARNING. Drinking distilled spirits=
+, beer, coolers, wine, and other alcoholic beverages may increase cancer ri=
+sk, and, during pregnancy, can cause birth defects. For more information go=
+ to www.P65Warnings.ca.gov/alcohol. Prop 65 BPA WARNING   This order summar=
+y is provided by DoorDash for informational purposes only. To obtain a tax =
+receipt/invoice for the services provided by DoorDash, please contact Custo=
+mer Support. To obtain a tax receipt/invoice for the goods and services pro=
+vided by the Merchant, please contact the Merchant directly.
+        =20
+       =20
+       =20
+    =20
+   =20
+  =20
+ =20
+=20
+
+--8a01a56df37ab2e037057caca88a38d488f14656887c4d37f7bb8480baf0
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/html; charset=utf-8
+Mime-Version: 1.0
+
+<!doctype html>
+<html lang=3D"en" dir=3D"ltr" xmlns:v=3D"urn:schemas-microsoft-com:vml" xml=
+ns:o=3D"urn:schemas-microsoft-com:office:office">
+ <head>
+  <meta charset=3D"utf-8">
+  <meta http-equiv=3D"X-UA-Compatible" content=3D"IE=3Dedge">
+  <meta name=3D"viewport" content=3D"width=3Ddevice-width, initial-scale=3D=
+1, user-scalable=3Dyes">
+  <meta name=3D"format-detection" content=3D"telephone=3Dno, date=3Dno, add=
+ress=3Dno, email=3Dno, url=3Dno">
+  <meta name=3D"x-apple-disable-message-reformatting">
+  <meta name=3D"color-scheme" content=3D"light dark">
+  <meta name=3D"supported-color-schemes" content=3D"light dark">
+  <title>DoorDash</title> <!-- WEB FONTS --> <!--[if !mso]>-->
+  <style type=3D"text/css">
+      @font-face{font-family:'TTNorms-Condensed';font-style:normal;font-wei=
+ght:900;src:url('https://assets.doordash.team/m/3a73ba84e4d48a38/original/T=
+TNorms-Condensed-Black.woff2')format('woff2');}
+      @font-face{font-family:'TTNorms';font-style:normal;font-weight:700;sr=
+c:url('https://typography.doordash.com/TTNorms-Pro/TTNormsPro-Bold.woff2')f=
+ormat('woff2');}
+      @font-face{font-family:'TTNorms';font-style:normal;font-weight:600;sr=
+c:url('https://typography.doordash.com/TTNorms-Pro/TTNormsPro-DemiBold.woff=
+2')format('woff2');}
+      @font-face{font-family:'TTNorms';font-style:normal;font-weight:500;sr=
+c:url('https://typography.doordash.com/TTNorms-Pro/TTNormsPro-Medium.woff2'=
+)format('woff2');}
+      @font-face{font-family:'TTNorms';font-style:normal;font-weight:450;sr=
+c:url('https://typography.doordash.com/TTNorms-Pro/TTNormsPro-Normal.woff2'=
+)format('woff2');}
+      @font-face{font-family:'TTNorms';font-style:normal;font-weight:400;sr=
+c:url('https://typography.doordash.com/TTNorms-Pro/TTNormsPro-Regular.woff2=
+')format('woff2');}
+    </style> <!--<![endif]--> <!-- STYLE RESETS -->
+  <style type=3D"text/css">a[href^=3D"tel"],a[href^=3D"sms"]{color:inherit;=
+cursor:default;font-weight:inherit;text-decoration:none}body{-ms-text-size-=
+adjust:100%;-webkit-font-smoothing:antialiased;-webkit-text-size-adjust:100=
+%;mso-line-height-rule:exactly;}html,body{width:100%;margin:0;padding:0}img=
+{border:0;display:block;height:auto;line-height:100%;outline:none;text-deco=
+ration:none}table{border:0 !important;padding:0 !important; border-collapse=
+:collapse !important;mso-table-lspace:0pt;mso-table-rspace:0pt;}u + .body #=
+MainTable img + div{display:none!important;}u + .body{width:100%;}.body a[x=
+-apple-data-detectors=3Dtrue]{color:inherit!important;text-decoration:inher=
+it!important}span.MsoHyperlink{color:inherit !important;mso-style-priority:=
+99 !important}span.MsoHyperlinkFollowed{color:inherit !important;mso-style-=
+priority:99 !important}
+    </style> <!-- CLASSIC COLORS -->
+  <style type=3D"text/css">
+      body,#MainTable{background-color:#F4F4F4;}
+      #Basic000{background-color:#FEFFFF;}
+      #Bouquet050{background-color:#FFE8FE;}
+      #DeliveryRed600{background-color:#FF3008;background-image:linear-grad=
+ient(#FF3008,#FF3008);}
+      #PinotNoir900{background-color:#4C0C3A;background-image:linear-gradie=
+nt(#4C0C3A,#4C0C3A);}
+    </style> <!--FONT STYLES-->
+  <style type=3D"text/css">
+      h1,h2,h3,h4,h5,h6,p.h7{font-family:'TTNorms',system-ui,sans-serif;fon=
+t-weight:600;margin:0 0 24px 0;line-height:1em;letter-spacing:-0.02em;}
+      p,li{font-family:'TTNorms',system-ui,sans-serif;font-weight:450;margi=
+n:0 0 24px 0;line-height:1.3em;}
+      .black{font-family:'TTNorms-Condensed',system-ui,sans-serif!important=
+;font-weight:900!important;line-height:0.85em;letter-spacing:-0.04em;text-t=
+ransform:uppercase;font-stretch:condensed;}
+      ul,ol{padding:0 0 0 20px;margin:0 0 24px 0;}
+      li{margin:0 0 8px 0;}
+      h1{font-size:5.5em;}
+      h2{font-size:4.5em;}
+      h3{font-size:3.5em;}
+      h4{font-size:3em;}
+      h5{font-size:2.5em;}
+      h6{font-size:2em;}
+      p.h7{font-size:1.5em;}
+      p.p1,li{font-size:1.125em;letter-spacing:-0.02em;}
+      p.p4{font-size:0.75em;margin:0 0 16px 0;}
+      sup{font-size:0.6em;line-height:0.7em;vertical-align:super;}
+      p sup{font-size:10px;}
+      #Footer p.p4,#Footer p.p4 a{color:#9A9A9A !important;font-weight:400;=
+}
+    </style> <!-- FONT COLORS -->
+  <style type=3D"text/css">
+      .body td,.body td a{color:#191919;}
+      .DeliveryRed600{color:#FF3008;}
+      .PinotNoir900{color:#4C0C3A;}
+    </style> <!-- CTAs -->
+  <style type=3D"text/css">
+      .button{border-radius:30px;}
+      .button a{
+        font-family:'TTNorms',system-ui,sans-serif;
+        border:1px solid #FFFFFF;
+        color:#FFFFFF;
+        display:inline-block;
+        border-radius:30px;
+        font-size:18px;
+        line-height:22px;
+        font-weight:700;
+        padding:12px 24px;
+        text-align:center;
+        text-decoration:none;
+        white-space:nowrap;
+        -webkit-text-size-adjust:none;
+      }
+      #DeliveryRed600.button a{background-color:#FF3008!important;}
+    </style> <!-- RATING HOVER STYLES -->
+  <style type=3D"text/css">
+      .rollover div,.rollover div a{display:inline-block;}
+      .rating:hover img.line{max-height: 0px !important;}
+      .rating:hover img.fill{max-height: none !important;}
+    </style> <!-- MOBILE STYLES -->
+  <style type=3D"text/css">
+      @media only screen and (max-width:699px){
+        #MainTable > table {max-width:410px!important;}
+        .full{width:100%!important;height:auto!important;}
+        .pad0{padding-left:0!important;padding-right:0!important;}
+        .pad16{padding-left:16px!important;padding-right:16px!important;}
+        .pad24{padding-left:24px!important;padding-right:24px!important;}
+        .black{line-height:0.85em!important;}
+        h1{font-size:3.5em!important;}
+        h2{font-size:3em!important;}
+        h3{font-size:2.5em!important;}
+        h4{font-size:2em!important;}
+        h5,h6{font-size:1.5em!important;}
+        p.p1,li{font-size:1em!important;}
+      }
+    </style> <!-- DARK MODE STYLES -->
+  <style type=3D"text/css">
+      @media (prefers-color-scheme:dark) {
+        body,#MainTable{background-color:#000000!important;}
+        #Basic000{background-color:#191919!important;}
+        #Bouquet050{background-color:#230522!important;}
+        .border{border-bottom:1px solid #FFC4FC!important;}
+        .body td{color:#FFFFFF!important;}
+        .body td a{color:inherit!important;}
+        .body .PinotNoir900{color:#FFC4FC!important;}
+        .body .DeliveryRed600{color:#FF3008!important;}
+        .body #Basic000.button a{background-color:#FEFFFF!important;color:#=
+191919!important;}
+        .body #Bouquet050.button a{background-color:#FFE8FE!important;color=
+:#4C0C3A!important;}
+      }
+    </style>
+  <style type=3D"text/css">
+      :root{color-scheme:light dark;supported-color-schemes:light dark;}
+    </style> <!-- GMAIL APP FIXES -->
+  <style type=3D"text/css">
+      @media only screen and (max-width:699px) {
+        u + .body .gmail-blend-screen{background:#000;mix-blend-mode: scree=
+n;}
+        u + .body .gmail-blend-difference{background:#000;mix-blend-mode: d=
+ifference;}
+        u + .body .gmail-blend-difference img {mix-blend-mode:exclusion;}
+      }
+    </style> <!-- OUTLOOK SPECIFIC CSS --> <!--[if mso]>
+    <style type=3D"text/css">
+      h1,h2,h3,h4,h5,h6,p.h7{font-family:'arial narrow',sans-serif;font-wei=
+ght:bold;mso-line-height-alt:100%;mso-line-height-rule:exactly;}
+      p,ol,ul{mso-line-height-rule:exactly;mso-line-height-alt:130%;}
+      ol,ul{margin-left:20px !important;}
+      li{text-indent:-1em;}
+      .black{font-family:'arial narrow',sans-serif;font-weight:bold;mso-lin=
+e-height-alt:80%;mso-line-height-rule:exactly;}
+    </style>
+    <noscript>
+      <xml>
+        <o:OfficeDocumentSettings>
+          <o:PixelsPerInch>96</o:PixelsPerInch>
+        </o:OfficeDocumentSettings>
+      </xml>
+    </noscript>
+    <![endif]-->
+ </head>
+ <body class=3D"body" style=3D"width:100%;margin:0;padding:0;">
+  <span style=3D"color:transparent;visibility:hidden;display:none;opacity:0=
+;height:0;width:0;font-size:0;"></span>
+  <div role=3D"article" aria-roledescription=3D"email" aria-label=3D"DoorDa=
+sh Email" lang=3D"en" dir=3D"ltr" style=3D"font-size:medium; font-size:max(=
+16px, 1rem);">
+   <div style=3D"display: none; max-height: 0px; overflow: hidden;">
+    =CD=8F =E2=80=8C &nbsp; =E2=80=87 =C2=AD =CD=8F =E2=80=8C &nbsp; =E2=80=
+=87 =C2=AD =CD=8F =E2=80=8C &nbsp; =E2=80=87 =C2=AD =CD=8F =E2=80=8C &nbsp;=
+ =E2=80=87 =C2=AD =CD=8F =E2=80=8C &nbsp; =E2=80=87 =C2=AD =CD=8F =E2=80=8C=
+ &nbsp; =E2=80=87 =C2=AD =CD=8F =E2=80=8C &nbsp; =E2=80=87 =C2=AD =CD=8F =
+=E2=80=8C &nbsp; =E2=80=87 =C2=AD =CD=8F =E2=80=8C &nbsp; =E2=80=87 =C2=AD =
+=CD=8F =E2=80=8C &nbsp; =E2=80=87 =C2=AD =CD=8F =E2=80=8C &nbsp; =E2=80=87 =
+=C2=AD =CD=8F =E2=80=8C &nbsp; =E2=80=87 =C2=AD =CD=8F =E2=80=8C &nbsp; =E2=
+=80=87 =C2=AD =CD=8F =E2=80=8C &nbsp; =E2=80=87 =C2=AD =CD=8F =E2=80=8C &nb=
+sp; =E2=80=87 =C2=AD =CD=8F =E2=80=8C &nbsp; =E2=80=87 =C2=AD =CD=8F =E2=80=
+=8C &nbsp; =E2=80=87 =C2=AD =CD=8F =E2=80=8C &nbsp; =E2=80=87 =C2=AD =CD=8F=
+ =E2=80=8C &nbsp; =E2=80=87 =C2=AD =CD=8F =E2=80=8C &nbsp; =E2=80=87 =C2=AD=
+ =CD=8F =E2=80=8C &nbsp; =E2=80=87 =C2=AD =CD=8F =E2=80=8C &nbsp; =E2=80=87=
+ =C2=AD =CD=8F =E2=80=8C &nbsp; =E2=80=87 =C2=AD =CD=8F =E2=80=8C &nbsp; =
+=E2=80=87 =C2=AD =CD=8F =E2=80=8C &nbsp; =E2=80=87 =C2=AD =CD=8F =E2=80=8C =
+&nbsp; =E2=80=87 =C2=AD =CD=8F =E2=80=8C &nbsp; =E2=80=87 =C2=AD =CD=8F =E2=
+=80=8C &nbsp; =E2=80=87 =C2=AD =CD=8F =E2=80=8C &nbsp; =E2=80=87 =C2=AD =CD=
+=8F =E2=80=8C &nbsp; =E2=80=87 =C2=AD =CD=8F =E2=80=8C &nbsp; =E2=80=87 =C2=
+=AD =CD=8F =E2=80=8C &nbsp; =E2=80=87 =C2=AD =CD=8F =E2=80=8C &nbsp; =E2=80=
+=87 =C2=AD =CD=8F =E2=80=8C &nbsp; =E2=80=87 =C2=AD =CD=8F =E2=80=8C &nbsp;=
+ =E2=80=87 =C2=AD =CD=8F =E2=80=8C &nbsp; =E2=80=87 =C2=AD =CD=8F =E2=80=8C=
+ &nbsp; =E2=80=87 =C2=AD =CD=8F =E2=80=8C &nbsp; =E2=80=87 =C2=AD =CD=8F =
+=E2=80=8C &nbsp; =E2=80=87 =C2=AD =CD=8F =E2=80=8C &nbsp; =E2=80=87 =C2=AD =
+=CD=8F =E2=80=8C &nbsp; =E2=80=87 =C2=AD =CD=8F =E2=80=8C &nbsp; =E2=80=87 =
+=C2=AD =CD=8F =E2=80=8C &nbsp; =E2=80=87 =C2=AD =CD=8F =E2=80=8C &nbsp; =E2=
+=80=87 =C2=AD =CD=8F =E2=80=8C &nbsp; =E2=80=87 =C2=AD =CD=8F =E2=80=8C &nb=
+sp; =E2=80=87 =C2=AD =CD=8F =E2=80=8C &nbsp; =E2=80=87 =C2=AD =CD=8F =E2=80=
+=8C &nbsp; =E2=80=87 =C2=AD =CD=8F =E2=80=8C &nbsp; =E2=80=87 =C2=AD =CD=8F=
+ =E2=80=8C &nbsp; =E2=80=87 =C2=AD =CD=8F =E2=80=8C &nbsp; =E2=80=87 =C2=AD=
+ =CD=8F =E2=80=8C &nbsp; =E2=80=87 =C2=AD =CD=8F =E2=80=8C &nbsp; =E2=80=87=
+ =C2=AD =CD=8F =E2=80=8C &nbsp; =E2=80=87 =C2=AD =CD=8F =E2=80=8C &nbsp; =
+=E2=80=87 =C2=AD =CD=8F =E2=80=8C &nbsp; =E2=80=87 =C2=AD =CD=8F =E2=80=8C =
+&nbsp; =E2=80=87 =C2=AD =CD=8F =E2=80=8C &nbsp; =E2=80=87 =C2=AD =CD=8F =E2=
+=80=8C &nbsp; =E2=80=87 =C2=AD =CD=8F =E2=80=8C &nbsp; =E2=80=87 =C2=AD =CD=
+=8F =E2=80=8C &nbsp; =E2=80=87 =C2=AD =CD=8F =E2=80=8C &nbsp; =E2=80=87 =C2=
+=AD =CD=8F =E2=80=8C &nbsp; =E2=80=87 =C2=AD =CD=8F =E2=80=8C &nbsp; =E2=80=
+=87 =C2=AD =CD=8F =E2=80=8C &nbsp; =E2=80=87 =C2=AD =CD=8F =E2=80=8C &nbsp;=
+ =E2=80=87 =C2=AD =CD=8F =E2=80=8C &nbsp; =E2=80=87 =C2=AD =CD=8F =E2=80=8C=
+ &nbsp; =E2=80=87 =C2=AD =CD=8F =E2=80=8C &nbsp; =E2=80=87 =C2=AD =CD=8F =
+=E2=80=8C &nbsp; =E2=80=87 =C2=AD =CD=8F =E2=80=8C &nbsp; =E2=80=87 =C2=AD =
+=CD=8F =E2=80=8C &nbsp; =E2=80=87 =C2=AD =CD=8F =E2=80=8C &nbsp; =E2=80=87 =
+=C2=AD =CD=8F =E2=80=8C &nbsp; =E2=80=87 =C2=AD =CD=8F =E2=80=8C &nbsp; =E2=
+=80=87 =C2=AD =CD=8F =E2=80=8C &nbsp; =E2=80=87 =C2=AD =CD=8F =E2=80=8C &nb=
+sp; =E2=80=87 =C2=AD =CD=8F =E2=80=8C &nbsp; =E2=80=87 =C2=AD =CD=8F =E2=80=
+=8C &nbsp; =E2=80=87 =C2=AD =CD=8F =E2=80=8C &nbsp; =E2=80=87 =C2=AD =CD=8F=
+ =E2=80=8C &nbsp; =E2=80=87 =C2=AD =CD=8F =E2=80=8C &nbsp; =E2=80=87 =C2=AD=
+ =CD=8F =E2=80=8C &nbsp; =E2=80=87 =C2=AD =CD=8F =E2=80=8C &nbsp; =E2=80=87=
+ =C2=AD =CD=8F =E2=80=8C &nbsp; =E2=80=87 =C2=AD =CD=8F =E2=80=8C &nbsp; =
+=E2=80=87 =C2=AD =CD=8F =E2=80=8C &nbsp; =E2=80=87 =C2=AD =CD=8F =E2=80=8C =
+&nbsp; =E2=80=87 =C2=AD =CD=8F =E2=80=8C &nbsp; =E2=80=87 =C2=AD =CD=8F =E2=
+=80=8C &nbsp; =E2=80=87 =C2=AD
+   </div>
+   <table align=3D"center" border=3D"0" cellpadding=3D"0" cellspacing=3D"0"=
+ role=3D"presentation" style=3D"width:100%;">
+    <tbody>
+     <tr>
+      <td align=3D"center" id=3D"MainTable" style=3D"background-color:#F4F4=
+F4;"><!--[if mso]>
+            <table align=3D"center" border=3D"0" cellpadding=3D"0" cellspac=
+ing=3D"0" role=3D"presentation" width=3D"700" style=3D"width:700px;">
+              <tr>
+                <td align=3D"center">
+                <![endif]-->
+       <table align=3D"center" border=3D"0" cellpadding=3D"0" cellspacing=
+=3D"0" class=3D"full" id=3D"Basic000" role=3D"presentation" style=3D"width:=
+100%;max-width:700px;">
+        <tbody>
+         <tr>
+          <td align=3D"center" class=3D"pad24" style=3D"padding: 0 40px;">
+           <table align=3D"center" border=3D"0" cellpadding=3D"0" cellspaci=
+ng=3D"0" role=3D"presentation" style=3D"width:100%;">
+            <tbody>
+             <tr>
+              <td align=3D"center" style=3D"padding: 40px 0;"><a href=3D"ht=
+tps://tracksg.doordash.com/uni/ls/click?upn=3Du001.2WPFTROKt87XSwhhpTWl-2B-=
+2FBg5Q-2B-2F17CbuWT8XZi-2BuiX9NQvXQ9aE-2FeLMhxL9C-2FAEQVdn_RsuM8DEUWpxI-2Bj=
+w9pNWOxClubibUpclL7UNoyoqG1Zpq-2B19dHWuV-2FBVGPzqb2tvIwmGNMo1YHO-2BdEQWAiYy=
+RwONblP9Y-2BD0QpVMlLLWWo22agvATYWy51LnPG4TSBhOtznOCugADO5FKGr3kjsx8RgWFT0mA=
+mvtJZmXeT3dydC2jZIx7VVs5vZeaCJQOTEvaq1TjXbOWcr7ztjxx5twcaBcJcOhoB7dZcSQGz18=
+sAJvq4ZrPEKgrNSk2Z-2BWtrwMavI9XbQBmQGGXFSEPteNd3SY-2FwYgywoNpPI7lCN9vxAGP9B=
+VnX3ssw6XjONjPnMuz8Fi02BWeChu2LD-2FCjuY68TOO22dLOJCGyKCROIBMv3V1QuWp2ApO6Ar=
+21TAT-2BTth42ZF7wTZpTynUemplMWwPsQ7jFS9G8rGfe3mXSyhOfcdkxAMGRHrWA-2BeXG5YGP=
+w5omeVpfdY5PDSLpt1qOUpUzQ55q98dg0jwYysoi4CTFSUZJnrzGATLfbMl9WqVrA1IiuUjoQts=
+nhHi8kXxWY-2FjUftMlZ9NqnL73stlVf5qbHhjetX9pDG3Jqs0YqkHlJSu2otAFXagxP50k23-2=
+BR7bnfA8IJjNRK9vNks6II-2F6GN2Ek3yAqI-2F0dlUSrgpS-2FUsYks2JvovL3u-2BmTWfdrvX=
+oU9-2FPJ93mkYXFvMNURvJoQn9Autee3k-2BS0jo3hNSbQ3yF" target=3D"_blank" univer=
+sal=3D"true"><img alt=3D"DoorDash" src=3D"https://assets.doordash.team/m/5e=
+68fa5cbbc50c32/original/DoorDash-Logo-Red100.png" style=3D"color: #FF3008;f=
+ont-family:system-ui,sans-serif;font-weight:bold;font-size:18px;text-decora=
+tion:none;" width=3D"50"></a></td>
+             </tr>
+             <tr>
+              <td align=3D"center"><h5 class=3D"black DeliveryRed600" style=
+=3D"margin:0 0 8px 0;color:#FF3008"><!---->THANKS FOR YOUR&nbsp;ORDER<!----=
+>,</h5> <!----> <h1 class=3D"black DeliveryRed600" style=3D"margin:0 0 8px =
+0;color:#FF3008">Lev</h1> <!----></td>
+             </tr>
+             <tr>
+              <td align=3D"center" class=3D"pad0" style=3D"padding:16px 48p=
+x 0;"><p class=3D"p1">The estimated delivery time for your<!----> order is =
+<a style=3D"font-weight:700;color:#191919;text-decoration:none;"><span styl=
+e=3D"white-space:nowrap;">7:44 PM</span> - <span style=3D"white-space:nowra=
+p;">7:51 PM</span><!----></a>. Track your order in the DoorDash app or&nbsp=
+;website.</p></td>
+             </tr>
+             <tr>
+              <td align=3D"center" style=3D"padding: 8px 0 48px 0;">
+               <table align=3D"center" border=3D"0" cellpadding=3D"0" cells=
+pacing=3D"0" role=3D"presentation">
+                <tbody>
+                 <tr>
+                  <td align=3D"center">
+                   <div class=3D"button" id=3D"DeliveryRed600">
+                    <a href=3D"https://tracksg.doordash.com/uni/ls/click?up=
+n=3Du001.2WPFTROKt87XSwhhpTWl-2B-2FBg5Q-2B-2F17CbuWT8XZi-2BuiXughF1Nzi6FlVT=
+bMbuGJ4s-2BvZwb2V0Nma0hv7IwGY9IARelD-2BekJRXkdto7mKE6As-3DfZWP_RsuM8DEUWpxI=
+-2Bjw9pNWOxClubibUpclL7UNoyoqG1Zpq-2B19dHWuV-2FBVGPzqb2tvIwmGNMo1YHO-2BdEQW=
+AiYyRwONblP9Y-2BD0QpVMlLLWWo22agvATYWy51LnPG4TSBhOtznOCugADO5FKGr3kjsx8RgWF=
+T0mAmvtJZmXeT3dydC2jZIx7VVs5vZeaCJQOTEvaq1TjXbOWcr7ztjxx5twcaBcJcOhoB7dZcSQ=
+Gz18sAJvq4ZrPEKgrNSk2Z-2BWtrwMavI9XbQBmQGGXFSEPteNd3SY-2FwYgywoNpPI7lCN9vxA=
+GP9BVnX3ssw6XjONjPnMuz8Fi02BWeChu2LD-2FCjuY68TOO22dLOJCGyKCROIBMv3V1QuWp2Ap=
+O6Ar21TAT-2BTth42ZF7wTZpTynUemplMWwPsQ7jFS9G8rGfe3mXSyhOfcdkxAMGRHrWA-2BeXG=
+5YGPw5omeVpfdY5PDSLpt1qOUpUzQ55q98dg0jwYysoi4CTFSUZJnrzGATLfbMl9WqVrA1IiuUj=
+oQtsnhHi8kXxWY-2FjUftMlZ9NqnL73stlVf5qbHhjetX9pDG3Jqs0YqkHlJS8gRhR-2B2jDpU2=
+Czu-2B2TF3cUFtJxbkYDWdBJlb7NHFgH61ZDyMQIdeDc7SfYL-2BleG4OVhv8E-2FNgmNQ2hlhS=
+aJzQh7DfH1SyUO4RSbIgAOTzPrV-2F-2B7yVJXYf3SR-2Fi0fpx4a" style=3D"color:#FFFF=
+FF;border:1px solid #FF3008;" target=3D"_blank" universal=3D"true">Track yo=
+ur order</a>
+                   </div></td>
+                 </tr>
+                </tbody>
+               </table></td>
+             </tr>
+             <tr>
+              <td align=3D"center" style=3D"padding:0 0 24px 0;">
+               <table align=3D"center" border=3D"0" cellpadding=3D"0" cells=
+pacing=3D"0" id=3D"Bouquet050" role=3D"presentation" style=3D"width:100%;bo=
+rder-radius:10px;">
+                <tbody>
+                 <tr>
+                  <td align=3D"center" class=3D"pad24" style=3D"padding:40p=
+x 64px 36px;">
+                   <table align=3D"center" border=3D"0" cellpadding=3D"0" c=
+ellspacing=3D"0" role=3D"presentation" style=3D"width:100%;">
+                    <tbody>
+                     <tr>
+                      <td align=3D"center" class=3D"border" style=3D"border=
+-bottom:1px solid #4C0C3A;color:#4C0C3A;"><h6>Your order details</h6> <!--
+                                           =20
+                                             =20
+                                           =20
+                                          --> <p class=3D"p1" style=3D"marg=
+in:0 0 4px 0;">Paid with MasterCard Ending in 0580&nbsp;and/or&nbsp;credits=
+</p> <p class=3D"p1" style=3D"margin:0 0 4px 0;">Bimi Poke</p> <p class=3D"=
+p1" style=3D"font-weight:700;">Total: $61.26</p></td>
+                     </tr>
+                     <tr>
+                      <td align=3D"center" style=3D"padding:24px 0 0 0;colo=
+r:#4C0C3A;"><p class=3D"h7">Your receipt</p> <p class=3D"p1"><a style=3D"te=
+xt-decoration:none;color:inherit;">1 Arkansas St #41, San Francisco, CA 941=
+07, USA</a></p> <h5 class=3D"black PinotNoir900">ESTIMATED TOTAL: $61.26</h=
+5></td>
+                     </tr>
+                     <tr>
+                      <td align=3D"center"><p class=3D"p1" style=3D"margin:=
+0 0 4px 0;font-weight:600;"><a href=3D"https://tracksg.doordash.com/uni/ls/=
+click?upn=3Du001.2WPFTROKt87XSwhhpTWl-2B-2FBg5Q-2B-2F17CbuWT8XZi-2BuiXughF1=
+Nzi6FlVTbMbuGJ4s-2BvZwb2V0Nma0hv7IwGY9IOIgXSxI5mQA2zqU7avQw8-2BgohNAqvvJcWT=
+FXtDXBYxd8qPj_RsuM8DEUWpxI-2Bjw9pNWOxClubibUpclL7UNoyoqG1Zpq-2B19dHWuV-2FBV=
+GPzqb2tvIwmGNMo1YHO-2BdEQWAiYyRwONblP9Y-2BD0QpVMlLLWWo22agvATYWy51LnPG4TSBh=
+OtznOCugADO5FKGr3kjsx8RgWFT0mAmvtJZmXeT3dydC2jZIx7VVs5vZeaCJQOTEvaq1TjXbOWc=
+r7ztjxx5twcaBcJcOhoB7dZcSQGz18sAJvq4ZrPEKgrNSk2Z-2BWtrwMavI9XbQBmQGGXFSEPte=
+Nd3SY-2FwYgywoNpPI7lCN9vxAGP9BVnX3ssw6XjONjPnMuz8Fi02BWeChu2LD-2FCjuY68TOO2=
+2dLOJCGyKCROIBMv3V1QuWp2ApO6Ar21TAT-2BTth42ZF7wTZpTynUemplMWwPsQ7jFS9G8rGfe=
+3mXSyhOfcdkxAMGRHrWA-2BeXG5YGPw5omeVpfdY5PDSLpt1qOUpUzQ55q98dg0jwYysoi4CTFS=
+UZJnrzGATLfbMl9WqVrA1IiuUjoQtsnhHi8kXxWY-2FjUftMlZ9NqnL73stlVf5qbHhjetX9pDG=
+3Jqs0YqkHlJSjsPPJvVOlbAFFR4oXCNeRkav-2BK4cvK2-2F34CZGAhWHOT28OvEZlIq8hOhZcW=
+ZLgXBqkAprBK1e27K6HfviB-2BFeoqlFwN1jYK6brJ2xh3xtqkSWwRuqNX9ot9g7-2Bt38xw0" =
+target=3D"_blank" class=3D"DeliveryRed600" style=3D"color:#FF3008;" univers=
+al=3D"true">View Full Receipt</a></p> <p class=3D"p1" style=3D"margin:0 0 4=
+px 0;font-weight:600;"><a href=3D"https://tracksg.doordash.com/uni/ls/click=
+?upn=3Du001.2WPFTROKt87XSwhhpTWl-2B-2FBg5Q-2B-2F17CbuWT8XZi-2BuiXughF1Nzi6F=
+lVTbMbuGJ4s-2BvZwb2V0Nma0hv7IwGY9IARelD-2BekJRXkdto7mKE6As-3DguTM_RsuM8DEUW=
+pxI-2Bjw9pNWOxClubibUpclL7UNoyoqG1Zpq-2B19dHWuV-2FBVGPzqb2tvIwmGNMo1YHO-2Bd=
+EQWAiYyRwONblP9Y-2BD0QpVMlLLWWo22agvATYWy51LnPG4TSBhOtznOCugADO5FKGr3kjsx8R=
+gWFT0mAmvtJZmXeT3dydC2jZIx7VVs5vZeaCJQOTEvaq1TjXbOWcr7ztjxx5twcaBcJcOhoB7dZ=
+cSQGz18sAJvq4ZrPEKgrNSk2Z-2BWtrwMavI9XbQBmQGGXFSEPteNd3SY-2FwYgywoNpPI7lCN9=
+vxAGP9BVnX3ssw6XjONjPnMuz8Fi02BWeChu2LD-2FCjuY68TOO22dLOJCGyKCROIBMv3V1QuWp=
+2ApO6Ar21TAT-2BTth42ZF7wTZpTynUemplMWwPsQ7jFS9G8rGfe3mXSyhOfcdkxAMGRHrWA-2B=
+eXG5YGPw5omeVpfdY5PDSLpt1qOUpUzQ55q98dg0jwYysoi4CTFSUZJnrzGATLfbMl9WqVrA1Ii=
+uUjoQtsnhHi8kXxWY-2FjUftMlZ9NqnL73stlVf5qbHhjetX9pDG3Jqs0YqkHlJSh-2BmVV8wyX=
+H5nyM0tZ-2BG9mj4mIu5w-2BoypACaUVxY0PwFftIG3eNovhOwc6FR2tjjrUMay6y4uZfxQtXEu=
+wrj0xhk8lVmSDRpxg3v8sqwtBXO1eMs2qB50PBMUCRYAgnQK" target=3D"_blank" class=
+=3D"DeliveryRed600" style=3D"color:#FF3008;" universal=3D"true">Get Order H=
+elp</a></p> <!----></td>
+                     </tr>
+                    </tbody>
+                   </table></td>
+                 </tr>
+                </tbody>
+               </table></td>
+             </tr>
+             <tr>
+              <td align=3D"center" class=3D"pad16" id=3D"Footer" style=3D"p=
+adding: 0 64px 16px;color:#9A9A9A"><!----> <!----> <!----> <!----></td>
+             </tr>
+            </tbody>
+           </table></td>
+         </tr> <!---->
+         <tr>
+          <td align=3D"center" style=3D"padding:0 0 48px 0;">
+           <table align=3D"center" border=3D"0" cellpadding=3D"0" cellspaci=
+ng=3D"0" class=3D"full" id=3D"PinotNoir900" role=3D"presentation" style=3D"=
+width:100%;">
+            <tbody>
+             <tr>
+              <td align=3D"center" class=3D"pad24" style=3D"padding:48px 12=
+0px 0;">
+               <table align=3D"center" border=3D"0" cellpadding=3D"0" cells=
+pacing=3D"0" role=3D"presentation" style=3D"width:100%;">
+                <tbody>
+                 <tr>
+                  <td align=3D"center" style=3D"color:#FFFFFF;"><h5 class=
+=3D"black DeliveryRed600" style=3D"margin:0 0 16px 0;color:#FF3008;">Review=
+ this Store</h5>
+                   <div class=3D"gmail-blend-screen">
+                    <div class=3D"gmail-blend-difference">
+                     <p class=3D"p1" style=3D"margin:0 0 8px 0;">Share your=
+ thoughts on your order with fellow customers and <span style=3D"white-spac=
+e:nowrap;">Bimi Poke</span>.</p>
+                    </div>
+                   </div></td>
+                 </tr>
+                </tbody>
+               </table></td>
+             </tr>
+             <tr>
+              <td align=3D"center" style=3D"padding:0 24px 24px;">
+               <table align=3D"center" border=3D"0" cellpadding=3D"0" cells=
+pacing=3D"0" role=3D"presentation" style=3D"width:100%;">
+                <!--[if !mso]>-->
+                <tbody>
+                 <tr>
+                  <td align=3D"center" class=3D"rollover">
+                   <div class=3D"rating">
+                    <a href=3D"https://tracksg.doordash.com/uni/ls/click?up=
+n=3Du001.2WPFTROKt87XSwhhpTWl-2B-2FBg5Q-2B-2F17CbuWT8XZi-2BuiUMJ04scFxtWnMS=
+nK-2FpMEUK6oYf0Zs1HzTMa8RyGRIFzA-3D-3D7b3A_RsuM8DEUWpxI-2Bjw9pNWOxClubibUpc=
+lL7UNoyoqG1Zpq-2B19dHWuV-2FBVGPzqb2tvIwmGNMo1YHO-2BdEQWAiYyRwONblP9Y-2BD0Qp=
+VMlLLWWo22agvATYWy51LnPG4TSBhOtznOCugADO5FKGr3kjsx8RgWFT0mAmvtJZmXeT3dydC2j=
+ZIx7VVs5vZeaCJQOTEvaq1TjXbOWcr7ztjxx5twcaBcJcOhoB7dZcSQGz18sAJvq4ZrPEKgrNSk=
+2Z-2BWtrwMavI9XbQBmQGGXFSEPteNd3SY-2FwYgywoNpPI7lCN9vxAGP9BVnX3ssw6XjONjPnM=
+uz8Fi02BWeChu2LD-2FCjuY68TOO22dLOJCGyKCROIBMv3V1QuWp2ApO6Ar21TAT-2BTth42ZF7=
+wTZpTynUemplMWwPsQ7jFS9G8rGfe3mXSyhOfcdkxAMGRHrWA-2BeXG5YGPw5omeVpfdY5PDSLp=
+t1qOUpUzQ55q98dg0jwYysoi4CTFSUZJnrzGATLfbMl9WqVrA1IiuUjoQtsnhHi8kXxWY-2FjUf=
+tMlZ9NqnL73stlVf5qbHhjetX9pDG3Jqs0YqkHlJSaQT9kcitb58JorKmPf5wq-2F1ZIrzi8qAZ=
+A7ky-2BNx8L0M9fJBeUHDO6punByd3KDJmNeFA2P4OOQkZG3AUMb6BQqscgmMxuivooOG5-2B-2=
+FOjPSj9eToD0Yff0rG4fn3GDh-2F4" target=3D"_blank" universal=3D"true"> <img c=
+lass=3D"line" alt=3D"1" src=3D"https://assets.doordash.team/m/c4777407d48c4=
+3d/original/rating-icon-toggle-thumbs-down-line-off.png" width=3D"80"> <img=
+ class=3D"fill" alt=3D"1" src=3D"https://assets.doordash.team/m/7b3862080e0=
+1b3e8/original/rating-icon-toggle-thumbs-down-line-on.png" width=3D"80" sty=
+le=3D"max-height:0px;"> </a>
+                   </div>
+                   <div class=3D"rating">
+                    <a href=3D"https://tracksg.doordash.com/uni/ls/click?up=
+n=3Du001.2WPFTROKt87XSwhhpTWl-2B-2FBg5Q-2B-2F17CbuWT8XZi-2BuiUMJ04scFxtWnMS=
+nK-2FpMEUKaAjpE-2Bf4qehEQ6jOeJquCw-3D-3DIlq__RsuM8DEUWpxI-2Bjw9pNWOxClubibU=
+pclL7UNoyoqG1Zpq-2B19dHWuV-2FBVGPzqb2tvIwmGNMo1YHO-2BdEQWAiYyRwONblP9Y-2BD0=
+QpVMlLLWWo22agvATYWy51LnPG4TSBhOtznOCugADO5FKGr3kjsx8RgWFT0mAmvtJZmXeT3dydC=
+2jZIx7VVs5vZeaCJQOTEvaq1TjXbOWcr7ztjxx5twcaBcJcOhoB7dZcSQGz18sAJvq4ZrPEKgrN=
+Sk2Z-2BWtrwMavI9XbQBmQGGXFSEPteNd3SY-2FwYgywoNpPI7lCN9vxAGP9BVnX3ssw6XjONjP=
+nMuz8Fi02BWeChu2LD-2FCjuY68TOO22dLOJCGyKCROIBMv3V1QuWp2ApO6Ar21TAT-2BTth42Z=
+F7wTZpTynUemplMWwPsQ7jFS9G8rGfe3mXSyhOfcdkxAMGRHrWA-2BeXG5YGPw5omeVpfdY5PDS=
+Lpt1qOUpUzQ55q98dg0jwYysoi4CTFSUZJnrzGATLfbMl9WqVrA1IiuUjoQtsnhHi8kXxWY-2Fj=
+UftMlZ9NqnL73stlVf5qbHhjetX9pDG3Jqs0YqkHlJS3fi9ydjD6QdW4LNMyd3bgzrIIhnkT0Le=
+NStWBZwnlHR06r7jFNqIxi7AHw4-2BIO3EjnFMmHAzlKL0H7o0jLwHlQle1aqX5t6Aeac-2BPNn=
+XgIk5DYlB7C-2FJJLBj3tMcDr7j" target=3D"_blank" universal=3D"true"> <img cla=
+ss=3D"line" alt=3D"2" src=3D"https://assets.doordash.team/m/e9467bf46d13be2=
+/original/rating-icon-toggle-thumbs-up-line-off.png" width=3D"80"> <img cla=
+ss=3D"fill" alt=3D"2" src=3D"https://assets.doordash.team/m/2530e747e57a3f7=
+3/original/rating-icon-toggle-thumbs-up-line-on.png" width=3D"80" style=3D"=
+max-height:0px;"> </a>
+                   </div>
+                   <div class=3D"rating">
+                    <a href=3D"https://tracksg.doordash.com/uni/ls/click?up=
+n=3Du001.2WPFTROKt87XSwhhpTWl-2B-2FBg5Q-2B-2F17CbuWT8XZi-2BuiUMJ04scFxtWnMS=
+nK-2FpMEUKdvScG1kGUAcY36muwpYZNQ-3D-3DZh5e_RsuM8DEUWpxI-2Bjw9pNWOxClubibUpc=
+lL7UNoyoqG1Zpq-2B19dHWuV-2FBVGPzqb2tvIwmGNMo1YHO-2BdEQWAiYyRwONblP9Y-2BD0Qp=
+VMlLLWWo22agvATYWy51LnPG4TSBhOtznOCugADO5FKGr3kjsx8RgWFT0mAmvtJZmXeT3dydC2j=
+ZIx7VVs5vZeaCJQOTEvaq1TjXbOWcr7ztjxx5twcaBcJcOhoB7dZcSQGz18sAJvq4ZrPEKgrNSk=
+2Z-2BWtrwMavI9XbQBmQGGXFSEPteNd3SY-2FwYgywoNpPI7lCN9vxAGP9BVnX3ssw6XjONjPnM=
+uz8Fi02BWeChu2LD-2FCjuY68TOO22dLOJCGyKCROIBMv3V1QuWp2ApO6Ar21TAT-2BTth42ZF7=
+wTZpTynUemplMWwPsQ7jFS9G8rGfe3mXSyhOfcdkxAMGRHrWA-2BeXG5YGPw5omeVpfdY5PDSLp=
+t1qOUpUzQ55q98dg0jwYysoi4CTFSUZJnrzGATLfbMl9WqVrA1IiuUjoQtsnhHi8kXxWY-2FjUf=
+tMlZ9NqnL73stlVf5qbHhjetX9pDG3Jqs0YqkHlJS5HePs1ePSSNLq35uURXhIQeej2B-2FecMn=
+80iCWq4IWLQtLCgAiHnKplMCm2m7hsDGFEUlAvK4yhyeV9SuRY1IacKwtifEvpkMeulAgPdPdJw=
+4VJhRdapyIe7h-2Bg4VjK61" target=3D"_blank" universal=3D"true"> <img class=
+=3D"line" alt=3D"3" src=3D"https://assets.doordash.team/m/59e5b7fd02c1ced/o=
+riginal/rating-icon-toggle-love-line-off.png" width=3D"80"> <img class=3D"f=
+ill" alt=3D"3" src=3D"https://assets.doordash.team/m/2893e85b469a8b21/origi=
+nal/rating-icon-toggle-love-line-on.png" width=3D"80" style=3D"max-height:0=
+px;"> </a>
+                   </div></td>
+                 </tr> <!--<![endif]--> <!--[if mso]>
+                                <tr>
+                                  <td align=3D"center">
+                                    <table align=3D"center" border=3D"0" ce=
+llpadding=3D"0" cellspacing=3D"0" role=3D"presentation">
+                                      <tr>
+                                        <td align=3D"center">
+                                          <a href=3D"https://tracksg.doorda=
+sh.com/ls/click?upn=3Du001.2WPFTROKt87XSwhhpTWl-2B-2FBg5Q-2B-2F17CbuWT8XZi-=
+2BuiUMJ04scFxtWnMSnK-2FpMEUK6oYf0Zs1HzTMa8RyGRIFzA-3D-3DmToR_RsuM8DEUWpxI-2=
+Bjw9pNWOxClubibUpclL7UNoyoqG1Zpq-2B19dHWuV-2FBVGPzqb2tvIwmGNMo1YHO-2BdEQWAi=
+YyRwONblP9Y-2BD0QpVMlLLWWo22agvATYWy51LnPG4TSBhOtznOCugADO5FKGr3kjsx8RgWFT0=
+mAmvtJZmXeT3dydC2jZIx7VVs5vZeaCJQOTEvaq1TjXbOWcr7ztjxx5twcaBcJcOhoB7dZcSQGz=
+18sAJvq4ZrPEKgrNSk2Z-2BWtrwMavI9XbQBmQGGXFSEPteNd3SY-2FwYgywoNpPI7lCN9vxAGP=
+9BVnX3ssw6XjONjPnMuz8Fi02BWeChu2LD-2FCjuY68TOO22dLOJCGyKCROIBMv3V1QuWp2ApO6=
+Ar21TAT-2BTth42ZF7wTZpTynUemplMWwPsQ7jFS9G8rGfe3mXSyhOfcdkxAMGRHrWA-2BeXG5Y=
+GPw5omeVpfdY5PDSLpt1qOUpUzQ55q98dg0jwYysoi4CTFSUZJnrzGATLfbMl9WqVrA1IiuUjoQ=
+tsnhHi8kXxWY-2FjUftMlZ9NqnL73stlVf5qbHhjetX9pDG3Jqs0YqkHlJSwBi0sSwk8Zuo6Vwz=
+Bf5O7q9gLEYl9UBiDUATTn7TkQlbqA3obdJDt5V7qz6caZB13wUofgJhswzgoLVNxAIhIICQBOY=
+kl4MNzAn7tVjsUPYfZKozxZE4ETdphqMAY1iX" target=3D"_blank"><img alt=3D"1" src=
+=3D"https://assets.doordash.team/m/c4777407d48c43d/original/rating-icon-tog=
+gle-thumbs-down-line-off.png" width=3D"80" /></a>
+                                        </td>
+                                        <td align=3D"center">
+                                          <a href=3D"https://tracksg.doorda=
+sh.com/ls/click?upn=3Du001.2WPFTROKt87XSwhhpTWl-2B-2FBg5Q-2B-2F17CbuWT8XZi-=
+2BuiUMJ04scFxtWnMSnK-2FpMEUKaAjpE-2Bf4qehEQ6jOeJquCw-3D-3Dybpq_RsuM8DEUWpxI=
+-2Bjw9pNWOxClubibUpclL7UNoyoqG1Zpq-2B19dHWuV-2FBVGPzqb2tvIwmGNMo1YHO-2BdEQW=
+AiYyRwONblP9Y-2BD0QpVMlLLWWo22agvATYWy51LnPG4TSBhOtznOCugADO5FKGr3kjsx8RgWF=
+T0mAmvtJZmXeT3dydC2jZIx7VVs5vZeaCJQOTEvaq1TjXbOWcr7ztjxx5twcaBcJcOhoB7dZcSQ=
+Gz18sAJvq4ZrPEKgrNSk2Z-2BWtrwMavI9XbQBmQGGXFSEPteNd3SY-2FwYgywoNpPI7lCN9vxA=
+GP9BVnX3ssw6XjONjPnMuz8Fi02BWeChu2LD-2FCjuY68TOO22dLOJCGyKCROIBMv3V1QuWp2Ap=
+O6Ar21TAT-2BTth42ZF7wTZpTynUemplMWwPsQ7jFS9G8rGfe3mXSyhOfcdkxAMGRHrWA-2BeXG=
+5YGPw5omeVpfdY5PDSLpt1qOUpUzQ55q98dg0jwYysoi4CTFSUZJnrzGATLfbMl9WqVrA1IiuUj=
+oQtsnhHi8kXxWY-2FjUftMlZ9NqnL73stlVf5qbHhjetX9pDG3Jqs0YqkHlJSxP-2B6nUoHyeKa=
+sAT1UgxX3DZ1bNxrXCuLL2UnbR3GmLUOgSKz0IYJYZkvy1IeRPVHBaF-2FFkVhMqKK5y9-2B4Wa=
+m0yPg0xp1sOV3kgZsNv9NKa4YDdlEI7bVOoEQn2QXMxbt" target=3D"_blank"><img alt=
+=3D"2" src=3D"https://assets.doordash.team/m/e9467bf46d13be2/original/ratin=
+g-icon-toggle-thumbs-up-line-off.png" width=3D"80" /></a>
+                                        </td>
+                                        <td align=3D"center">
+                                          <a href=3D"https://tracksg.doorda=
+sh.com/ls/click?upn=3Du001.2WPFTROKt87XSwhhpTWl-2B-2FBg5Q-2B-2F17CbuWT8XZi-=
+2BuiUMJ04scFxtWnMSnK-2FpMEUKdvScG1kGUAcY36muwpYZNQ-3D-3D7gRO_RsuM8DEUWpxI-2=
+Bjw9pNWOxClubibUpclL7UNoyoqG1Zpq-2B19dHWuV-2FBVGPzqb2tvIwmGNMo1YHO-2BdEQWAi=
+YyRwONblP9Y-2BD0QpVMlLLWWo22agvATYWy51LnPG4TSBhOtznOCugADO5FKGr3kjsx8RgWFT0=
+mAmvtJZmXeT3dydC2jZIx7VVs5vZeaCJQOTEvaq1TjXbOWcr7ztjxx5twcaBcJcOhoB7dZcSQGz=
+18sAJvq4ZrPEKgrNSk2Z-2BWtrwMavI9XbQBmQGGXFSEPteNd3SY-2FwYgywoNpPI7lCN9vxAGP=
+9BVnX3ssw6XjONjPnMuz8Fi02BWeChu2LD-2FCjuY68TOO22dLOJCGyKCROIBMv3V1QuWp2ApO6=
+Ar21TAT-2BTth42ZF7wTZpTynUemplMWwPsQ7jFS9G8rGfe3mXSyhOfcdkxAMGRHrWA-2BeXG5Y=
+GPw5omeVpfdY5PDSLpt1qOUpUzQ55q98dg0jwYysoi4CTFSUZJnrzGATLfbMl9WqVrA1IiuUjoQ=
+tsnhHi8kXxWY-2FjUftMlZ9NqnL73stlVf5qbHhjetX9pDG3Jqs0YqkHlJSmDlDIGMCV1H-2B0C=
+58rH9u8LyQmoweXtuaE-2FgHNA6i0mhPhmXChM44DNEKQyr7JSnWdJgvrlwsHBzV2E2InD0YFOk=
+vmRL1biH-2Fj88g6jIC74ZjoY51XpFI7HsCnOJl7Yje" target=3D"_blank"><img alt=3D"=
+3" src=3D"https://assets.doordash.team/m/59e5b7fd02c1ced/original/rating-ic=
+on-toggle-love-line-off.png" width=3D"80" /></a>
+                                        </td>
+                                      </tr>
+                                    </table>
+                                  </td>
+                                </tr>
+                                <![endif]-->
+                </tbody>
+               </table></td>
+             </tr>
+            </tbody>
+           </table></td>
+         </tr> <!---->
+         <tr>
+          <td align=3D"center" class=3D"pad24" style=3D"padding:0 48px;">
+           <table align=3D"center" border=3D"0" cellpadding=3D"0" cellspaci=
+ng=3D"0" role=3D"presentation" style=3D"width:100%;">
+            <tbody>
+             <tr>
+              <td align=3D"center" style=3D"padding:0 0 24px 0;"><h6 class=
+=3D"PinotNoir900">Restaurants and beyond, it's&nbsp;in&nbsp;the&nbsp;bag.</=
+h6></td>
+             </tr>
+             <tr>
+              <td align=3D"center" style=3D"padding:0 0 32px 0;"><h3 class=
+=3D"black" style=3D"margin:0;"><a href=3D"https://tracksg.doordash.com/uni/=
+ls/click?upn=3Du001.2WPFTROKt87XSwhhpTWl-2B-2FBg5Q-2B-2F17CbuWT8XZi-2BuiX9N=
+QvXQ9aE-2FeLMhxL9C-2FAEGQPw_RsuM8DEUWpxI-2Bjw9pNWOxClubibUpclL7UNoyoqG1Zpq-=
+2B19dHWuV-2FBVGPzqb2tvIwmGNMo1YHO-2BdEQWAiYyRwONblP9Y-2BD0QpVMlLLWWo22agvAT=
+YWy51LnPG4TSBhOtznOCugADO5FKGr3kjsx8RgWFT0mAmvtJZmXeT3dydC2jZIx7VVs5vZeaCJQ=
+OTEvaq1TjXbOWcr7ztjxx5twcaBcJcOhoB7dZcSQGz18sAJvq4ZrPEKgrNSk2Z-2BWtrwMavI9X=
+bQBmQGGXFSEPteNd3SY-2FwYgywoNpPI7lCN9vxAGP9BVnX3ssw6XjONjPnMuz8Fi02BWeChu2L=
+D-2FCjuY68TOO22dLOJCGyKCROIBMv3V1QuWp2ApO6Ar21TAT-2BTth42ZF7wTZpTynUemplMWw=
+PsQ7jFS9G8rGfe3mXSyhOfcdkxAMGRHrWA-2BeXG5YGPw5omeVpfdY5PDSLpt1qOUpUzQ55q98d=
+g0jwYysoi4CTFSUZJnrzGATLfbMl9WqVrA1IiuUjoQtsnhHi8kXxWY-2FjUftMlZ9NqnL73stlV=
+f5qbHhjetX9pDG3Jqs0YqkHlJSH5gjER33FyeElZR1-2BCZglP7PIWCKI62zQx6WpAF8e9Mn3GL=
+IjzJ8FHfqYZx8dYbtwJedAcNOdAGbAQms8nv2TB2DUKNv8UO1N9VWSXfQSmtegmQhTGUVK-2B-2=
+BZSH9fW4Dj" target=3D"_blank" class=3D"DeliveryRed600" style=3D"color:#FF30=
+08;text-decoration:none;" universal=3D"true">YOUR DOOR <br>TO MORE</a></h3>=
+</td>
+             </tr>
+             <tr>
+              <td align=3D"center" style=3D"padding:0 0 48px 0;"><a href=3D=
+"https://tracksg.doordash.com/uni/ls/click?upn=3Du001.2WPFTROKt87XSwhhpTWl-=
+2B-2FBg5Q-2B-2F17CbuWT8XZi-2BuiX9NQvXQ9aE-2FeLMhxL9C-2FAE4fxS_RsuM8DEUWpxI-=
+2Bjw9pNWOxClubibUpclL7UNoyoqG1Zpq-2B19dHWuV-2FBVGPzqb2tvIwmGNMo1YHO-2BdEQWA=
+iYyRwONblP9Y-2BD0QpVMlLLWWo22agvATYWy51LnPG4TSBhOtznOCugADO5FKGr3kjsx8RgWFT=
+0mAmvtJZmXeT3dydC2jZIx7VVs5vZeaCJQOTEvaq1TjXbOWcr7ztjxx5twcaBcJcOhoB7dZcSQG=
+z18sAJvq4ZrPEKgrNSk2Z-2BWtrwMavI9XbQBmQGGXFSEPteNd3SY-2FwYgywoNpPI7lCN9vxAG=
+P9BVnX3ssw6XjONjPnMuz8Fi02BWeChu2LD-2FCjuY68TOO22dLOJCGyKCROIBMv3V1QuWp2ApO=
+6Ar21TAT-2BTth42ZF7wTZpTynUemplMWwPsQ7jFS9G8rGfe3mXSyhOfcdkxAMGRHrWA-2BeXG5=
+YGPw5omeVpfdY5PDSLpt1qOUpUzQ55q98dg0jwYysoi4CTFSUZJnrzGATLfbMl9WqVrA1IiuUjo=
+QtsnhHi8kXxWY-2FjUftMlZ9NqnL73stlVf5qbHhjetX9pDG3Jqs0YqkHlJSjyxAkL0OfbAI1Me=
+xLMV-2BMljAbOiXGWJpRnDlh6d1U4ouKNKu923zIgW-2BcrMjJ3unPozq-2BsTRd7KH87U6Dp3Q=
+gwsEfOXT151bomu1r-2BSMxPc710Yz5ki2neV3RJ-2FYMmW4" target=3D"_blank" univers=
+al=3D"true"><img alt=3D"" src=3D"https://assets.doordash.team/m/664f91d9119=
+fc0e2/original/order-confirmation-footer-image.jpg" width=3D"604" style=3D"=
+width:100%;max-width:604px;border-radius:10px;"></a></td>
+             </tr>
+            </tbody>
+           </table></td>
+         </tr>
+        </tbody>
+       </table>
+       <table align=3D"center" border=3D"0" cellpadding=3D"0" cellspacing=
+=3D"0" class=3D"full" id=3D"Footer" role=3D"presentation" style=3D"width:10=
+0%;max-width:700px;">
+        <tbody>
+         <tr>
+          <td valign=3D"top" align=3D"center"><!--[if (gte mso 9)|(IE)]>
+<table align=3D"center" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" ro=
+le=3D"presentation" style=3D"width:620px;">
+	<tr>
+		<td align=3D"center">
+			<![endif]-->
+           <table align=3D"center" border=3D"0" cellpadding=3D"0" cellspaci=
+ng=3D"0" id=3D"Footer" role=3D"presentation" style=3D"mso-table-lspace: 0; =
+mso-table-rspace: 0; width: 100%; max-width: 700px; border: 0; padding: 0; =
+border-collapse: collapse;" width=3D"100%">
+            <tbody>
+             <tr>
+              <td align=3D"center" style=3D"padding: 0 24px;">
+               <table align=3D"center" border=3D"0" cellpadding=3D"0" cells=
+pacing=3D"0" role=3D"presentation" style=3D"mso-table-lspace: 0; mso-table-=
+rspace: 0; width:100%;max-width:572px; border: 0; padding: 0; border-collap=
+se: collapse;" width=3D"100%">
+                <tbody>
+                 <tr>
+                  <td align=3D"left" style=3D"padding:0 0 48px 0;border-bot=
+tom: 1px solid #E7E7E7;"></td>
+                 </tr>
+                 <tr>
+                  <td align=3D"left" style=3D"color: #191919; padding: 32px=
+ 0 16px 0;"><p style=3D"font-family:'TTNorms',system-ui,sans-serif;font-siz=
+e:14px;line-height:18px;font-weight:400;margin:0;color:#9A9A9A;">=C2=A92025=
+ <a style=3D"color: #9A9A9A; text-decoration: none;">DoorDash Inc. <br>303 =
+2nd Street, South Tower, Suite 800 <br>San Francisco, CA 94107</a></p> <p s=
+tyle=3D"font-family:'TTNorms',system-ui,sans-serif;font-size:14px;line-heig=
+ht:18px;font-weight:400;margin:0;color:#9A9A9A;"><a href=3D"https://tracksg=
+.doordash.com/ls/click?upn=3Du001.2WPFTROKt87XSwhhpTWl-2B-2FDD8FcMNUAvAdfcD=
+QmgdYAfdX67BmAmt0ufvV0DN-2BQcKLBxKTnrSNIWzubRh3E-2BfgEsS2yrPfbmkJcf80iMMHs-=
+3DZqU8_RsuM8DEUWpxI-2Bjw9pNWOxClubibUpclL7UNoyoqG1Zpq-2B19dHWuV-2FBVGPzqb2t=
+vIwmGNMo1YHO-2BdEQWAiYyRwONblP9Y-2BD0QpVMlLLWWo22agvATYWy51LnPG4TSBhOtznOCu=
+gADO5FKGr3kjsx8RgWFT0mAmvtJZmXeT3dydC2jZIx7VVs5vZeaCJQOTEvaq1TjXbOWcr7ztjxx=
+5twcaBcJcOhoB7dZcSQGz18sAJvq4ZrPEKgrNSk2Z-2BWtrwMavI9XbQBmQGGXFSEPteNd3SY-2=
+FwYgywoNpPI7lCN9vxAGP9BVnX3ssw6XjONjPnMuz8Fi02BWeChu2LD-2FCjuY68TOO22dLOJCG=
+yKCROIBMv3V1QuWp2ApO6Ar21TAT-2BTth42ZF7wTZpTynUemplMWwPsQ7jFS9G8rGfe3mXSyhO=
+fcdkxAMGRHrWA-2BeXG5YGPw5omeVpfdY5PDSLpt1qOUpUzQ55q98dg0jwYysoi4CTFSUZJnrzG=
+ATLfbMl9WqVrA1IiuUjoQtsnhHi8kXxWY-2FjUftMlZ9NqnL73stlVf5qbHhjetX9pDG3Jqs0Yq=
+kHlJSBnovJtya0tRhlxEgFYll73hv80NWubmzO24RvivAne8YawN0IJxM7q3KlMEpaN5Kb1l0l1=
+mj-2FzfJv4HdDLcINLJ-2FHxqsW1jPGMrwYWMlSwms6i2x2680xP7nBiVNHp0j" target=3D"_=
+blank" style=3D"color: #9A9A9A; text-decoration: none;">Privacy Policy</a><=
+/p></td>
+                 </tr>
+                 <tr>
+                  <td align=3D"left" style=3D"color: #191919; padding: 0 0 =
+24px 0;"><p style=3D"font-family:'TTNorms',system-ui,sans-serif;font-size:1=
+4px;line-height:18px;font-weight:500;margin:0;color:#9A9A9A;"><a href=3D"ht=
+tps://tracksg.doordash.com/ls/click?upn=3Du001.2WPFTROKt87XSwhhpTWl-2B-2FDD=
+8FcMNUAvAdfcDQmgdYABnncKv1afIihr5Gt6bkMjJLDI_RsuM8DEUWpxI-2Bjw9pNWOxClubibU=
+pclL7UNoyoqG1Zpq-2B19dHWuV-2FBVGPzqb2tvIwmGNMo1YHO-2BdEQWAiYyRwONblP9Y-2BD0=
+QpVMlLLWWo22agvATYWy51LnPG4TSBhOtznOCugADO5FKGr3kjsx8RgWFT0mAmvtJZmXeT3dydC=
+2jZIx7VVs5vZeaCJQOTEvaq1TjXbOWcr7ztjxx5twcaBcJcOhoB7dZcSQGz18sAJvq4ZrPEKgrN=
+Sk2Z-2BWtrwMavI9XbQBmQGGXFSEPteNd3SY-2FwYgywoNpPI7lCN9vxAGP9BVnX3ssw6XjONjP=
+nMuz8Fi02BWeChu2LD-2FCjuY68TOO22dLOJCGyKCROIBMv3V1QuWp2ApO6Ar21TAT-2BTth42Z=
+F7wTZpTynUemplMWwPsQ7jFS9G8rGfe3mXSyhOfcdkxAMGRHrWA-2BeXG5YGPw5omeVpfdY5PDS=
+Lpt1qOUpUzQ55q98dg0jwYysoi4CTFSUZJnrzGATLfbMl9WqVrA1IiuUjoQtsnhHi8kXxWY-2Fj=
+UftMlZ9NqnL73stlVf5qbHhjetX9pDG3Jqs0YqkHlJSnp3WcL3awfwsRLM9OSk-2Bli1BXZJf4V=
+-2B-2F-2BGmKOAOP4BJK8S-2FO2DPMUxoQD6CrqM-2BGAOCahMHxn2mcuGSw-2F-2FO-2Fk0RMS=
+698c3POIQRlpp017nwKlBdgceuruksOUpLUF-2FcU" target=3D"_blank" style=3D"color=
+:#9A9A9A;text-decoration:none;">Help Center</a></p></td>
+                 </tr>
+                </tbody>
+               </table></td>
+             </tr>
+            </tbody>
+           </table> <!--[if (gte mso 9)|(IE)]>
+		</td>
+	</tr>
+</table>
+<![endif]--></td>
+         </tr>
+         <tr>
+          <td align=3D"left" valign=3D"top" class=3D"pad24" style=3D"paddin=
+g: 0 64px 32px;color:#9A9A9A;"><!----> <p class=3D"p4" style=3D"margin:0 0 =
+16px 0;">This restaurant pays a commission to DoorDash on this order</p> <!=
+----> <p class=3D"p4" style=3D"margin:0 0 16px 0;">Prop 65 Restaurant <a hr=
+ef=3D"https://tracksg.doordash.com/ls/click?upn=3Du001.2WPFTROKt87XSwhhpTWl=
+-2B15-2BhWQxoYkZ56rcWBjgowVNhC-2BKbbpJ-2FyS4l8ZzrqkvpAbpmh6xMGqJ3PxZACrgiw-=
+3D-3DCUwE_RsuM8DEUWpxI-2Bjw9pNWOxClubibUpclL7UNoyoqG1Zpq-2B19dHWuV-2FBVGPzq=
+b2tvIwmGNMo1YHO-2BdEQWAiYyRwONblP9Y-2BD0QpVMlLLWWo22agvATYWy51LnPG4TSBhOtzn=
+OCugADO5FKGr3kjsx8RgWFT0mAmvtJZmXeT3dydC2jZIx7VVs5vZeaCJQOTEvaq1TjXbOWcr7zt=
+jxx5twcaBcJcOhoB7dZcSQGz18sAJvq4ZrPEKgrNSk2Z-2BWtrwMavI9XbQBmQGGXFSEPteNd3S=
+Y-2FwYgywoNpPI7lCN9vxAGP9BVnX3ssw6XjONjPnMuz8Fi02BWeChu2LD-2FCjuY68TOO22dLO=
+JCGyKCROIBMv3V1QuWp2ApO6Ar21TAT-2BTth42ZF7wTZpTynUemplMWwPsQ7jFS9G8rGfe3mXS=
+yhOfcdkxAMGRHrWA-2BeXG5YGPw5omeVpfdY5PDSLpt1qOUpUzQ55q98dg0jwYysoi4CTFSUZJn=
+rzGATLfbMl9WqVrA1IiuUjoQtsnhHi8kXxWY-2FjUftMlZ9NqnL73stlVf5qbHhjetX9pDG3Jqs=
+0YqkHlJSY9txi-2B-2FzfwKF7kKq6J3E9kcCHfvueYy5TKEpSADweVk3hLs4C6t4sESoWXAxdPK=
+uNHAwUwFrxPcnVIwXr-2Fu6QDtmUY3kf-2F2vBToaBxDVaTi4BUPvdWYngufeuNws-2Frio" ta=
+rget=3D"_blank" style=3D"color:#191919;">WARNING</a></p> <p class=3D"p4" st=
+yle=3D"margin:0 0 16px 0;">Prop 65 Alcohol <a href=3D"https://tracksg.doord=
+ash.com/ls/click?upn=3Du001.2WPFTROKt87XSwhhpTWl-2B15-2BhWQxoYkZ56rcWBjgowV=
+kh-2FKcx9IdsYOYOX3bSSQXX2VU9kylc3JZnginfYpP8Fv58V2Gad0szmjBZwRM34k-3DflNJ_R=
+suM8DEUWpxI-2Bjw9pNWOxClubibUpclL7UNoyoqG1Zpq-2B19dHWuV-2FBVGPzqb2tvIwmGNMo=
+1YHO-2BdEQWAiYyRwONblP9Y-2BD0QpVMlLLWWo22agvATYWy51LnPG4TSBhOtznOCugADO5FKG=
+r3kjsx8RgWFT0mAmvtJZmXeT3dydC2jZIx7VVs5vZeaCJQOTEvaq1TjXbOWcr7ztjxx5twcaBcJ=
+cOhoB7dZcSQGz18sAJvq4ZrPEKgrNSk2Z-2BWtrwMavI9XbQBmQGGXFSEPteNd3SY-2FwYgywoN=
+pPI7lCN9vxAGP9BVnX3ssw6XjONjPnMuz8Fi02BWeChu2LD-2FCjuY68TOO22dLOJCGyKCROIBM=
+v3V1QuWp2ApO6Ar21TAT-2BTth42ZF7wTZpTynUemplMWwPsQ7jFS9G8rGfe3mXSyhOfcdkxAMG=
+RHrWA-2BeXG5YGPw5omeVpfdY5PDSLpt1qOUpUzQ55q98dg0jwYysoi4CTFSUZJnrzGATLfbMl9=
+WqVrA1IiuUjoQtsnhHi8kXxWY-2FjUftMlZ9NqnL73stlVf5qbHhjetX9pDG3Jqs0YqkHlJSFuR=
+uAMyafu9G4J28w4kyIIcrtmwiUfiZcwl-2BN7HyeXJ6EHaKNua9LqrAlfl6zfzcvBE8H3uEBhGh=
+g-2BSzzcICyhza43xbQZXhYuclC7LtBeWrNp-2BewMOb4G35Lv2kqdtL" target=3D"_blank"=
+ style=3D"color:#191919;">WARNING</a>. Drinking distilled spirits, beer, co=
+olers, wine, and other alcoholic beverages may increase cancer risk, and, d=
+uring pregnancy, can cause birth defects. For more information go to <a hre=
+f=3D"https://tracksg.doordash.com/ls/click?upn=3Du001.w8bmSeHXyA0fd7rAPHCC-=
+2BveYEEDFpPbKqpH0908D-2FbFTn662MrnwWC94hremUVyWngcQ_RsuM8DEUWpxI-2Bjw9pNWOx=
+ClubibUpclL7UNoyoqG1Zpq-2B19dHWuV-2FBVGPzqb2tvIwmGNMo1YHO-2BdEQWAiYyRwONblP=
+9Y-2BD0QpVMlLLWWo22agvATYWy51LnPG4TSBhOtznOCugADO5FKGr3kjsx8RgWFT0mAmvtJZmX=
+eT3dydC2jZIx7VVs5vZeaCJQOTEvaq1TjXbOWcr7ztjxx5twcaBcJcOhoB7dZcSQGz18sAJvq4Z=
+rPEKgrNSk2Z-2BWtrwMavI9XbQBmQGGXFSEPteNd3SY-2FwYgywoNpPI7lCN9vxAGP9BVnX3ssw=
+6XjONjPnMuz8Fi02BWeChu2LD-2FCjuY68TOO22dLOJCGyKCROIBMv3V1QuWp2ApO6Ar21TAT-2=
+BTth42ZF7wTZpTynUemplMWwPsQ7jFS9G8rGfe3mXSyhOfcdkxAMGRHrWA-2BeXG5YGPw5omeVp=
+fdY5PDSLpt1qOUpUzQ55q98dg0jwYysoi4CTFSUZJnrzGATLfbMl9WqVrA1IiuUjoQtsnhHi8kX=
+xWY-2FjUftMlZ9NqnL73stlVf5qbHhjetX9pDG3Jqs0YqkHlJSmKFN0qfnRz4PzK0qw8FuzuqEo=
+ngNN1-2Bq8ihXOgZGNcHGwIEEfslB4hfEbrexdPsMAfGd-2B4dMOtj3268KJTvIFezZckURQe9m=
+BHzvJELXeUBF6y-2F0T-2F6w-2Fiy23y7n1gMB" style=3D"text-decoration: none; col=
+or:#9A9A9A;">www.P65Warnings.ca.gov/alcohol</a>.</p> <p class=3D"p4" style=
+=3D"margin:0 0 16px 0;">Prop 65 BPA <a href=3D"https://tracksg.doordash.com=
+/ls/click?upn=3Du001.2WPFTROKt87XSwhhpTWl-2B15-2BhWQxoYkZ56rcWBjgowW6WbwCN5=
+7LjWD5UaEYOVHrJPpLgJl33D1dHGtpAMDr2w-3D-3DRHza_RsuM8DEUWpxI-2Bjw9pNWOxClubi=
+bUpclL7UNoyoqG1Zpq-2B19dHWuV-2FBVGPzqb2tvIwmGNMo1YHO-2BdEQWAiYyRwONblP9Y-2B=
+D0QpVMlLLWWo22agvATYWy51LnPG4TSBhOtznOCugADO5FKGr3kjsx8RgWFT0mAmvtJZmXeT3dy=
+dC2jZIx7VVs5vZeaCJQOTEvaq1TjXbOWcr7ztjxx5twcaBcJcOhoB7dZcSQGz18sAJvq4ZrPEKg=
+rNSk2Z-2BWtrwMavI9XbQBmQGGXFSEPteNd3SY-2FwYgywoNpPI7lCN9vxAGP9BVnX3ssw6XjON=
+jPnMuz8Fi02BWeChu2LD-2FCjuY68TOO22dLOJCGyKCROIBMv3V1QuWp2ApO6Ar21TAT-2BTth4=
+2ZF7wTZpTynUemplMWwPsQ7jFS9G8rGfe3mXSyhOfcdkxAMGRHrWA-2BeXG5YGPw5omeVpfdY5P=
+DSLpt1qOUpUzQ55q98dg0jwYysoi4CTFSUZJnrzGATLfbMl9WqVrA1IiuUjoQtsnhHi8kXxWY-2=
+FjUftMlZ9NqnL73stlVf5qbHhjetX9pDG3Jqs0YqkHlJSH-2FuRjwv8AZHI2cqgctbUg3dj9cgE=
+3yKhgmT3YLS9LNBlzKsj0XjwCjcq2zowJBqPr9neKfFBhilYt7ovXIXwQRm4x-2FWrQwh69F4vr=
+GvMl7jFK4ACflyTqmjh2BAKccP4" target=3D"_blank" style=3D"color:#191919;">WAR=
+NING</a></p> <!----> <p class=3D"p4" style=3D"margin:0 0 16px 0;"><!----> T=
+his order summary is provided by DoorDash for informational purposes only. =
+To obtain a tax receipt/invoice for the services provided by DoorDash, plea=
+se contact Customer Support. To obtain a tax receipt/invoice for the goods =
+and services provided by the Merchant, please contact the Merchant directly=
+.</p></td>
+         </tr>
+        </tbody>
+       </table> <!--[if mso]>
+                </td>
+              </tr>
+            </table>
+            <![endif]--></td>
+     </tr>
+    </tbody>
+   </table>
+  </div>
+ <img src=3D"https://tracksg.doordash.com/wf/open?upn=3Du001.ZINUistG65CIRw=
+jeAkgTVKWxN6wlGdFEJQ-2BaKLSWNtKHuWjpiXoHpWNb83Oa6YA9oamR-2BrmEDdkE-2BDDDsBD=
+8Zw8EfhLXuRE0q4Ma2ht7yrkjZdR52STYo6QCtrw8Lo-2FvgzQZBGEwk0kWyMh0tZchsevtKvOl=
+WJjVG9ZWZqNQeRTmPqZ-2BWqFgFzq3f-2F0oS-2BKDwxSIME7rHBn8w6OKPQ41jXhDAvQPyx-2F=
+23N0Jenbclr7QM92mKBgxxXxoOWGuUg508K6Oz39nJHBQhlQP7NDZx9H36rOAHWu5ATVFOe4Yx4=
+9MgbMFAwxAuLdVnsYuaJd0ixBsVu88wlCME-2FY2pHraVUV5i3XhYa-2B2KLwJb9nLi58QI2XAm=
+951TWG-2BReMIb75YeDDg-2BQSx2UOl8vHHoadC58Nixaina0DT4y-2BspL-2BNMY-2Fn-2Fj50=
+w1mSgJftxDp18yh9GrOZud6beMh86NGFNxjyQuCWJpnbIonzntcGt55DWv88iNQBM0S5Pk6IhOX=
+xmnJN8zh7uzeWYYTRIdtfRq7m3eCAmQfYTyw-2Bu9IRAzbrjY-2BhPoEE3NDJDMoWfyXu6vSoKY=
+146lA1WYXRuTvWVruFRYtjSJqOn-2Bgi1NQP7HSXpqGMEzHYu-2F5TLZi-2BEhPcQEz5QZ6f-2B=
+fxncmP9klEH1tMGm-2BoB-2BZk7cw7b-2Fs5jQZBr9o7r-2F7fOx5oPDKTvOzJ4VNL7GIrpitsh=
+sVQG-2Fgw9ZA5NaA-3D-3D" alt=3D"" width=3D"1" height=3D"1" border=3D"0" styl=
+e=3D"height:1px !important;width:1px !important;border-width:0 !important;m=
+argin-top:0 !important;margin-bottom:0 !important;margin-right:0 !important=
+;margin-left:0 !important;padding-top:0 !important;padding-bottom:0 !import=
+ant;padding-right:0 !important;padding-left:0 !important;"/></body>
+</html>
+--8a01a56df37ab2e037057caca88a38d488f14656887c4d37f7bb8480baf0--

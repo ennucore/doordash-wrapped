@@ -8,7 +8,7 @@ const GOOGLE_API_KEY = 'AIzaSyDAEUPr9EiVGKzIJLxYDMkqt8YZz3p76tg';
 
 // State
 let currentSlide = 0;
-let totalSlides = 8;
+let totalSlides = 9;
 let orders = [];
 let stats = null;
 let tokenClient = null;
@@ -502,6 +502,13 @@ function populateWrapped(stats) {
     initDeliveryMap(stats.topLocations.slice(0, 5));
   }
 
+  // Slide 7: Tips
+  document.getElementById('total-tips-display').textContent = '$' + stats.totalTips.toFixed(0);
+  const avgTip = stats.totalOrders > 0 ? stats.totalTips / stats.totalOrders : 0;
+  document.getElementById('avg-tip-display').textContent = '$' + avgTip.toFixed(2);
+  const tipPercentage = stats.totalSpent > 0 ? (stats.totalTips / stats.totalSpent) * 100 : 0;
+  document.getElementById('tip-percentage-display').textContent = tipPercentage.toFixed(1) + '%';
+
   // Share card
   document.getElementById('share-spent').textContent =
     '$' + stats.totalSpent.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
@@ -511,6 +518,19 @@ function populateWrapped(stats) {
   document.getElementById('share-tips').textContent = '$' + stats.totalTips.toFixed(0);
   document.getElementById('share-restaurant').textContent =
     stats.topRestaurants.length > 0 ? stats.topRestaurants[0].name : 'N/A';
+
+  // Add restaurant photo to share card
+  if (stats.topRestaurants.length > 0) {
+    const topLocation = stats.topLocations.length > 0 ? stats.topLocations[0].address : null;
+    fetchPlacePhoto(stats.topRestaurants[0].name, topLocation).then(photoUrl => {
+      if (photoUrl) {
+        const photoContainer = document.getElementById('share-restaurant-photo-container');
+        const photo = document.getElementById('share-restaurant-photo');
+        photo.src = photoUrl;
+        photo.onload = () => photoContainer.classList.add('loaded');
+      }
+    });
+  }
   document.getElementById('share-item').textContent =
     stats.topItems.length > 0 ? stats.topItems[0].name : 'N/A';
   // Convert day abbreviation to full name
@@ -813,13 +833,20 @@ async function initDeliveryMap(locations) {
     }
   }
 
-  // Fit map to show all markers
+  // Fit map to show all markers (zoomed out)
   if (markers.length > 0) {
     if (markers.length === 1) {
       map.setCenter(markers[0].getPosition());
-      map.setZoom(14);
+      map.setZoom(12);
     } else {
-      map.fitBounds(bounds, { padding: 30 });
+      map.fitBounds(bounds, { padding: 50 });
+      // Zoom out a bit more after fitting bounds
+      google.maps.event.addListenerOnce(map, 'bounds_changed', () => {
+        const currentZoom = map.getZoom();
+        if (currentZoom > 13) {
+          map.setZoom(13);
+        }
+      });
     }
   }
 }
