@@ -699,6 +699,8 @@ async function fetchPlacePhoto(restaurantName, nearLocation) {
       ? `${restaurantName} restaurant near ${nearLocation}`
       : `${restaurantName} restaurant`;
 
+    console.log('Restaurant image search query:', textQuery);
+
     // Step 1: Search for the place
     const searchResponse = await fetch('https://places.googleapis.com/v1/places:searchText', {
       method: 'POST',
