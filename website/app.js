@@ -741,28 +741,49 @@ async function fetchPlacePhoto(restaurantName, nearLocation) {
 }
 
 async function fetchDishImage(dishName) {
+  // First try Openverse API
   try {
-    // Search for food images using Openverse API
     const searchQuery = encodeURIComponent(`${dishName} food`);
     const searchUrl = `https://api.openverse.org/v1/images/?q=${searchQuery}&license_type=commercial&page_size=5`;
 
     const response = await fetch(searchUrl);
 
+    if (response.ok) {
+      const data = await response.json();
+      if (data.results && data.results.length > 0) {
+        const image = data.results[0];
+        return image.thumbnail || image.url;
+      }
+    }
+  } catch (error) {
+    console.error('Openverse search failed:', error);
+  }
+
+  // Fallback to Serper API
+  try {
+    const response = await fetch('https://google.serper.dev/images', {
+      method: 'POST',
+      headers: {
+        'X-API-KEY': 'f847dc3e230d27cc2a5bb1c78baea56e6f2a4637',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ q: `${dishName} food` })
+    });
+
     if (!response.ok) {
-      console.error('Openverse search failed:', response.status);
+      console.error('Serper search failed:', response.status);
       return null;
     }
 
     const data = await response.json();
 
-    if (!data.results || data.results.length === 0) {
+    if (!data.images || data.images.length === 0) {
       console.log('No images found for dish:', dishName);
       return null;
     }
 
     // Return the thumbnail URL of the first result
-    const image = data.results[0];
-    return image.thumbnail || image.url;
+    return data.images[0].thumbnailUrl || data.images[0].imageUrl;
   } catch (error) {
     console.error('Error fetching dish image:', error);
     return null;
