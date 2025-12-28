@@ -8,7 +8,7 @@ const GOOGLE_API_KEY = 'AIzaSyDAEUPr9EiVGKzIJLxYDMkqt8YZz3p76tg';
 
 // State
 let currentSlide = 0;
-let totalSlides = 8;
+let totalSlides = 9;
 let orders = [];
 let stats = null;
 let tokenClient = null;
@@ -490,6 +490,13 @@ function populateWrapped(stats) {
     // Initialize interactive map with markers
     initDeliveryMap(stats.topLocations.slice(0, 5));
   }
+
+  // Slide 7: Tips
+  document.getElementById('total-tips-display').textContent = '$' + stats.totalTips.toFixed(0);
+  const avgTip = stats.totalOrders > 0 ? stats.totalTips / stats.totalOrders : 0;
+  document.getElementById('avg-tip-display').textContent = '$' + avgTip.toFixed(2);
+  const tipPercentage = stats.totalSpent > 0 ? (stats.totalTips / stats.totalSpent) * 100 : 0;
+  document.getElementById('tip-percentage-display').textContent = tipPercentage.toFixed(1) + '%';
 
   // Share card
   document.getElementById('share-spent').textContent =

@@ -174,6 +174,16 @@ body {
   margin-top: 16px;
 }
 
+.privacy-note a {
+  color: var(--gray-600);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.privacy-note a:hover {
+  color: var(--gray-400);
+}
+
 /* Loading Page */
 .loading-container {
   display: flex;
@@ -798,6 +808,49 @@ body {
 .funfact-label {
   font-size: 12px;
   opacity: 0.7;
+  margin-top: 4px;
+}
+
+/* Tips Slide */
+.tips-slide {
+  text-align: center;
+}
+
+.tips-emoji {
+  font-size: 80px;
+  margin: 24px 0;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+.tips-breakdown {
+  display: flex;
+  gap: 24px;
+  margin-top: 32px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 24px 32px;
+}
+
+.tips-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+}
+
+.tips-stat-value {
+  font-size: 32px;
+  font-weight: 800;
+}
+
+.tips-stat-label {
+  font-size: 14px;
+  opacity: 0.8;
   margin-top: 4px;
 }
 
