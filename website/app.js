@@ -4,10 +4,11 @@ import { parseDoordashEmail, parseMultipleEmails } from './email-parser.js';
 // Google API configuration
 const GOOGLE_CLIENT_ID = '763048176504-mvr3nj646ars9d8ip8buegffcrupv646.apps.googleusercontent.com';
 const SCOPES = 'https://www.googleapis.com/auth/gmail.readonly';
+const MAPS_API_KEY = 'AIzaSyDAEUPr9EiVGKzIJLxYDMkqt8YZz3p76tg';
 
 // State
 let currentSlide = 0;
-let totalSlides = 9;
+let totalSlides = 8;
 let orders = [];
 let stats = null;
 let tokenClient = null;
@@ -473,22 +474,27 @@ function populateWrapped(stats) {
     let addr = stats.topLocations[0].address;
     if (addr.length > 50) addr = addr.substring(0, 50) + '...';
     document.getElementById('top-address').textContent = addr;
-  }
 
-  // Slide 7: Fun Facts
-  if (stats.topMonth) {
-    document.getElementById('busiest-month').textContent = stats.topMonth.name;
+    // Initialize interactive map with markers
+    initDeliveryMap(stats.topLocations.slice(0, 5));
   }
-  document.getElementById('total-items').textContent = stats.totalItems;
-  document.getElementById('total-tips').textContent = '$' + stats.totalTips.toFixed(0);
-  document.getElementById('unique-restaurants').textContent = stats.uniqueRestaurants;
 
   // Share card
   document.getElementById('share-spent').textContent =
     '$' + stats.totalSpent.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
   document.getElementById('share-orders').textContent = stats.totalOrders;
+  document.getElementById('share-items').textContent = stats.totalItems;
+  document.getElementById('share-restaurants').textContent = stats.uniqueRestaurants;
+  document.getElementById('share-tips').textContent = '$' + stats.totalTips.toFixed(0);
   document.getElementById('share-restaurant').textContent =
     stats.topRestaurants.length > 0 ? stats.topRestaurants[0].name : 'N/A';
+  document.getElementById('share-item').textContent =
+    stats.topItems.length > 0 ? stats.topItems[0].name : 'N/A';
+  // Convert day abbreviation to full name
+  const dayFullNames = { Sun: 'Sunday', Mon: 'Monday', Tue: 'Tuesday', Wed: 'Wednesday', Thu: 'Thursday', Fri: 'Friday', Sat: 'Saturday' };
+  document.getElementById('share-day').textContent =
+    stats.topDay ? (dayFullNames[stats.topDay.name] || stats.topDay.name) : 'N/A';
+  document.getElementById('share-emoji').textContent = emoji;
 
   // Setup navigation
   setupNavigation();
@@ -547,9 +553,10 @@ function setupNavigation() {
     if (currentSlide < totalSlides - 1) goToSlide(currentSlide + 1);
   });
 
-  // Click anywhere to advance (but not if selecting text)
+  // Click anywhere to advance (but not if selecting text or interacting with map)
   document.querySelector('.slides-wrapper').addEventListener('click', (e) => {
     if (window.getSelection().toString()) return; // Don't advance if text is selected
+    if (e.target.closest('.delivery-map-container')) return; // Don't advance when clicking map
     if (!e.target.closest('.nav-btn') && !e.target.closest('.share-btn') && !e.target.closest('.secondary-button')) {
       if (currentSlide < totalSlides - 1) goToSlide(currentSlide + 1);
     }
@@ -637,4 +644,82 @@ function escapeHtml(text) {
   const div = document.createElement('div');
   div.textContent = text;
   return div.innerHTML;
+}
+
+async function initDeliveryMap(locations) {
+  // Wait for Google Maps to load
+  const waitForMaps = () => new Promise(resolve => {
+    if (window.google && window.google.maps) {
+      resolve();
+    } else {
+      const check = setInterval(() => {
+        if (window.google && window.google.maps) {
+          clearInterval(check);
+          resolve();
+        }
+      }, 100);
+    }
+  });
+
+  await waitForMaps();
+
+  const mapElement = document.getElementById('delivery-map');
+  const map = new google.maps.Map(mapElement, {
+    zoom: 12,
+    mapTypeControl: false,
+    streetViewControl: false,
+    fullscreenControl: false,
+    styles: [
+      { featureType: 'poi', stylers: [{ visibility: 'off' }] },
+      { featureType: 'transit', stylers: [{ visibility: 'off' }] }
+    ]
+  });
+
+  const geocoder = new google.maps.Geocoder();
+  const bounds = new google.maps.LatLngBounds();
+  const markers = [];
+
+  // Geocode each address and add marker
+  for (let i = 0; i < locations.length; i++) {
+    const loc = locations[i];
+    try {
+      const result = await new Promise((resolve, reject) => {
+        geocoder.geocode({ address: loc.address }, (results, status) => {
+          if (status === 'OK' && results[0]) {
+            resolve(results[0]);
+          } else {
+            reject(status);
+          }
+        });
+      });
+
+      const position = result.geometry.location;
+      bounds.extend(position);
+
+      const marker = new google.maps.Marker({
+        position,
+        map,
+        label: {
+          text: String(i + 1),
+          color: 'white',
+          fontWeight: 'bold'
+        },
+        title: `#${i + 1}: ${loc.address} (${loc.count} orders)`
+      });
+
+      markers.push(marker);
+    } catch (err) {
+      console.warn(`Failed to geocode address: ${loc.address}`, err);
+    }
+  }
+
+  // Fit map to show all markers
+  if (markers.length > 0) {
+    if (markers.length === 1) {
+      map.setCenter(markers[0].getPosition());
+      map.setZoom(14);
+    } else {
+      map.fitBounds(bounds, { padding: 30 });
+    }
+  }
 }
