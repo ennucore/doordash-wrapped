@@ -4,6 +4,7 @@ import { parseDoordashEmail, parseMultipleEmails } from './email-parser.js';
 // Google API configuration
 const GOOGLE_CLIENT_ID = '763048176504-mvr3nj646ars9d8ip8buegffcrupv646.apps.googleusercontent.com';
 const SCOPES = 'https://www.googleapis.com/auth/gmail.readonly';
+const GOOGLE_PLACES_API_KEY = 'AIzaSyDAEUPr9EiVGKzIJLxYDMkqt8YZz3p76tg';
 
 // State
 let currentSlide = 0;
@@ -435,6 +436,18 @@ function populateWrapped(stats) {
       `;
       restaurantsList.appendChild(li);
     });
+
+    // Fetch and display restaurant photo
+    const topLocation = stats.topLocations.length > 0 ? stats.topLocations[0].address : null;
+    fetchPlacePhoto(stats.topRestaurants[0].name, topLocation).then(photoUrl => {
+      if (photoUrl) {
+        const imgContainer = document.getElementById('top-restaurant-image-container');
+        const img = document.getElementById('top-restaurant-image');
+        img.src = photoUrl;
+        img.onload = () => imgContainer.classList.add('loaded');
+        img.onerror = () => console.error('Failed to load restaurant image');
+      }
+    });
   }
 
   // Slide 4: Timing
@@ -637,4 +650,52 @@ function escapeHtml(text) {
   const div = document.createElement('div');
   div.textContent = text;
   return div.innerHTML;
+}
+
+async function fetchPlacePhoto(restaurantName, nearLocation) {
+  try {
+    // Build search query with location context
+    const textQuery = nearLocation
+      ? `${restaurantName} near "${nearLocation}"`
+      : restaurantName;
+
+    // Step 1: Search for the place
+    const searchResponse = await fetch('https://places.googleapis.com/v1/places:searchText', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Goog-Api-Key': GOOGLE_PLACES_API_KEY,
+        'X-Goog-FieldMask': 'places.id,places.displayName,places.photos'
+      },
+      body: JSON.stringify({ textQuery })
+    });
+
+    if (!searchResponse.ok) {
+      console.error('Places search failed:', searchResponse.status);
+      return null;
+    }
+
+    const searchData = await searchResponse.json();
+
+    if (!searchData.places || searchData.places.length === 0) {
+      console.log('No places found for:', textQuery);
+      return null;
+    }
+
+    const place = searchData.places[0];
+
+    if (!place.photos || place.photos.length === 0) {
+      console.log('No photos found for place:', place.displayName?.text);
+      return null;
+    }
+
+    // Step 2: Build the photo URL
+    const photoName = place.photos[0].name;
+    const photoUrl = `https://places.googleapis.com/v1/${photoName}/media?maxWidthPx=400&key=${GOOGLE_PLACES_API_KEY}`;
+
+    return photoUrl;
+  } catch (error) {
+    console.error('Error fetching place photo:', error);
+    return null;
+  }
 }
