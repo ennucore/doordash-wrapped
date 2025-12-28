@@ -44,6 +44,7 @@ function initializeApp() {
   document.getElementById('connect-gmail-btn').addEventListener('click', handleConnectGmail);
   document.getElementById('try-again-btn').addEventListener('click', handleTryAgain);
   document.getElementById('download-btn').addEventListener('click', handleDownload);
+  document.getElementById('copy-btn').addEventListener('click', handleCopy);
 
   // Check for demo mode (for development without Google API)
   if (window.location.search.includes('demo')) {
@@ -514,7 +515,6 @@ function populateWrapped(stats) {
     '$' + stats.totalSpent.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
   document.getElementById('share-orders').textContent = stats.totalOrders;
   document.getElementById('share-restaurants').textContent = stats.uniqueRestaurants;
-  document.getElementById('share-tips').textContent = '$' + stats.totalTips.toFixed(0);
   document.getElementById('share-restaurant').textContent =
     stats.topRestaurants.length > 0 ? stats.topRestaurants[0].name : 'N/A';
 
@@ -663,19 +663,96 @@ function handleTryAgain() {
   showPage('landing');
 }
 
+async function convertImagesToDataUrls(container) {
+  const images = container.querySelectorAll('img');
+  const originalSrcs = [];
+
+  for (const img of images) {
+    originalSrcs.push({ img, src: img.src });
+
+    if (img.src && !img.src.startsWith('data:')) {
+      try {
+        const response = await fetch(img.src);
+        const blob = await response.blob();
+        const dataUrl = await new Promise((resolve) => {
+          const reader = new FileReader();
+          reader.onloadend = () => resolve(reader.result);
+          reader.readAsDataURL(blob);
+        });
+        img.src = dataUrl;
+      } catch (err) {
+        console.log('Could not convert image:', img.src, err);
+      }
+    }
+  }
+
+  return originalSrcs;
+}
+
+function restoreImageSrcs(originalSrcs) {
+  for (const { img, src } of originalSrcs) {
+    img.src = src;
+  }
+}
+
 async function handleDownload() {
   const shareCard = document.getElementById('share-card');
 
   if (typeof html2canvas !== 'undefined') {
+    const originalSrcs = await convertImagesToDataUrls(shareCard);
+
     const canvas = await html2canvas(shareCard, {
       backgroundColor: null,
-      scale: 2
+      scale: 2,
+      useCORS: true
     });
+
+    restoreImageSrcs(originalSrcs);
 
     const link = document.createElement('a');
     link.download = 'doordash-wrapped-2025.png';
     link.href = canvas.toDataURL();
     link.click();
+  } else {
+    alert('Screenshot feature not available. Please try again later.');
+  }
+}
+
+async function handleCopy() {
+  const shareCard = document.getElementById('share-card');
+  const copyBtn = document.getElementById('copy-btn');
+  const originalText = copyBtn.innerHTML;
+
+  if (typeof html2canvas !== 'undefined') {
+    try {
+      const originalSrcs = await convertImagesToDataUrls(shareCard);
+
+      const canvas = await html2canvas(shareCard, {
+        backgroundColor: null,
+        scale: 2,
+        useCORS: true
+      });
+
+      restoreImageSrcs(originalSrcs);
+
+      canvas.toBlob(async (blob) => {
+        try {
+          await navigator.clipboard.write([
+            new ClipboardItem({ 'image/png': blob })
+          ]);
+          copyBtn.innerHTML = '<svg viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> Copied!';
+          setTimeout(() => {
+            copyBtn.innerHTML = originalText;
+          }, 2000);
+        } catch (err) {
+          console.error('Failed to copy:', err);
+          alert('Failed to copy image. Try using the Save button instead.');
+        }
+      }, 'image/png');
+    } catch (err) {
+      console.error('Failed to generate image:', err);
+      alert('Failed to generate image. Please try again.');
+    }
   } else {
     alert('Screenshot feature not available. Please try again later.');
   }
