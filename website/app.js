@@ -430,15 +430,22 @@ function populateWrapped(stats) {
       restaurantsList.appendChild(li);
     });
 
-    // Fetch and display restaurant photo
+    // Fetch and display restaurant photo (for both slide and share card)
     const topLocation = stats.topLocations.length > 0 ? stats.topLocations[0].address : null;
     fetchPlacePhoto(stats.topRestaurants[0].name, topLocation).then(photoUrl => {
       if (photoUrl) {
+        // Restaurant slide image
         const imgContainer = document.getElementById('top-restaurant-image-container');
         const img = document.getElementById('top-restaurant-image');
         img.src = photoUrl;
         img.onload = () => imgContainer.classList.add('loaded');
         img.onerror = () => console.error('Failed to load restaurant image');
+
+        // Share card restaurant image
+        const sharePhotoContainer = document.getElementById('share-restaurant-photo-container');
+        const sharePhoto = document.getElementById('share-restaurant-photo');
+        sharePhoto.src = photoUrl;
+        sharePhoto.onload = () => sharePhotoContainer.classList.add('loaded');
       }
     });
   }
@@ -511,18 +518,6 @@ function populateWrapped(stats) {
   document.getElementById('share-restaurant').textContent =
     stats.topRestaurants.length > 0 ? stats.topRestaurants[0].name : 'N/A';
 
-  // Add restaurant photo to share card
-  if (stats.topRestaurants.length > 0) {
-    const topLocation = stats.topLocations.length > 0 ? stats.topLocations[0].address : null;
-    fetchPlacePhoto(stats.topRestaurants[0].name, topLocation).then(photoUrl => {
-      if (photoUrl) {
-        const photoContainer = document.getElementById('share-restaurant-photo-container');
-        const photo = document.getElementById('share-restaurant-photo');
-        photo.src = photoUrl;
-        photo.onload = () => photoContainer.classList.add('loaded');
-      }
-    });
-  }
   document.getElementById('share-item').textContent =
     stats.topItems.length > 0 ? stats.topItems[0].name : 'N/A';
   document.getElementById('share-item-count').textContent =
@@ -696,8 +691,8 @@ async function fetchPlacePhoto(restaurantName, nearLocation) {
   try {
     // Build search query with location context
     const textQuery = nearLocation
-      ? `${restaurantName} restaurant near ${nearLocation}`
-      : `${restaurantName} restaurant`;
+      ? `${restaurantName} near ${nearLocation}`
+      : restaurantName;
 
     console.log('Restaurant image search query:', textQuery);
 
