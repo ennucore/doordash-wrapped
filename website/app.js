@@ -526,6 +526,21 @@ function populateWrapped(stats) {
   }
   document.getElementById('share-item').textContent =
     stats.topItems.length > 0 ? stats.topItems[0].name : 'N/A';
+
+  // Add item photo to share card (search for item at top restaurant)
+  if (stats.topItems.length > 0 && stats.topRestaurants.length > 0) {
+    const searchQuery = `${stats.topItems[0].name} ${stats.topRestaurants[0].name}`;
+    const topLocation = stats.topLocations.length > 0 ? stats.topLocations[0].address : null;
+    fetchPlacePhoto(searchQuery, topLocation).then(photoUrl => {
+      if (photoUrl) {
+        const photoContainer = document.getElementById('share-item-photo-container');
+        const photo = document.getElementById('share-item-photo');
+        photo.src = photoUrl;
+        photo.onload = () => photoContainer.classList.add('loaded');
+      }
+    });
+  }
+
   document.getElementById('share-emoji').textContent = emoji;
 
   // Setup navigation
