@@ -183,6 +183,9 @@
             <p class="stat-label">You ordered to</p>
             <div class="big-stat" id="locations-count">0</div>
             <p class="stat-sublabel">different locations</p>
+            <div class="delivery-map-container">
+              <div id="delivery-map" class="delivery-map"></div>
+            </div>
             <div class="delivery-card">
               <div class="delivery-icon">📍</div>
               <div class="delivery-address" id="top-address"></div>
@@ -191,63 +194,82 @@
           </div>
         </div>
 
-        <!-- Slide 7: Fun Facts -->
-        <div class="slide" data-slide="7" style="--slide-color: #FB5607;">
-          <div class="slide-content funfacts-slide">
-            <p class="stat-label">Fun facts</p>
-            <div class="funfacts-grid">
-              <div class="funfact-card">
-                <div class="funfact-icon">📅</div>
-                <div class="funfact-value" id="busiest-month">Jan</div>
-                <div class="funfact-label">Busiest month</div>
-              </div>
-              <div class="funfact-card">
-                <div class="funfact-icon">🍽️</div>
-                <div class="funfact-value" id="total-items">0</div>
-                <div class="funfact-label">Items ordered</div>
-              </div>
-              <div class="funfact-card">
-                <div class="funfact-icon">💵</div>
-                <div class="funfact-value" id="total-tips">$0</div>
-                <div class="funfact-label">Tips given</div>
-              </div>
-              <div class="funfact-card">
-                <div class="funfact-icon">🏪</div>
-                <div class="funfact-value" id="unique-restaurants">0</div>
-                <div class="funfact-label">Restaurants tried</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Slide 8: Share -->
-        <div class="slide" data-slide="8" style="--slide-color: #FF3008;">
+        <!-- Slide 7: Share -->
+        <div class="slide" data-slide="7" style="--slide-color: #FF3008;">
           <div class="slide-content share-slide">
-            <h2 class="share-title">That's a wrap!</h2>
-            <p class="share-subtitle">Share your DoorDash Wrapped</p>
             <div id="share-card" class="share-card">
+              <div class="share-card-decoration">
+                <span class="deco-emoji deco-1">🍔</span>
+                <span class="deco-emoji deco-2">🍕</span>
+                <span class="deco-emoji deco-3">🌮</span>
+                <span class="deco-emoji deco-4">🍜</span>
+                <span class="deco-emoji deco-5">🍣</span>
+                <span class="deco-emoji deco-6">🥗</span>
+              </div>
               <div class="share-card-header">
-                <span class="share-card-logo">DoorDash Wrapped 2025</span>
+                <span class="share-card-logo">DoorDash Wrapped</span>
+                <span class="share-card-year">2025</span>
               </div>
-              <div class="share-card-stats">
-                <div class="share-stat">
-                  <span class="share-stat-value" id="share-spent">$0</span>
-                  <span class="share-stat-label">spent</span>
+              <div class="share-card-main-stats">
+                <div class="share-main-stat">
+                  <span class="share-main-value" id="share-spent">$0</span>
+                  <span class="share-main-label">spent on food this year</span>
                 </div>
-                <div class="share-stat">
-                  <span class="share-stat-value" id="share-orders">0</span>
-                  <span class="share-stat-label">orders</span>
+                <span class="share-spending-emoji" id="share-emoji">🍔</span>
+              </div>
+              <div class="share-card-grid">
+                <div class="share-grid-item">
+                  <span class="share-grid-icon">📦</span>
+                  <span class="share-grid-value" id="share-orders">0</span>
+                  <span class="share-grid-label">orders</span>
+                </div>
+                <div class="share-grid-item">
+                  <span class="share-grid-icon">🍽️</span>
+                  <span class="share-grid-value" id="share-items">0</span>
+                  <span class="share-grid-label">items</span>
+                </div>
+                <div class="share-grid-item">
+                  <span class="share-grid-icon">🏪</span>
+                  <span class="share-grid-value" id="share-restaurants">0</span>
+                  <span class="share-grid-label">restaurants</span>
+                </div>
+                <div class="share-grid-item">
+                  <span class="share-grid-icon">💵</span>
+                  <span class="share-grid-value" id="share-tips">$0</span>
+                  <span class="share-grid-label">tipped</span>
                 </div>
               </div>
-              <div class="share-card-restaurant">
-                <span class="share-restaurant-label">Top spot:</span>
-                <span class="share-restaurant-name" id="share-restaurant"></span>
+              <div class="share-card-highlights">
+                <div class="share-highlight">
+                  <div class="share-highlight-left">
+                    <span class="share-highlight-icon">🏆</span>
+                    <span class="share-highlight-label">Top spot</span>
+                  </div>
+                  <span class="share-highlight-value" id="share-restaurant"></span>
+                </div>
+                <div class="share-highlight">
+                  <div class="share-highlight-left">
+                    <span class="share-highlight-icon">⭐</span>
+                    <span class="share-highlight-label">Favorite item</span>
+                  </div>
+                  <span class="share-highlight-value" id="share-item"></span>
+                </div>
+                <div class="share-highlight">
+                  <div class="share-highlight-left">
+                    <span class="share-highlight-icon">📅</span>
+                    <span class="share-highlight-label">Busiest day</span>
+                  </div>
+                  <span class="share-highlight-value" id="share-day"></span>
+                </div>
+              </div>
+              <div class="share-card-footer">
+                <span class="share-footer-text">doordash-wrapped.pages.dev</span>
               </div>
             </div>
             <div class="share-buttons">
               <button id="download-btn" class="share-btn">
                 <svg viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
-                Download Image
+                Save Image
               </button>
             </div>
           </div>
@@ -258,6 +280,8 @@
 
   <script src="https://accounts.google.com/gsi/client" async defer></script>
   <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+  <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDAEUPr9EiVGKzIJLxYDMkqt8YZz3p76tg&libraries=geocoding&callback=initMapsReady"></script>
+  <script>window.initMapsReady = function() { window.mapsReady = true; }</script>
   <script type="module" src="app.js"></script>
 </body>
 </html>

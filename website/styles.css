@@ -533,8 +533,8 @@ body {
 
 /* Restaurant Slide */
 .top-restaurant-image-container {
-  width: 240px;
-  height: 240px;
+  width: 100%;
+  max-width: 320px;
   overflow: hidden;
   margin-bottom: 24px;
   display: none;
@@ -546,8 +546,7 @@ body {
 
 .top-restaurant-image {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
+  height: auto;
 }
 
 .top-restaurant-name {
@@ -729,12 +728,29 @@ body {
 }
 
 /* Delivery Slide */
+.delivery-map-container {
+  width: 100%;
+  max-width: 340px;
+  margin: 20px 0;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+.delivery-map {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  display: block;
+  background: rgba(255, 255, 255, 0.1);
+}
+
 .delivery-card {
   background: rgba(255, 255, 255, 0.1);
   border-radius: 16px;
   padding: 24px;
   max-width: 320px;
-  margin-top: 24px;
+  margin-top: 16px;
 }
 
 .delivery-icon {
@@ -787,77 +803,191 @@ body {
 
 /* Share Slide */
 .share-slide {
-  padding-top: 60px;
-}
-
-.share-title {
-  font-size: 40px;
-  font-weight: 900;
-  margin-bottom: 8px;
-}
-
-.share-subtitle {
-  font-size: 16px;
-  opacity: 0.8;
-  margin-bottom: 24px;
+  padding-top: 40px;
+  padding-bottom: 40px;
 }
 
 .share-card {
-  background: linear-gradient(135deg, #FF3008, #FF6B35);
-  border-radius: 20px;
-  padding: 24px;
-  width: 300px;
+  position: relative;
+  background: linear-gradient(145deg, #FF3008 0%, #E02800 50%, #B81F00 100%);
+  border-radius: 28px;
+  padding: 32px 28px;
+  width: 360px;
   margin-bottom: 24px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
 }
 
+.share-card-decoration {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.deco-emoji {
+  position: absolute;
+  font-size: 28px;
+  opacity: 0.15;
+}
+
+.deco-1 { top: 8%; left: 5%; transform: rotate(-15deg); }
+.deco-2 { top: 12%; right: 8%; transform: rotate(20deg); }
+.deco-3 { top: 45%; left: 3%; transform: rotate(-10deg); }
+.deco-4 { top: 50%; right: 2%; transform: rotate(15deg); }
+.deco-5 { bottom: 15%; left: 6%; transform: rotate(10deg); }
+.deco-6 { bottom: 18%; right: 5%; transform: rotate(-20deg); }
+
 .share-card-header {
-  margin-bottom: 20px;
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .share-card-logo {
-  font-size: 14px;
-  font-weight: 700;
-  opacity: 0.9;
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
 }
 
-.share-card-stats {
+.share-card-year {
+  font-size: 16px;
+  font-weight: 800;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 6px 14px;
+  border-radius: 20px;
+}
+
+.share-card-main-stats {
+  position: relative;
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+.share-main-stat {
   display: flex;
-  justify-content: space-around;
+  flex-direction: column;
+  align-items: center;
+}
+
+.share-main-value {
+  font-size: 64px;
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -2px;
+  text-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.share-main-label {
+  font-size: 15px;
+  opacity: 0.9;
+  margin-top: 8px;
+  font-weight: 500;
+}
+
+.share-spending-emoji {
+  display: block;
+  font-size: 48px;
+  margin-top: 12px;
+}
+
+.share-card-grid {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
   margin-bottom: 20px;
 }
 
-.share-stat {
-  text-align: center;
-}
-
-.share-stat-value {
-  display: block;
-  font-size: 32px;
-  font-weight: 900;
-}
-
-.share-stat-label {
-  font-size: 12px;
-  opacity: 0.8;
-}
-
-.share-card-restaurant {
+.share-grid-item {
   background: rgba(255, 255, 255, 0.15);
-  border-radius: 12px;
-  padding: 12px;
+  border-radius: 14px;
+  padding: 14px 8px 12px;
   text-align: center;
 }
 
-.share-restaurant-label {
-  font-size: 12px;
-  opacity: 0.8;
+.share-grid-icon {
   display: block;
+  font-size: 20px;
+  margin-bottom: 6px;
 }
 
-.share-restaurant-name {
-  font-size: 16px;
+.share-grid-value {
+  display: block;
+  font-size: 20px;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.share-grid-label {
+  display: block;
+  font-size: 9px;
+  opacity: 0.8;
+  margin-top: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: 600;
+}
+
+.share-card-highlights {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+
+.share-highlight {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 14px;
+  padding: 14px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.share-highlight-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.share-highlight-icon {
+  font-size: 20px;
+}
+
+.share-highlight-label {
+  font-size: 13px;
+  opacity: 0.85;
+  font-weight: 600;
+}
+
+.share-highlight-value {
+  font-size: 14px;
   font-weight: 700;
+  text-align: right;
+  flex: 1;
+  margin-left: 12px;
+}
+
+.share-card-footer {
+  position: relative;
+  text-align: center;
+  padding-top: 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.share-footer-text {
+  font-size: 12px;
+  opacity: 0.6;
+  letter-spacing: 0.5px;
 }
 
 .share-buttons {
@@ -870,19 +1000,20 @@ body {
   display: flex;
   align-items: center;
   gap: 8px;
-  padding: 12px 20px;
-  font-size: 14px;
+  padding: 14px 28px;
+  font-size: 15px;
   font-weight: 600;
   color: var(--doordash-red);
   background: var(--white);
   border: none;
-  border-radius: 8px;
+  border-radius: 12px;
   cursor: pointer;
-  transition: transform 0.2s;
+  transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .share-btn:hover {
   transform: scale(1.05);
+  box-shadow: 0 4px 16px rgba(255, 255, 255, 0.2);
 }
 
 /* Responsive */
@@ -918,6 +1049,60 @@ body {
 
   .nav-next {
     right: 8px;
+  }
+
+  .share-card {
+    width: 320px;
+    padding: 24px 20px;
+  }
+
+  .share-main-value {
+    font-size: 52px;
+  }
+
+  .share-spending-emoji {
+    font-size: 40px;
+  }
+
+  .share-card-grid {
+    gap: 6px;
+  }
+
+  .share-grid-item {
+    padding: 12px 6px 10px;
+  }
+
+  .share-grid-icon {
+    font-size: 18px;
+    margin-bottom: 4px;
+  }
+
+  .share-grid-value {
+    font-size: 16px;
+  }
+
+  .share-grid-label {
+    font-size: 8px;
+  }
+
+  .share-highlight {
+    padding: 12px 14px;
+  }
+
+  .share-highlight-icon {
+    font-size: 18px;
+  }
+
+  .share-highlight-label {
+    font-size: 12px;
+  }
+
+  .share-highlight-value {
+    font-size: 12px;
+  }
+
+  .deco-emoji {
+    font-size: 24px;
   }
 }
 
