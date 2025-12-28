@@ -8,7 +8,7 @@ const GOOGLE_API_KEY = 'AIzaSyDAEUPr9EiVGKzIJLxYDMkqt8YZz3p76tg';
 
 // State
 let currentSlide = 0;
-let totalSlides = 9;
+let totalSlides = 8;
 let orders = [];
 let stats = null;
 let tokenClient = null;
@@ -413,14 +413,7 @@ function populateWrapped(stats) {
   document.getElementById('spending-emoji').textContent = emoji;
   document.getElementById('spending-description').textContent = description;
 
-  // Slide 2: Average Order
-  document.getElementById('avg-order-display').textContent = '$' + stats.avgOrder.toFixed(2);
-  document.getElementById('max-order-display').textContent = '$' + (stats.maxOrder.totalPrice / 100).toFixed(2);
-  document.getElementById('max-order-restaurant').textContent = stats.maxOrder.restaurantName;
-  document.getElementById('min-order-display').textContent = '$' + (stats.minOrder.totalPrice / 100).toFixed(2);
-  document.getElementById('min-order-restaurant').textContent = stats.minOrder.restaurantName;
-
-  // Slide 3: Top Restaurant
+  // Slide 2: Top Restaurant
   if (stats.topRestaurants.length > 0) {
     document.getElementById('top-restaurant-name').textContent = stats.topRestaurants[0].name;
     document.getElementById('top-restaurant-count').textContent = stats.topRestaurants[0].count;
@@ -450,7 +443,7 @@ function populateWrapped(stats) {
     });
   }
 
-  // Slide 4: Timing
+  // Slide 3: Timing
   if (stats.topDay) {
     document.getElementById('peak-day').textContent = stats.topDay.name;
   }
@@ -462,7 +455,7 @@ function populateWrapped(stats) {
 
   renderHeatmap(stats.activityMap);
 
-  // Slide 5: Top Items
+  // Slide 4: Top Items
   if (stats.topItems.length > 0) {
     document.getElementById('top-item-name').textContent = stats.topItems[0].name;
     document.getElementById('top-item-count').textContent = stats.topItems[0].count;
@@ -491,7 +484,7 @@ function populateWrapped(stats) {
     });
   }
 
-  // Slide 6: Delivery
+  // Slide 5: Delivery
   document.getElementById('locations-count').textContent = stats.uniqueLocations;
   if (stats.topLocations.length > 0) {
     let addr = stats.topLocations[0].address;
