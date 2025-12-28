@@ -478,6 +478,17 @@ function populateWrapped(stats) {
       `;
       itemsList.appendChild(li);
     });
+
+    // Fetch and display dish image from Openverse
+    fetchDishImage(stats.topItems[0].name).then(imageUrl => {
+      if (imageUrl) {
+        const imgContainer = document.getElementById('top-dish-image-container');
+        const img = document.getElementById('top-dish-image');
+        img.src = imageUrl;
+        img.onload = () => imgContainer.classList.add('loaded');
+        img.onerror = () => console.error('Failed to load dish image');
+      }
+    });
   }
 
   // Slide 6: Delivery
@@ -702,6 +713,35 @@ async function fetchPlacePhoto(restaurantName, nearLocation) {
     return photoUrl;
   } catch (error) {
     console.error('Error fetching place photo:', error);
+    return null;
+  }
+}
+
+async function fetchDishImage(dishName) {
+  try {
+    // Search for food images using Openverse API
+    const searchQuery = encodeURIComponent(`${dishName} food`);
+    const searchUrl = `https://api.openverse.org/v1/images/?q=${searchQuery}&license_type=commercial&page_size=5`;
+
+    const response = await fetch(searchUrl);
+
+    if (!response.ok) {
+      console.error('Openverse search failed:', response.status);
+      return null;
+    }
+
+    const data = await response.json();
+
+    if (!data.results || data.results.length === 0) {
+      console.log('No images found for dish:', dishName);
+      return null;
+    }
+
+    // Return the thumbnail URL of the first result
+    const image = data.results[0];
+    return image.thumbnail || image.url;
+  } catch (error) {
+    console.error('Error fetching dish image:', error);
     return null;
   }
 }
