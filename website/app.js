@@ -506,7 +506,6 @@ function populateWrapped(stats) {
   document.getElementById('share-spent').textContent =
     '$' + stats.totalSpent.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
   document.getElementById('share-orders').textContent = stats.totalOrders;
-  document.getElementById('share-items').textContent = stats.totalItems;
   document.getElementById('share-restaurants').textContent = stats.uniqueRestaurants;
   document.getElementById('share-tips').textContent = '$' + stats.totalTips.toFixed(0);
   document.getElementById('share-restaurant').textContent =
@@ -526,6 +525,8 @@ function populateWrapped(stats) {
   }
   document.getElementById('share-item').textContent =
     stats.topItems.length > 0 ? stats.topItems[0].name : 'N/A';
+  document.getElementById('share-item-count').textContent =
+    stats.topItems.length > 0 ? stats.topItems[0].count : 0;
 
   // Add item photo to share card
   if (stats.topItems.length > 0) {
