@@ -527,15 +527,13 @@ function populateWrapped(stats) {
   document.getElementById('share-item').textContent =
     stats.topItems.length > 0 ? stats.topItems[0].name : 'N/A';
 
-  // Add item photo to share card (search for item at top restaurant)
-  if (stats.topItems.length > 0 && stats.topRestaurants.length > 0) {
-    const searchQuery = `${stats.topItems[0].name} ${stats.topRestaurants[0].name}`;
-    const topLocation = stats.topLocations.length > 0 ? stats.topLocations[0].address : null;
-    fetchPlacePhoto(searchQuery, topLocation).then(photoUrl => {
-      if (photoUrl) {
+  // Add item photo to share card
+  if (stats.topItems.length > 0) {
+    fetchDishImage(stats.topItems[0].name).then(imageUrl => {
+      if (imageUrl) {
         const photoContainer = document.getElementById('share-item-photo-container');
         const photo = document.getElementById('share-item-photo');
-        photo.src = photoUrl;
+        photo.src = imageUrl;
         photo.onload = () => photoContainer.classList.add('loaded');
       }
     });
@@ -697,8 +695,8 @@ async function fetchPlacePhoto(restaurantName, nearLocation) {
   try {
     // Build search query with location context
     const textQuery = nearLocation
-      ? `${restaurantName} near "${nearLocation}"`
-      : restaurantName;
+      ? `${restaurantName} restaurant near ${nearLocation}`
+      : `${restaurantName} restaurant`;
 
     // Step 1: Search for the place
     const searchResponse = await fetch('https://places.googleapis.com/v1/places:searchText', {
