@@ -526,10 +526,6 @@ function populateWrapped(stats) {
   }
   document.getElementById('share-item').textContent =
     stats.topItems.length > 0 ? stats.topItems[0].name : 'N/A';
-  // Convert day abbreviation to full name
-  const dayFullNames = { Sun: 'Sunday', Mon: 'Monday', Tue: 'Tuesday', Wed: 'Wednesday', Thu: 'Thursday', Fri: 'Friday', Sat: 'Saturday' };
-  document.getElementById('share-day').textContent =
-    stats.topDay ? (dayFullNames[stats.topDay.name] || stats.topDay.name) : 'N/A';
   document.getElementById('share-emoji').textContent = emoji;
 
   // Setup navigation
