@@ -885,14 +885,22 @@ body {
   position: absolute;
   font-size: 28px;
   opacity: 0.15;
+  animation: float 4s ease-in-out infinite;
 }
 
-.deco-1 { top: 8%; left: 5%; transform: rotate(-15deg); }
-.deco-2 { top: 12%; right: 8%; transform: rotate(20deg); }
-.deco-3 { top: 45%; left: 3%; transform: rotate(-10deg); }
-.deco-4 { top: 50%; right: 2%; transform: rotate(15deg); }
-.deco-5 { bottom: 15%; left: 6%; transform: rotate(10deg); }
-.deco-6 { bottom: 18%; right: 5%; transform: rotate(-20deg); }
+.deco-1 { top: 8%; left: 5%; animation-delay: 0s; }
+.deco-2 { top: 12%; right: 8%; animation-delay: 0.5s; }
+.deco-3 { top: 45%; left: 3%; animation-delay: 1s; }
+.deco-4 { top: 50%; right: 2%; animation-delay: 1.5s; }
+.deco-5 { bottom: 15%; left: 6%; animation-delay: 2s; }
+.deco-6 { bottom: 18%; right: 5%; animation-delay: 2.5s; }
+
+@keyframes float {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  25% { transform: translate(5px, -8px) rotate(5deg); }
+  50% { transform: translate(-3px, -12px) rotate(-3deg); }
+  75% { transform: translate(-6px, -5px) rotate(-5deg); }
+}
 
 .share-card-header {
   position: relative;
@@ -1016,7 +1024,8 @@ body {
   font-size: 20px;
 }
 
-.share-restaurant-photo-container {
+.share-restaurant-photo-container,
+.share-item-photo-container {
   display: none;
   width: 36px;
   height: 36px;
@@ -1026,11 +1035,13 @@ body {
   margin-left: 10px;
 }
 
-.share-restaurant-photo-container.loaded {
+.share-restaurant-photo-container.loaded,
+.share-item-photo-container.loaded {
   display: block;
 }
 
-.share-restaurant-photo {
+.share-restaurant-photo,
+.share-item-photo {
   width: 100%;
   height: 100%;
   object-fit: cover;

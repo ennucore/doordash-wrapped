@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>DoorDash Wrapped 2025</title>
-  <link rel="stylesheet" href="styles.css?v=2">
+  <link rel="stylesheet" href="styles.css?v=3">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -270,12 +270,15 @@
                     <img id="share-restaurant-photo" class="share-restaurant-photo" alt="" />
                   </div>
                 </div>
-                <div class="share-highlight">
+                <div class="share-highlight share-highlight-item">
                   <div class="share-highlight-left">
-                    <span class="share-highlight-icon">⭐</span>
+                    <span class="share-highlight-icon" id="share-item-icon">⭐</span>
                     <span class="share-highlight-label">Favorite item</span>
                   </div>
                   <span class="share-highlight-value" id="share-item"></span>
+                  <div class="share-item-photo-container" id="share-item-photo-container">
+                    <img id="share-item-photo" class="share-item-photo" alt="" />
+                  </div>
                 </div>
                 <div class="share-highlight">
                   <div class="share-highlight-left">
@@ -305,6 +308,6 @@
   <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
   <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDAEUPr9EiVGKzIJLxYDMkqt8YZz3p76tg&libraries=geocoding&callback=initMapsReady"></script>
   <script>window.initMapsReady = function() { window.mapsReady = true; }</script>
-  <script type="module" src="app.js?v=2"></script>
+  <script type="module" src="app.js?v=3"></script>
 </body>
 </html>
